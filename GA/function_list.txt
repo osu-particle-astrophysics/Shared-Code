@@ -33,7 +33,7 @@ Roulette
 Return location of individual based on fitness weighted selection
 
 Tournament
-Return location of individual based on highest score os population subset
+Return location of individual based on highest score of population subset
 
 Survival
 (Reproduction) move selected individual into next generation
