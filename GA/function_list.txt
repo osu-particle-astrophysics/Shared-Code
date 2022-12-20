@@ -1,4 +1,4 @@
-This File will contain the list of functions we need for our GA to opperate
+This File will contain the list of functions we need for our GA to operate
 
 
 DataRead:
