@@ -11,7 +11,6 @@
 
 void immigration(vector<vector<vector<float> > > & varOutput, int reproduction_no, int crossover_no, float max_length, float max_radius, float max_seperation, float max_outer_radius, float max_A, float max_B)
 {
-  //cout << "mutation flag" << endl;
   uniform_real_distribution<float> l_mut(min_length, max_length);
   uniform_real_distribution<float> r_mut(0, max_radius);
   uniform_real_distribution<float> a_mut(min_A, max_A);
@@ -22,21 +21,17 @@ void immigration(vector<vector<vector<float> > > & varOutput, int reproduction_n
     {
       for(int j=0; j<NSECTIONS; j++)
 	{
-	  //immigration generators
 	  varOutput[i][j][0] = r_mut(generator);
 	  varOutput[i][j][1] = l_mut(generator);
 	  varOutput[i][j][2] = a_mut(generator);
 	  varOutput[i][j][3] = b_mut(generator);
 	  varOutput[i][j][4] = s_mut(generator);
-	  // gene values
           float R= varOutput[i][j][0]; 
           float l= varOutput[i][j][1]; 
           float a= varOutput[i][j][2]; 
           float b= varOutput[i][j][3]; 
           float end_point = (a*l*l + b*l + R); 
           float vertex = (R - (b*b)/(4*a)); 
-          //cout << end_point << endl; 
-          //cout << vertex << endl;
 	  if(a == 0.0 && max_outer_radius > end_point && end_point >= 0.0)
 	    {
 	      j=j;
@@ -46,11 +41,9 @@ void immigration(vector<vector<vector<float> > > & varOutput, int reproduction_n
             j= j;
           }
           else{
-		//cout << "Cannot create individual!" << endl;
             j= j-1;
           }
 	  
 	}
     }
-  //cout << "Immigration finished" << endl;
 }
