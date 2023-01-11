@@ -9,7 +9,7 @@
 #include <chrono>
 #include <ctime>
 
-void immigration(vector<vector<vector<float> > > & varOutput, int reproduction_no, int crossover_no, float max_length, float max_radius, float max_seperation, float max_outer_radius, float max_A, float max_B)
+void Immigration(vector<vector<vector<float> > > & varOutput, int reproduction_no, int crossover_no, float max_length, float max_radius, float max_seperation, float max_outer_radius, float max_A, float max_B)
 {
   uniform_real_distribution<float> l_mut(min_length, max_length);
   uniform_real_distribution<float> r_mut(0, max_radius);
@@ -26,12 +26,14 @@ void immigration(vector<vector<vector<float> > > & varOutput, int reproduction_n
 	  varOutput[i][j][2] = a_mut(generator);
 	  varOutput[i][j][3] = b_mut(generator);
 	  varOutput[i][j][4] = s_mut(generator);
+
           float R= varOutput[i][j][0]; 
           float l= varOutput[i][j][1]; 
           float a= varOutput[i][j][2]; 
           float b= varOutput[i][j][3]; 
           float end_point = (a*l*l + b*l + R); 
           float vertex = (R - (b*b)/(4*a)); 
+
 	  if(a == 0.0 && max_outer_radius > end_point && end_point >= 0.0)
 	    {
 	      j=j;
