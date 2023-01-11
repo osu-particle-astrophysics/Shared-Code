@@ -25,7 +25,7 @@ void Initialize(vector<vector<vector<float> > > & varOutput, str experiment)
     }
   }
   
-// if the experiment is PUEO, teh call GeneratePUEO for NPop individuals
+// if the experiment is PUEO, then call GeneratePUEO for NPop individuals
    if(experiment == "PUEO")
   {
     for(int i=0; i<NPop; i++)
