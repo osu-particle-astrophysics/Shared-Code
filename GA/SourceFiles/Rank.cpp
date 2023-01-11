@@ -17,11 +17,9 @@ int Rank(vector<float> fitness)
     {
       sum_npop = sum_npop + i;
     }
-  // cout << sum_npop << endl;
   for(int j=0; j<fitness.size(); j++)
     {
       probabilities.push_back((fitness.size()-j)/(sum_npop));
-      // cout << probabilities[j] << endl; 
     }
 
   uniform_real_distribution<float> choice(0.0, 1.0);
