@@ -71,6 +71,4 @@ void Mutation(vector<vector<vector<float> > > & varOutput, float M_rate, float s
 	    }
 	}
     }
-
-  //  cout << "Mutation complete" << endl;
 }
