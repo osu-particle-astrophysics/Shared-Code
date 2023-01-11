@@ -1,5 +1,5 @@
 // New_GA.cpp
-// Author: Ryan Debolt
+// Author: Ryan Debolt, Dylan Wells
 // Organization: GENETIS
 // Date: 12/5/2022
 // Info:
@@ -24,6 +24,18 @@ using namespace std;
 int main()
 {
   // make vectors here
+  //
   // Call functions here
+  // if generation zero:
+  //    Initalize(ARA/PUEO) 
+  //    DataWrite
+  // Otherwise:
+  //    DataRead
+  //    Sort
+  //    Reproduction
+  //    Crossover
+  //    Immigration
+  //    DataWrite
+  
   return 0;
 }
