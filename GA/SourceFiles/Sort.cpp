@@ -20,11 +20,9 @@ void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, v
 
 	for(i = 0; i < fitness.size(); i++)
 	{
-	  //cout << "index: " << i << " of "<< fitness.size() << endl;
 		double temp = fitness[i];
 		int T = O_loc[i];
 		vector<vector<vector<float>>> location (1,vector<vector<float> >(NSECTIONS,vector <float>(NVARS, 0.0f)));
-		//cout << " location vector established " << endl;
 		for(int a = 0; a < NSECTIONS; a++)
 		{
 			for(int b = 0; b < NVARS; b++)
@@ -32,7 +30,6 @@ void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, v
 				location[0][a][b] = varInput[i][a][b];
 				
 			}
-			//	cout<< "saved paremeters" << endl;
 		}
 		for(j = i; j > 0 && fitness[j-1] < temp; j--)
 		{
@@ -48,7 +45,6 @@ void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, v
 		}
 		fitness[j]=temp;
 		P_loc[j] = T;
-		//cout << "fitness Scores re-allocated" << endl;
 		for(int a = 0; a < NSECTIONS; a++)
                 {
                         for(int b = 0; b < NVARS; b++)
@@ -56,7 +52,6 @@ void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, v
                                 varInput[j][a][b] = location[0][a][b];
                         }
                 }
-		//cout << "Parameters re-allocated" << endl;
 	}
 }
 
