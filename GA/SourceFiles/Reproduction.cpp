@@ -11,8 +11,6 @@
 
 void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected, float roul_percentage, float tour_percentage, float rank_percentage, int reproduction_no, int pool_size, int elite)
 {
-  // cout << "reproduction flag" << endl;
-  //NEED: Current gen; next generation; roul_perecentage, tour_percentage, reproduction_no, fitness, pool_size
 
   if(elite == 1)
     {
@@ -36,7 +34,7 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
 
   if(reproduction_no == 1)
     {
-      roul_no = 1; // this is because roulette will not be left to purely random chance for small population sizes
+      roul_no = 1; 
     }
 
   while(roul_no + tour_no + rank_no < reproduction_no)
@@ -46,11 +44,9 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
 
   if(roul_no > 0)
     {
-      //      cout << "roullete flag"<< endl;
-      //int r_select = new_roulette(fitness);
       for(int i=elite; i<roul_no + elite; i++)
 	{
-	  int r_select = new_roulette(fitness); //new_roulette
+	  int r_select = new_roulette(fitness); 
 	  for(int j=0; j<NSECTIONS; j++)
 	    {
 	      for(int k=0; k<NVARS; k++)
@@ -64,8 +60,6 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
     }
   if(tour_no > 0)
     {
-      // cout << "tournament flag"<< endl;
-      // int t_select = new_tournament(fitness, pool_size);
       for(int x=roul_no+elite; x<tour_no+roul_no+elite; x++)
 	{
 	  int t_select = new_tournament(fitness, pool_size);
@@ -78,11 +72,9 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
 	    }
 	  selected.push_back(P_loc[t_select]);
 	}
-      // cout << "reproduction finished" << endl;
     }
   if(rank_no > 0)
     {
-      // cout << "rank flag" << endl;
        for(int r=tour_no+roul_no+elite; r<reproduction_no+elite; r++)
 	 {
 	   int k_select = Rank(fitness);
@@ -100,5 +92,4 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
     {
       reproduction_no = reproduction_no+elite; 
     }
-  //cout << "Roulette Finished" << endl;
 }
