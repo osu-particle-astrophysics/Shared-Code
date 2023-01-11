@@ -9,7 +9,7 @@
 #include <chrono>
 #include <ctime>
 
-void InsertionSort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, vector<int> & P_loc)
+void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, vector<int> & P_loc)
 {
 	int i,j,x,y;
 	vector<int> O_loc;
