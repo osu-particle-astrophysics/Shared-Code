@@ -19,10 +19,10 @@ bool ConstraintPUEO(vector<vector<float> > varInput)
   float H = varInput[1];
   float x_0 = varInput[2];
   float x_f = varInput[0]; //x_f = S
-  float y_0 = varInput[4];
-  float y_f = varInput[5];
-  float z_f = varInput[6];
-  float beta = varInput[7];
+  float y_0 = varInput[3];
+  float y_f = varInput[4];
+  float z_f = varInput[5];
+  float beta = varInput[6];
   
   if(S > max_S || H > max_H){
     intersect = true;
