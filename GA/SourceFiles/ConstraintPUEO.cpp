@@ -9,21 +9,10 @@
 #include <chrono>
 #include <ctime>
 
-bool ConstraintPUEO(vector<vector<float> > varInput)
+bool ConstraintPUEO(float S, float H, float x_0, float y_0, float y_f, float z_f, float beta)
 {
   bool intersect = true;
-  //float max_S = 50;
-  //float max_H = 50;
-  // these indicies will change depending on how the individual is formatted.
-  float S = varInput[0][0];
-  float H = varInput[0][1];
-  float x_0 = varInput[0][2];
-  float x_f = varInput[0][0]; //x_f = S
-  float y_0 = varInput[0][3];
-  float y_f = varInput[0][4];
-  float z_f = varInput[0][5];
-  float beta = varInput[0][6];
-  
+  float x_f = S;
   if(S > max_S || H > max_H){
     intersect = true;
   }else if(x_0 < 0 || x_0 > x_f){
