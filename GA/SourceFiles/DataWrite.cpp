@@ -11,7 +11,7 @@
 #include <math.h>
 #include <ctime>
 
-void DataWrite(int numChildren, vector<vector<vector<float> > >& varVector, int freq_coeffs, vector<double> freqVector,int reproduction_no, int crossover_no, vector<int> selected, string gen)
+void DataWrite( vector<vector<vector<float> > >& varVector,int reproduction_no, int crossover_no, vector<int> selected)
 {
   ofstream generationDNA;
   generationDNA.open("generationDNA.csv");
@@ -22,7 +22,8 @@ void DataWrite(int numChildren, vector<vector<vector<float> > >& varVector, int 
   generationDNA << "Working on behalf of Dr. Amy Connolly" << "\n";
   generationDNA << "And the ANITA project" << "\n";
   generationDNA << "Revision date: 21 March 2018 1800 EST" << "\n";
-  for(int i=0;i<freq_coeffs;i++)
+	
+  /*for(int i=0;i<freq_coeffs;i++)
     {
       if(i==freq_coeffs-1)
 	{
@@ -32,15 +33,17 @@ void DataWrite(int numChildren, vector<vector<vector<float> > >& varVector, int 
 	{
 	  generationDNA << freqVector[i] << ",";
 	}
-    }
+     }
+     */
+     
   generationDNA << "Matrices for this Generation: " << "\n";
-  for(int i=0;i<numChildren;i++)
+  for(int i=0;i<population;i++)
     {
-      for(int j=0;j<NSECTIONS;j++)
+      for(int j=0;j<sections;j++)
 	{
-	  for(int k=0;k<NVARS;k++)
+	  for(int k=0;k<genes;k++)
 	    {
-	      if(k==(NVARS-1))
+	      if(k==(genes-1))
 		{
 		  generationDNA << varVector[i][j][k] << "\n";
 		}
@@ -55,7 +58,7 @@ void DataWrite(int numChildren, vector<vector<vector<float> > >& varVector, int 
   
   
   // PARENT LOCATION FILE
-  if (gen == "cont")
+  if (generation == 0)
     {
       ofstream Parents;
       Parents.open("parents.csv");
@@ -65,7 +68,7 @@ void DataWrite(int numChildren, vector<vector<vector<float> > >& varVector, int 
       Parents << "Current Gen, Parent 1, Parent 2, Operator" << endl;
       int j=0;
 
-      for(int i=0; i<numChildren; i++)
+      for(int i=0; i<population; i++)
 	{
 	  if( i<reproduction_no )
 	    {
