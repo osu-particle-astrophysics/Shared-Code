@@ -9,7 +9,7 @@
 #include <chrono>
 #include <ctime>
 
-bool ConstraintARA(vector<vector<float> > varInput, int side)
+bool ConstraintARA(int R, int L, int A, int B)
 {
   bool intersect = true;
   float max_radius = 7.5;
