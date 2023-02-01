@@ -29,7 +29,7 @@ bool ConstraintARA(vector<vector<float> > varInput, int side)
   }else{
     vertex = end_point;
   }
-  if(A == 0.0 && ma_radius > end_point && end_point >= 0.0){
+  if(A == 0.0 && max_radius > end_point && end_point >= 0.0){
     if(R < 0.0 || L < min_length || L > max_length || A < min_coeff || A > max_coeff || B < min_coeff || B > max_coeff){
       intersect = true;
     }else{
