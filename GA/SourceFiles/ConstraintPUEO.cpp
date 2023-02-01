@@ -12,8 +12,8 @@
 bool ConstraintPUEO(vector<vector<float> > varInput)
 {
   bool intersect = true;
-  float max_S = 50;
-  float max_H = 50;
+  //float max_S = 50;
+  //float max_H = 50;
   // these indicies will change depending on how the individual is formatted.
   float S = varInput[0][0];
   float H = varInput[0][1];
