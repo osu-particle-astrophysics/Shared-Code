@@ -11,7 +11,7 @@
 #include <chrono>
 #include <ctime>
 
-vector<vector<float> > Generate(int sections, int genes)
+vector<vector<float> > GenerateARA(int sections, int genes)
 {
   // initialize an interesect condidtion
   bool intersect = True;
