@@ -48,6 +48,6 @@ vector<vector<float> > Generate(int sections, int genes)
     outputVector[i][7] = m;
     outputVector[i][8] = tau;
   }
-  return outputVector
+  return outputVector;
 
 }
