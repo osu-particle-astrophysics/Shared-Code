@@ -15,6 +15,7 @@ vector<vector<float> > Generate(int sections, int genes)
 {
   // initialize an interesect condidtion
   bool intersect = True;
+  vector<vector<<float> > antenna = [][]
   for(int i=0; i<sections, i++)
   {
     // while the intersect condition is true, generate the side of an individual
@@ -33,4 +34,5 @@ vector<vector<float> > Generate(int sections, int genes)
       intersect = ConstraintARA(R, L, A, B)
     }
   }
+  return(antenna)
 }
