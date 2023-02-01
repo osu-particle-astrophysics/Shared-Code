@@ -33,8 +33,9 @@ vector<vector<float>> Generate(int sections, int genes)
       float YF = distribution_YF(generator);
       std::uniform_real_distribution <float> distribution_beta((4/30)*ZF, 7*ZF);  //beta, upper bound is arbitrary, can adjust if needed
       float beta = distribution_beta(generator)/100;
-      float tau = 0.26;  //tau must be 0.26
-      float m = 1;  //we are only evolving m = 1 for now.
+      //float tau = 0.26;  tau must be 0.26, not evolving
+      //float m = 1;  we are only evolving m = 1 for now.
+      //flaot Z0 = 0; not evolving
       outputVector[i][0] = S;
       outputVector[i][1] = H;
       outputVector[i][2] = X0;
@@ -42,8 +43,8 @@ vector<vector<float>> Generate(int sections, int genes)
       outputVector[i][4] = YF;
       outputVector[i][5] = ZF;
       outputVector[i][6] = beta;
-      outputVector[i][7] = m;
-      outputVector[i][8] = tau;
+      //outputVector[i][7] = m;
+      //outputVector[i][8] = tau;
       intersect = ConstraintPUEO(outputVector);
     }
   }
