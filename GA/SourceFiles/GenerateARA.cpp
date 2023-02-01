@@ -15,7 +15,19 @@ vector<vector<float> > GenerateARA(int sections, int genes)
 {
   // initialize an interesect condidtion
   bool intersect = True;
-  vector<vector<<float> > antenna = [][]
+  vector<vector<<float> > antenna = [][];
+  
+  // variables
+  float max_outer_radius = 7.5;
+  float max_radius = max_outer_radius;
+  float min_length = 10.0; // in cm
+  float max_length = 140;  // in cm
+  float max_theta = atan(max_outer_radius/min_length);
+  float min_A = -1.0; 
+  float max_A = 1.0;
+  float min_B = -1.0; 
+  float max_B = 1.0;
+
   for(int i=0; i<sections, i++)
   {
     // while the intersect condition is true, generate the side of an individual
