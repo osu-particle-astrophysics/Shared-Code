@@ -76,13 +76,8 @@ int main()
   vector<float> fitness (population, 0.0f); // stores fitness score
   vector<int> selected = [];
   
-  // FUNCTION CALLS
-  
-  // Generation zero functions
-  if (generation == 0)
-  {
-    // if ARA, create ARA atennas
-    if (design == "ARA")
+  // Check the design and prepare input/output vectors
+  if (design == "ARA")
     {
       // determine sections and genes for ara
       sections = 2;
@@ -91,16 +86,10 @@ int main()
       // create vectors based on parameters
       vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
       vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
-      
-      // generate each individual
-      for(int i=0; i<NPOP; i++)
-      {
-        varOutput [i] = GenerateARA();
-      }
     }
     
     // if PUEO, create PUEO antennas
-    elseif (design == "PUEO")
+  else if (design == "PUEO")
     {
       // determine sections and genes for PUEO
       sections = 1;
@@ -109,20 +98,21 @@ int main()
       // create vectors based on parameters
       vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
       vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
-      
-      // generate
-      for(int i=0; i<NPOP; i++)
-      {
-        varOutput [i] = GeneratePUEO();
-      }
     }
+  
+  // FUNCTION CALLS
+  
+  // Generation zero functions
+  if (generation == 0)
+  {
+    // run initialization
+    Initialize(varOutput, design);
+    
     // write information to data files
     DataWrite(varOutput, selected);
   }
-  //    Initalize(ARA/PUEO)
   
-  //    DataWrite
-  // Otherwise:
+  // Generation 1+ functions
   //    DataRead
   //    Sort
   //    Reproduction
