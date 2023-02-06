@@ -9,6 +9,23 @@
 #include <chrono>
 #include <ctime>
 
+// User functions
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
 void Immigration(vector<vector<vector<float> > > & varOutput, int reproduction_no, int crossover_no, float max_length, float max_radius, float max_seperation, float max_outer_radius, float max_A, float max_B)
 {
   uniform_real_distribution<float> l_mut(min_length, max_length);
