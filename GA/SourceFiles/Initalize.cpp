@@ -13,24 +13,41 @@
 #include <chrono>
 #include <ctime>
 
-void Initialize(vector<vector<vector<float> > > & varOutput, str experiment)
+// User functions
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
+void Initialize(vector<vector<vector<float> > > & varOutput, str design)
 {
-// Code
-// if the experiment is ARA, then call GenerateARA for NPop individuals
-  if(experiment == "ARA")
+// if the experiment is ARA, then call GenerateARA 
+  if(design == "ARA")
   {
-    for(int i=0; i<NPop; i++)
+    for(int i=0; i<population; i++)
     {
-      varOutput[i] = GenerateARA() 
+      varOutput[i] = GenerateARA(); 
     }
   }
   
-// if the experiment is PUEO, then call GeneratePUEO for NPop individuals
-   if(experiment == "PUEO")
+// if the experiment is PUEO, then call GeneratePUEO 
+   if(design == "PUEO")
   {
-    for(int i=0; i<NPop; i++)
+    for(int i=0; i<population; i++)
     {
-      varOutput[i] = GeneratePUEO()
+      varOutput[i] = GeneratePUEO();
     }
   }
 }
