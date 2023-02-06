@@ -9,6 +9,22 @@
 #include <chrono>
 #include <ctime>
 
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Sort.h"
+#include "Tournament.h"
+
 void Select(int Opp_no, vector<float> Fitness, int Roul_no, int Rank_no, int Tour_no, int Pool, vector<int> locations)
 {
  // initialize Values
