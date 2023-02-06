@@ -9,6 +9,22 @@
 #include <chrono>
 #include <ctime>
 
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Tournament.h"
+
 void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, vector<int> & P_loc)
 {
 	int i,j,x,y;
