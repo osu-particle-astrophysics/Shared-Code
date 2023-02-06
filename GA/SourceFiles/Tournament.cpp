@@ -24,7 +24,6 @@
 #include "Roulette.h"
 #include "Selection.h"
 #include "Sort.h"
-#include "Tournament.h"
 
 int Tournament(vector<float> fitness, int pool_size)
 {
