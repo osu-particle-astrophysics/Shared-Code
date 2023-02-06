@@ -11,6 +11,23 @@
 #include <math.h>
 #include <ctime>
 
+// User functions
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
 void DataWrite( vector<vector<vector<float> > >& varVector,int reproduction_no, int crossover_no, vector<int> selected)
 {
   ofstream generationDNA;
