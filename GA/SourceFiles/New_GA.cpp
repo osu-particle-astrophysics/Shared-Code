@@ -54,8 +54,6 @@ int main()
   
   // VECTORS
   vector<int> P_loc (population); // Parent locations vector
-  vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
-  vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
   vector<float> fitness (population, 0.0f); // stores fitness score
   vector<int> selected = [];
   
@@ -71,6 +69,10 @@ int main()
       sections = 2;
       genes = 4;
       
+      // create vectors based on parameters
+      vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
+      vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
+      
       // generate each individual
       for(int i=0; i<NPOP; i++)
       {
@@ -81,9 +83,15 @@ int main()
     // if PUEO, create PUEO antennas
     elseif (design == "PUEO")
     {
-      // determine sections and genes for pueo
+      // determine sections and genes for PUEO
       sections = 1;
-      genes = 9; // Dylan please replace this
+      genes = 7; 
+      
+      // create vectors based on parameters
+      vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
+      vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
+      
+      // generate
       for(int i=0; i<NPOP; i++)
       {
         varOutput [i] = GeneratePUEO();
