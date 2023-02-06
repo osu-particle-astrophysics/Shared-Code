@@ -9,6 +9,23 @@
 #include <chrono>
 #include <ctime>
 
+// User functions
+#include "ConstraintARA.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
 bool ConstraintPUEO(float S, float H, float x_0, float y_0, float y_f, float z_f, float beta)
 {
   bool intersect = true;
