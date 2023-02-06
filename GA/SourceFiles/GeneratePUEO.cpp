@@ -9,7 +9,7 @@
 #include <chrono>
 #include <ctime>
 
-vector<vector<float>> Generate(int sections, int genes)
+vector<vector<float>> Generate()
 {
   //initialize variables
   //int max_S = 50; //might not need the max variables in this file
