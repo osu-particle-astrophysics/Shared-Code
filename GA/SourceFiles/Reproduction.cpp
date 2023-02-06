@@ -9,6 +9,22 @@
 #include <chrono>
 #include <ctime>
 
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
 void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected, float roul_percentage, float tour_percentage, float rank_percentage, int reproduction_no, int pool_size, int elite)
 {
     vector<int> locations = [];
