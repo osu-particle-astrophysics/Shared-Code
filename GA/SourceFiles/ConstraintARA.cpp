@@ -10,7 +10,6 @@
 #include <ctime>
 
 // User functions
-#include "ConstraintARA.h"
 #include "ContraintPUEO.h"
 #include "Crossover.h"
 #include "DataRead.h"
