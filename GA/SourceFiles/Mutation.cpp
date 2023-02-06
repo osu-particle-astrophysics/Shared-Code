@@ -9,6 +9,22 @@
 #include <chrono>
 #include <ctime>
 
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "GeneratePUEO.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
 void Mutation(vector<vector<vector<float> > > & varOutput, float M_rate, float sigma, int reproduction_no, int crossover_no)
 {
   uniform_real_distribution<float> select(0.0, 1.0);
