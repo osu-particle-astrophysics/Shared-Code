@@ -15,7 +15,7 @@ vector<vector<float> > GenerateARA()
 {
   // initialize an interesect condidtion
   bool intersect = True;
-  vector<vector<<float> > antenna = [][];
+  vector<vector<<float> > antenna (sections,vector <float>(genes, 0.0f));
   
   // variables
   float max_outer_radius = 7.5;
@@ -35,16 +35,24 @@ vector<vector<float> > GenerateARA()
     {
       std::uniform_real_distribution <float> distribution_radius(0, max_radius);          // Inner Radius
       float R = distribution_radius(generator);
+      
       std::uniform_real_distribution <float> distribution_length(min_length, max_length); // Length
-      float L = distribution_length(generator)
+      float L = distribution_length(generator);
+      
       std::uniform_real_distribution <float> distribution_A(min_A, max_A);                // linear coefficient
       float A = distribution_A(generator);
+      
       std::uniform_real_distribution <float> distribution_B(min_B, max_B);                // quadratic coefficient
       float B = distribution_B(generator);
       
       // Take the individual and pass it to the constraint function and update the interesct condition
       intersect = ConstraintARA(R, L, A, B)
     }
+    // store the variables into the antenna vector
+    antenna[i][0] = R;
+    antenna[i][1] = L;
+    antenna[i][2] = A;
+    antenna[i][3] = B;
   }
   return(antenna)
 }
