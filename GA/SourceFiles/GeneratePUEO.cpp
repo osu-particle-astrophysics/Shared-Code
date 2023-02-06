@@ -9,7 +9,24 @@
 #include <chrono>
 #include <ctime>
 
-vector<vector<float>> Generate()
+// User functions
+#include "ConstraintARA.h"
+#include "ContraintPUEO.h"
+#include "Crossover.h"
+#include "DataRead.h"
+#include "DataWrite.h"
+#include "GenerateARA.h"
+#include "Immigration.h"
+#include "Initialize.h"
+#include "Mutation.h"
+#include "Rank.h"
+#include "Reproduction.h"
+#include "Roulette.h"
+#include "Selection.h"
+#include "Sort.h"
+#include "Tournament.h"
+
+vector<vector<float>> GeneratePUEO()
 {
   //initialize variables
   //int max_S = 50; //might not need the max variables in this file
