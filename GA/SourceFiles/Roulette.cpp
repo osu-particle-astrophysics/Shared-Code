@@ -9,21 +9,21 @@
 #include <chrono>
 #include <ctime>
 
-#include "ConstraintARA.h"
-#include "ContraintPUEO.h"
-#include "Crossover.h"
-#include "DataRead.h"
-#include "DataWrite.h"
-#include "GenerateARA.h"
-#include "GeneratePUEO.h"
-#include "Immigration.h"
-#include "Initialize.h"
-#include "Mutation.h"
-#include "Rank.h"
-#include "Reproduction.h"
-#include "Selection.h"
-#include "Sort.h"
-#include "Tournament.h"
+#include "../HeaderFiles/ConstraintARA.h"
+#include "../HeaderFiles/ContraintPUEO.h"
+#include "../HeaderFiles/Crossover.h"
+#include "../HeaderFiles/DataRead.h"
+#include "../HeaderFiles/DataWrite.h"
+#include "../HeaderFiles/GenerateARA.h"
+#include "../HeaderFiles/GeneratePUEO.h"
+#include "../HeaderFiles/Immigration.h"
+#include "../HeaderFiles/Initialize.h"
+#include "../HeaderFiles/Mutation.h"
+#include "../HeaderFiles/Rank.h"
+#include "../HeaderFiles/Reproduction.h"
+#include "../HeaderFiles/Selection.h"
+#include "../HeaderFiles/Sort.h"
+#include "../HeaderFiles/Tournament.h"
 
 int Roulette(vector<float> fitness)
 {
