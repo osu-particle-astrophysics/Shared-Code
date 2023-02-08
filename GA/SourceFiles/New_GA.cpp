@@ -86,9 +86,6 @@ int main(int argc, char const *argv[])
       sections = 2;
       genes = 4;
       
-      // create vectors based on parameters
-      vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
-      vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
     }
     
     // if PUEO, create PUEO antennas
@@ -97,11 +94,10 @@ int main(int argc, char const *argv[])
       // determine sections and genes for PUEO
       sections = 1;
       genes = 7; 
-      
-      // create vectors based on parameters
-      vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
-      vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
-    }
+  }
+  // create vectors based on parameters
+  vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
+  vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
   
   // FUNCTION CALLS
   
