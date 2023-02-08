@@ -59,7 +59,7 @@ int main()
   cout << "Genetic Algorithm initialized" << endl;
   
   // ARGUMENTS (read in all arguments that determine what functions get run) 
-  str design = ARA;  string(argv[1]); // read in ARA or PUEO
+  string design = ARA;  string(argv[1]); // read in ARA or PUEO
   generation = atoi(argv[2]);
   population = atoi(argv[3]); // read in : atoi(argv[x])
   rank_no = atoi(argv[4]);
