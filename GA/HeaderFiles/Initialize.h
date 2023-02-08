@@ -1,6 +1,6 @@
 #pragma once
 
-extern int seed = time(NULL);
+extern int seed;
 extern default_random_engine generator(seed);
 extern int generation;
 extern int population;
