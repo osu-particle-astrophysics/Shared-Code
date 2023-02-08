@@ -1,3 +1,3 @@
 #pragma once
 
-vector<vector<float> > Generate();
+vector<vector<float> > GeneratePUEO();
