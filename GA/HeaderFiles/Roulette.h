@@ -1,3 +1,4 @@
 #pragma once
 
-int new_roulette(vector<float> fitness)
+using namespace std;
+int roulette(vector<float> fitness)
