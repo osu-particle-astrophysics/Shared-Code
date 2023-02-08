@@ -27,7 +27,7 @@
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
 
-vector<vector<float>> GeneratePUEO()
+vector<vector<float> > GeneratePUEO()
 {
   //initialize variables
   //int max_S = 50; //might not need the max variables in this file
