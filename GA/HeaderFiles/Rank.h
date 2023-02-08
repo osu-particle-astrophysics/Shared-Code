@@ -1,3 +1,3 @@
 #pragma once
 
-int Rank(vector<float> fitness)
+int Rank(vector<float> fitness);
