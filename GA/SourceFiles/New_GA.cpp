@@ -19,6 +19,8 @@
 #include <thread>
 #include <ctime>
 
+using namespace std;
+
 // User functions
 #include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
@@ -37,8 +39,6 @@
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
 
-
-using namespace std;
 
 // GLOBAL CONSTANTS
 
