@@ -52,6 +52,9 @@ int reproduction_no;
 int crossover_no;
 int mutation_rate;
 int sigma; 
+int rank_no; 
+int roulette_no;
+int tournament_no;
 
 
 int main(int argc, char const *argv[])
