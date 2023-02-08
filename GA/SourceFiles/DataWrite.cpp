@@ -29,7 +29,7 @@
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
 
-void DataWrite( vector<vector<vector<float> > >& varVector,int reproduction_no, int crossover_no, vector<int> selected)
+void DataWrite( vector<vector<vector<float> > >& varVector, vector<int> selected)
 {
   ofstream generationDNA;
   generationDNA.open("generationDNA.csv");
