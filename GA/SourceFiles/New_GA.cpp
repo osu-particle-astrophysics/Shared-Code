@@ -54,7 +54,7 @@ int mutation_rate;
 int sigma; 
 
 
-int main()
+int main(int argc, char const *argv[])
 {
   cout << "Genetic Algorithm initialized" << endl;
   
