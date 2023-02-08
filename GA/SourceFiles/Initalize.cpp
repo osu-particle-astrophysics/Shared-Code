@@ -13,6 +13,8 @@
 #include <chrono>
 #include <ctime>
 
+using namespace std;
+
 // User functions
 #include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
