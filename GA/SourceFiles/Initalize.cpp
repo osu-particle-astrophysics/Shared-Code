@@ -31,7 +31,7 @@
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
 
-void Initialize(vector<vector<vector<float> > > & varOutput, str design)
+void Initialize(vector<vector<vector<float> > > & varOutput, string design)
 {
 // if the experiment is ARA, then call GenerateARA 
   if(design == "ARA")
