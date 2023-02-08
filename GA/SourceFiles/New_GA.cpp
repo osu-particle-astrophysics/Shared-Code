@@ -20,7 +20,7 @@
 #include <ctime>
 
 // User functions
-#include "../HeaderFiles/ConstraintAra.h"
+#include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
 #include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
