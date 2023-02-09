@@ -57,5 +57,5 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> locations)
   locations.push_back(Tournament(Fitness));
  }
  
- 
+ cout << "Selection Finished" << endl;
 }
