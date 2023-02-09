@@ -1,6 +1,5 @@
 #pragma once
 extern int seed;
-default_random_engine generator(seed);
 extern int generation;
 extern int population;
 extern int sections;
