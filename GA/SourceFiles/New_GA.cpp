@@ -113,12 +113,15 @@ int main(int argc, char const *argv[])
   }
   
   // Generation 1+ functions
-  //    DataRead
+  if (generation != 0)
+  {
+  //    Read in data from pervious generation
+    DataRead(varInput, fitness);
   //    Sort
   //    Reproduction
   //    Crossover
   //    Immigration
   //    DataWrite
-  
+  }
   return 0;
 }
