@@ -120,6 +120,7 @@ int main(int argc, char const *argv[])
   //    Sort vectors by fitness scores
     Sort(fitness, varInput, P_loc);
   //    Reproduction
+    Reproduction(varInput, varOutput, fitness, P_loc, selected);
   //    Crossover
   //    Immigration
   //    DataWrite
