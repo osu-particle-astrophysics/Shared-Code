@@ -23,9 +23,9 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
     for(int i=0; i<reproduction_no; i++)
     {
     	selected.push_back(varInput[locations[i]);
-	for(int j=0; j<Sections; j++)
+	for(int j=0; j<sections; j++)
 	{
-	    for(int k=0; k<Parameters; k++)
+	    for(int k=0; k<genes; k++)
 	    {
 	    	varOutput[i][j][k] = varInput[locations[i]][j][k];
 	    }
