@@ -26,7 +26,7 @@ void Sort(vector<float> & fitness, vector<vector<vector<float> > > & varInput, v
 	{
 		double temp = fitness[i];
 		int T = O_loc[i];
-		vector<vector<vector<float>>> location (1,vector<vector<float> >(NSECTIONS,vector <float>(NVARS, 0.0f)));
+		vector<vector<vector<float>>> location (1,vector<vector<float> >(sections,vector <float>(genes, 0.0f)));
 		for(int a = 0; a < sections; a++)
 		{
 			for(int b = 0; b < genes; b++)
