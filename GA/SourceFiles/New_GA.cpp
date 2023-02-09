@@ -36,7 +36,7 @@ using namespace std;
 //#include "../HeaderFiles/Reproduction.h"
 //#include "../HeaderFiles/Roulette.h"
 //#include "../HeaderFiles/Selection.h"
-//#include "../HeaderFiles/Sort.h"
+#include "../HeaderFiles/Sort.h"
 //#include "../HeaderFiles/Tournament.h"
 
 
@@ -117,7 +117,8 @@ int main(int argc, char const *argv[])
   {
   //    Read in data from pervious generation
     DataRead(varInput, fitness);
-  //    Sort
+  //    Sort vectors by fitness scores
+    sort(fitness, varInput, P_loc);
   //    Reproduction
   //    Crossover
   //    Immigration
