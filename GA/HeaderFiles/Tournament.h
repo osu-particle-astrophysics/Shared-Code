@@ -1,4 +1,7 @@
 #pragma once
+
+#include <random>
+
 extern int seed;
 extern int generation;
 extern int population;
