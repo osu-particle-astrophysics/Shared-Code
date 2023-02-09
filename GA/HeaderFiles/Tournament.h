@@ -19,6 +19,7 @@ int Tournament(vector<float> fitness)
 {
   int pool_size = 0.07*population;
   vector<int> contenders; 
+  int random_num = 0;
   uniform_real_distribution<float> choice(0, fitness.size());
 
   for( int i =0; i<pool_size; i++)
