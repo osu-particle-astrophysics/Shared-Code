@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Selection.h"
 
 extern int seed;
