@@ -119,7 +119,6 @@ int main(int argc, char const *argv[])
     DataRead(varInput, fitness);
   //    Sort vectors by fitness scores
     Sort(fitness, varInput, P_loc);
-    varOutput = varInput;
   //    Reproduction
   //    Crossover
   //    Immigration
