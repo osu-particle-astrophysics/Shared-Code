@@ -119,7 +119,10 @@ int main(int argc, char const *argv[])
     DataRead(varInput, fitness);
   //    Sort vectors by fitness scores
     Sort(fitness, varInput, P_loc);
-    cout << fitness << endl;
+    for (float i: fitness)
+    {
+      cout << i << ' ' << endl;
+    }
   //    Reproduction
   //    Crossover
   //    Immigration
