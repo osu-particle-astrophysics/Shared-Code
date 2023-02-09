@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Selection.h"
+
 extern int seed;
 extern int generation;
 extern int population;
