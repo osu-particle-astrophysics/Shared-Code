@@ -1,10 +1,22 @@
 #pragma once
 
+extern int seed;
+extern int generation;
+extern int population;
+extern int sections;
+extern int genes;
+extern int reproduction_no;
+extern int crossover_no;
+extern int mutation_rate;
+extern int sigma; 
+extern int rank_no; 
+extern int roulette_no;
+extern int tournament_no;
 
-void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected, float roul_percentage, float tour_percentage, float rank_percentage, int reproduction_no, int pool_size, int elite)
+void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected)
 {
     vector<int> locations = [];
-    Selection(Reproduction_no, fitness, Roul_no, Rank_no, Tour_no, Pool);
+    Selection(Reproduction_no, fitness, locations);
     
     for(int i=0; i<Reproduction_no; i++)
     {
