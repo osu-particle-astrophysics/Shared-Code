@@ -44,15 +44,15 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
  }
  
  // Call each selection method
- for(int i=0; i>Roul_Select; i++)
+ for(int i=0; i<Roul_Select; i++)
  {
   locations.push_back(Roulette(Fitness));
  }
- for(int i=0; i>Rank_Select; i++)
+ for(int i=0; i<Rank_Select; i++)
  {
   locations.push_back(Rank(Fitness));
  }
- for(int i=0; i>Tour_Select; i++)
+ for(int i=0; i<Tour_Select; i++)
  {
   locations.push_back(Tournament(Fitness));
  }
