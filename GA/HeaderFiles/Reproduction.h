@@ -16,9 +16,9 @@ extern int tournament_no;
 void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected)
 {
     vector<int> locations;
-    Selection(Reproduction_no, fitness, locations);
+    Selection(reproduction_no, fitness, locations);
     
-    for(int i=0; i<Reproduction_no; i++)
+    for(int i=0; i<reproduction_no; i++)
     {
     	selected.push_back(varInput[locations[i]);
 	for(int j=0; j<Sections; j++)
