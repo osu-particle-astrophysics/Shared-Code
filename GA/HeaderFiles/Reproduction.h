@@ -25,6 +25,7 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
     for(int i=0; i<reproduction_no; i++)
     {
     	selected.push_back(P_loc[locations[i]]);
+	cout << selected[i] << endl;
 	for(int j=0; j<sections; j++)
 	{
 	    for(int k=0; k<genes; k++)
