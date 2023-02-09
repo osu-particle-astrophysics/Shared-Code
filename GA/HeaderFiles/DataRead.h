@@ -49,10 +49,6 @@ void DataRead(vector<vector<vector<float> > >& varInput, vector<float>& fitness)
   fitnessScores.open("fitnessScores.csv");
   string fitnessRead[population+2];
 
-  ifstream fitnessScores;
-  fitnessScores.open("fitnessScores.csv");
-  string fitnessRead[population+2];
-
   for (int i=0; i<(population+2); i++)
     {
       getline(fitnessScores, fitnessRead[i]);
