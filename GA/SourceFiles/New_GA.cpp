@@ -32,12 +32,12 @@ using namespace std;
 //#include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 //#include "../HeaderFiles/Mutation.h"
-//#include "../HeaderFiles/Rank.h"
-//#include "../HeaderFiles/Reproduction.h"
-//#include "../HeaderFiles/Roulette.h"
-//#include "../HeaderFiles/Selection.h"
+#include "../HeaderFiles/Rank.h"
+#include "../HeaderFiles/Reproduction.h"
+#include "../HeaderFiles/Roulette.h"
+#include "../HeaderFiles/Selection.h"
 #include "../HeaderFiles/Sort.h"
-//#include "../HeaderFiles/Tournament.h"
+#include "../HeaderFiles/Tournament.h"
 
 
 // GLOBAL CONSTANTS
