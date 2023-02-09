@@ -26,7 +26,7 @@ std::vector<std::vector<float> > GenerateARA()
   for(int i=0; i<sections; i++)
   {
     // while the intersect condition is true, generate the side of an individual
-    intersect = false;
+    intersect = true;
     while(intersect==true)
     {
       std::uniform_real_distribution <float> distribution_radius(0, max_radius);          // Inner Radius
