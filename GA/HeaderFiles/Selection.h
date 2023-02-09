@@ -28,11 +28,11 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> locations)
   {
     Roul_Select = Roul_Select + 1;
   }
-  elseif(rank_no/100*Opp_no - Rank_Select >= 0.5)
+  else if(rank_no/100*Opp_no - Rank_Select >= 0.5)
   {
     Rank_Select = Rank_Select + 1;
   }
-  elseif(tournament_no/100*Opp_no - Tour_Select >= 0.5)
+  else if(tournament_no/100*Opp_no - Tour_Select >= 0.5)
   {
     Tour_Select = Tour_Select + 1;
   }
