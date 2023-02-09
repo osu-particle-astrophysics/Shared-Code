@@ -1,8 +1,21 @@
 #pragma once
+extern int seed;
+extern default_random_engine generator(seed);
+extern int generation;
+extern int population;
+extern int sections;
+extern int genes;
+extern int reproduction_no;
+extern int crossover_no;
+extern int mutation_rate;
+extern int sigma; 
+extern int rank_no; 
+extern int roulette_no;
+extern int tournament_no;
 
-int Tournament(vector<float> fitness, int pool_size)
+int Tournament(vector<float> fitness)
 {
- 
+  int pool_size = 0.07*population;
   vector<int> contenders; 
   uniform_real_distribution<float> choice(0, fitness.size());
 
