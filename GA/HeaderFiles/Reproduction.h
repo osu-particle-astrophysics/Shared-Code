@@ -33,4 +33,5 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
 	    }
 	}
     }
+    cout << "Reproduction Finished" << endl;
 }
