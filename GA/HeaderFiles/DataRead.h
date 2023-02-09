@@ -1,5 +1,18 @@
 #pragma once
 
+extern int seed;
+extern int generation;
+extern int population;
+extern int sections;
+extern int genes;
+extern int reproduction_no;
+extern int crossover_no;
+extern int mutation_rate;
+extern int sigma; 
+extern int rank_no; 
+extern int roulette_no;
+extern int tournament_no;
+
 void DataRead(vector<vector<vector<float> > >& varInput, vector<float>& fitness)
 {
   int DNA_GARBAGE_END = 9;
