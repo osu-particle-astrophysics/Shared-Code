@@ -17,7 +17,7 @@ extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void Selection(int Opp_no, vector<float> Fitness, vector<int> locations)
+void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
 {
  // initialize Values
  int Roul_Select = roulette_no/100 * Opp_no;
