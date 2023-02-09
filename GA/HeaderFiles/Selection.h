@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Rank.h"
+#include "Roulette.h"
+#include "Tournament.h"
+
 extern int seed;
 extern int generation;
 extern int population;
