@@ -21,6 +21,7 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
 {
     vector<int> locations;
     Selection(reproduction_no, fitness, locations);
+    cout << "no really finished" << endl;
     cout << locations[0] << endl;
     
     for(int i=0; i<reproduction_no; i++)
