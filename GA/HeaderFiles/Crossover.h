@@ -1,7 +1,13 @@
 #pragma once
 
+// User Functions
+#include "ConstraintARA.h"
+#include "ConstraintPUEO.h"
+#include "Selection.h"
+
 // Global Variables
 extern int seed;
+extern string design;
 extern int generation;
 extern int population;
 extern int sections;
@@ -14,66 +20,87 @@ extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected, float roul_percentage, float tour_percentage, float rank_percentage, int crossover_no, int pool_size, int reproduction_no, float M_rate, float sigma)
+void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected)
 {
-  // Start Flag
-  cout << "Crossover Started" << endl;
+	// Start Flag
+	cout << "Crossover Started" << endl;
 	
-  // Define Variables
-  vector<int> locations;
-  double swap;
-  uniform_real_distribution<double> choice(0.0, 1.0);
+	// Define Variables
+	vector<int> locations;
+	double swap;
+	uniform_real_distribution<double> choice(0.0, 1.0);
 
-  // call selection methods
-  Selection(crossover_no, fitness, locations)
+	// call selection methods
+	Selection(crossover_no, fitness, locations)
 
-  if(locations.size() != crossover_no)
-   {
-     cout << "error: parent vector is not proper length" << endl;
-   }
+	// Check the size of location vector
+	if(locations.size() != crossover_no)
+	{
+		cout << "error: parent vector is not proper length" << endl;
+	}
 
-//
-   for(int i=0; i<locations.size(); i=i+2)
-      {
-         for(int j=0; j<sections; j++)
-            {
-	       bool intersect = true;
-	       while (intersect == true)
-	       {
-	          for(int k=0; k<genes; k++)
-	          {
-	             swap = choice(generator);
-
-	             if(swap < .5)
-	                {
-		           varOutput[i+reproduction_no][j][k] = varInput[locations[i]][j][k];
-		           varOutput[i+1+reproduction_no][j][k] = varInput[locations[i+1]][j][k];
+	// Crossover two antennas to make 2 children
+	for(int i=0; i<locations.size(); i=i+2)
+	{
+		for(int j=0; j<sections; j++)
+		{
+			// If the design self-intersects, find a new design
+			bool intersect = true;
+			while (intersect == true)
+			{
+				for(int k=0; k<genes; k++)
+				{
+					// Swap genes between parents to create the children
+					swap = choice(generator);
+					if(swap < .5)
+					{
+						varOutput[i+reproduction_no][j][k] = varInput[locations[i]][j][k];
+						varOutput[i+1+reproduction_no][j][k] = varInput[locations[i+1]][j][k];
 	                }
-	             else
+					else
 	                {
-		           varOutput[i+reproduction_no][j][k] = varInput[locations[i+1]][j][k];
-		           varOutput[i+1+reproduction_no][j][k] = varInput[locations[i]][j][k];
+						varOutput[i+reproduction_no][j][k] = varInput[locations[i+1]][j][k];
+						varOutput[i+1+reproduction_no][j][k] = varInput[locations[i]][j][k];
 	                }
-	          }
+				}
 		  
-		  if (design == "ARA")
-		  {
-	             bool intersect_A = true;
-                     float R_1= varOutput[i+reproduction_no][j][0];                                                 
-                     float l_1= varOutput[i+reproduction_no][j][1]; 
-                     float a_1= varOutput[i+reproduction_no][j][2];  
-                     float b_1= varOutput[i+reproduction_no][j][3]; 
-	             intersect_A = ConstraintARA(R_1, l_1, a_1, b_1);
-
-	             float R_2= varOutput[i+1+reproduction_no][j][0];
-                     float l_2= varOutput[i+1+reproduction_no][j][1];
-                     float a_2= varOutput[i+1+reproduction_no][j][2];
-                     float b_2= varOutput[i+1+reproduction_no][j][3];
-		  }     	  
-	       }
-            }
-         selected.push_back(P_loc[parents_loc[i]]);
-         selected.push_back(P_loc[parents_loc[1+i]]);
-   }
-   mutation(varOutput, M_rate, sigma, reproduction_no, crossover_no);
+				// Call constraint functions to make sure the designs are applicable
+				if (design == "ARA")
+				{
+					bool intersect_A = true;
+                    float R_1= varOutput[i+reproduction_no][j][0];                                                 
+                    float L_1= varOutput[i+reproduction_no][j][1]; 
+                    float A_1= varOutput[i+reproduction_no][j][2];  
+                    float B_1= varOutput[i+reproduction_no][j][3]; 
+	             	intersect_A = ConstraintARA(R_1, L_1, A_1, B_1);
+		     
+		     		bool intersect_B = true;
+	             	float R_2= varOutput[i+1+reproduction_no][j][0];
+                    float L_2= varOutput[i+1+reproduction_no][j][1];
+                    float A_2= varOutput[i+1+reproduction_no][j][2];
+                    float B_2= varOutput[i+1+reproduction_no][j][3];
+	                intersect_B = ConstraintARA(R_2, L_2, A_2, B_2);
+			  
+					if (intersect_A == false && intersect_B == false)
+					{
+						intersect = false;
+					}
+				}
+				
+				else if (design == "PUEO")
+				{
+					// Call constraint PUEO for variables
+					// intersect = ConstraintPUEO();
+				}     	  
+			}
+		}
+		// Save location of the parent antennas
+		selected.push_back(P_loc[parents_loc[i]]);
+		selected.push_back(P_loc[parents_loc[1+i]]);
+	}
+	// Call Mutation to apply mutations on children
+	mutation(varOutput);
+	
+	// End Flag
+	cout << "Crossover Complete" << endl;
 }
