@@ -60,6 +60,7 @@ int tournament_no;
 
 int main(int argc, char const *argv[])
 {
+  // Start Flag
   cout << "Genetic Algorithm initialized" << endl;
   
   //ARGUMENTS (read in all arguments that determine what functions get run) 
@@ -96,9 +97,11 @@ int main(int argc, char const *argv[])
       sections = 1;
       genes = 7; 
   }
-  // create vectors based on parameters
+  
+  // create in/out vectors based on parameters
   vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
   vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
+  
   
   // FUNCTION CALLS
   
@@ -115,15 +118,15 @@ int main(int argc, char const *argv[])
   // Generation 1+ functions
   if (generation != 0)
   {
-  //    Read in data from pervious generation
+    // Read in data from pervious generation
     DataRead(varInput, fitness);
-  //    Sort vectors by fitness scores
+    // Sort vectors by fitness scores
     Sort(fitness, varInput, P_loc);
-  //    Reproduction
+    // Pass individuals from the previous generation into the current one
     Reproduction(varInput, varOutput, fitness, P_loc, selected);
-  //    Crossover
-  //    Immigration
-  //    DataWrite
+    // Create new individuals via sexual reproduction and mutations
+    // Introduce new individuals into the population by random generation
+    // Write all data into files
   }
   return 0;
 }
