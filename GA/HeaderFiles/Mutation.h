@@ -1,66 +1,78 @@
 #pragma once
 
+// User Functions
+#include "ConstraintARA.h"
+#include "ConstraintPUEO.h"
 
-void Mutation(vector<vector<vector<float> > > & varOutput, float M_rate, float sigma, int reproduction_no, int crossover_no)
+// Global Variables
+extern int seed;
+extern string design;
+extern int generation;
+extern int population;
+extern int sections;
+extern int genes;
+extern int reproduction_no;
+extern int crossover_no;
+extern int mutation_rate;
+extern int sigma; 
+extern int rank_no; 
+extern int roulette_no;
+extern int tournament_no;
+
+void Mutation(vector<vector<vector<float> > > & varOutput)
 {
-  uniform_real_distribution<float> select(0.0, 1.0);
-
-  for(int i=reproduction_no; i<crossover_no+reproduction_no; i++)
-    {
-      for(int j=0; j<NSECTIONS; j++)
-	{
-	  for(int k=0; k<NVARS; k++)
-	    {
-	      float s = select(generator);
-	      if(s <= M_rate)
-		{
-		  normal_distribution<float> mutate(varOutput[i][j][k], sigma*varOutput[i][j][k]);
-		  varOutput[i][j][k] = mutate(generator);
-		  int intersect = 0;
-		  int constrained = 0;
-		  while(intersect == 0 || constrained == 0)
-		    {
-		      float r = varOutput[i][j][0];
-		      float l = varOutput[i][j][1];
-		      float a = varOutput[i][j][2];
-		      float b = varOutput[i][j][3];
-		      float end_point = (a * l * l + b * l + r);
-		      float vertex = (r - (b * b)/(4 * a));
+	// Start Flag
+	cout << "Mutation Started" << endl;
 	
-		      if(a == 0.0 && max_outer_radius > end_point && end_point >= 0.0)
+	// Set random number generator
+	uniform_real_distribution<float> select(0.0, 1.0);
+
+	// itterate over individuals and genes to determine for mutations
+	for(int i=reproduction_no; i<crossover_no+reproduction_no; i++)
+    {
+		for(int j=0; j<sections; j++)
+		{
+			// Set the intersect condition
+			bool intersect = true;
+			
+			// Initialize vector to store temporary values as to not lose data
+			vector<float> temp;
+			
+			// Attempt mutations and check if viable
+			while (intersect == true)
 			{
-			  if(r<0 || l<min_length || l>max_length || a<min_A || a>max_A || b<min_B || b>max_B)
-			    {
-			      constrained = 0;
-			      varOutput[i][j][k] = mutate(generator);
-			    }
-			  else
-			    {
-			      constrained = 1;
-			    }
-			  intersect = 1;
+				for(int k=0; k<genes; k++)
+				{
+					// Save gene into temp
+					temp.push_back(varOutput[i][j][k]);
+					float s = select(generator);
+				
+					// See if this gene will be mutated
+					if(s <= M_rate)
+					{
+						// Set distribution based on current gene
+						normal_distribution<float> mutate(varOutput[i][j][k], sigma*varOutput[i][j][k]);
+					
+						// Save the mutated value into temp
+						temp[k] = (mutate(generator));
+					}	
+				}
+				
+				// Check to see if the antenna is viable
+				if (design == "ARA")
+				{
+					intersect = ConstraintARA(temp[0], temp[1], temp[2], temp[3]);
+				}
+				else if (design == "PUEO")
+				{
+					// call PUEO constraint
+				}
 			}
-		      else if(a != 0.0 && max_outer_radius > end_point && end_point >= 0.0 && max_outer_radius > vertex && vertex >= 0.0)
+			// Save temp values back to the output vector
+			for (int k=0; k<genes; k++)
 			{
-			  if(r<0 || l<min_length || l>max_length || a<min_A || a>max_A || b<min_B || b>max_B)
-                            {
-                              constrained = 0;
-                              varOutput[i][j][k] = mutate(generator);
-                            }
-                          else
-                            {
-                              constrained = 1;
-                            }
-			  intersect = 1;
+				varOutput[i][j][0] = temp[0];
 			}
-		      else
-			{
-			  intersect = 0;
-			  varOutput[i][j][k] = mutate(generator);
-			}
-		    }
 		}
-	    }
 	}
-    }
 }
