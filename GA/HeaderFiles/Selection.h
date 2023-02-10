@@ -1,9 +1,11 @@
 #pragma once
 
+// User Functions
 #include "Rank.h"
 #include "Roulette.h"
 #include "Tournament.h"
 
+// Gloabal Variables
 extern int seed;
 extern int generation;
 extern int population;
@@ -19,6 +21,9 @@ extern int tournament_no;
 
 void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
 {
+ // Start Flag
+ cout << "Begining Selection" << endl;
+ 
  // initialize Values
  int Roul_Select = roulette_no/100 * Opp_no;
  int Rank_Select = rank_no/100 * Opp_no;
@@ -57,5 +62,6 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
   locations.push_back(Tournament(Fitness));
  }
  
+ // End Flag
  cout << "Selection Finished" << endl;
 }
