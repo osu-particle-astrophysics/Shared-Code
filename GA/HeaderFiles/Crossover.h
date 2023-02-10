@@ -68,18 +68,18 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 				if (design == "ARA")
 				{
 					bool intersect_A = true;
-                    float R_1= varOutput[i+reproduction_no][j][0];                                                 
-                    float L_1= varOutput[i+reproduction_no][j][1]; 
-                    float A_1= varOutput[i+reproduction_no][j][2];  
-                    float B_1= varOutput[i+reproduction_no][j][3]; 
-	             	intersect_A = ConstraintARA(R_1, L_1, A_1, B_1);
+					float R_1= varOutput[i+reproduction_no][j][0];
+					float L_1= varOutput[i+reproduction_no][j][1];
+					float A_1= varOutput[i+reproduction_no][j][2];
+					float B_1= varOutput[i+reproduction_no][j][3];
+					intersect_A = ConstraintARA(R_1, L_1, A_1, B_1);
 		     
-		     		bool intersect_B = true;
-	             	float R_2= varOutput[i+1+reproduction_no][j][0];
-                    float L_2= varOutput[i+1+reproduction_no][j][1];
-                    float A_2= varOutput[i+1+reproduction_no][j][2];
-                    float B_2= varOutput[i+1+reproduction_no][j][3];
-	                intersect_B = ConstraintARA(R_2, L_2, A_2, B_2);
+					bool intersect_B = true;
+					float R_2= varOutput[i+1+reproduction_no][j][0];
+					float L_2= varOutput[i+1+reproduction_no][j][1];
+					float A_2= varOutput[i+1+reproduction_no][j][2];
+					float B_2= varOutput[i+1+reproduction_no][j][3];
+					intersect_B = ConstraintARA(R_2, L_2, A_2, B_2);
 			  
 					if (intersect_A == false && intersect_B == false)
 					{
