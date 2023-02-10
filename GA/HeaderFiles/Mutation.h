@@ -29,7 +29,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 
 	// itterate over individuals and genes to determine for mutations
 	for(int i=reproduction_no; i<crossover_no+reproduction_no; i++)
-    {
+	{
 		for(int j=0; j<sections; j++)
 		{
 			// Set the intersect condition
