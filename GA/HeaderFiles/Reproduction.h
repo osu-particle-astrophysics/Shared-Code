@@ -1,9 +1,12 @@
 #pragma once
 
+// Libraries
 #include <vector>
 
+// User Functions
 #include "Selection.h"
 
+// Global variables
 extern int seed;
 extern int generation;
 extern int population;
@@ -19,11 +22,16 @@ extern int tournament_no;
 
 void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected)
 {
+    // Start Flag
+    cout << "Starting Reproduction" << endl;
+	
+    // define storage vector	
     vector<int> locations;
+	
+    // Call selection methods
     Selection(reproduction_no, fitness, locations);
-    cout << "no really finished" << endl;
-    cout << locations[0] << endl;
-    
+	
+    // Place individuals into the output arrays
     for(int i=0; i<reproduction_no; i++)
     {
     	selected.push_back(P_loc[locations[i]]);
@@ -35,5 +43,6 @@ void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vect
 	    }
 	}
     }
+    // End Flag
     cout << "Reproduction Finished" << endl;
 }
