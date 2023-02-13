@@ -71,7 +71,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 			// Save temp values back to the output vector
 			for (int k=0; k<genes; k++)
 			{
-				varOutput[i][j][0] = temp[0];
+				varOutput[i][j][k] = temp[k];
 			}
 		}
 	}
