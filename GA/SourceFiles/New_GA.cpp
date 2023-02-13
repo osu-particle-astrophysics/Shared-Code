@@ -24,14 +24,14 @@ using namespace std;
 // User functions
 #include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
-//#include "../HeaderFiles/Crossover.h"
+#include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
 #include "../HeaderFiles/DataWrite.h"
 #include "../HeaderFiles/GenerateARA.h"
 #include "../HeaderFiles/GeneratePUEO.h"
 //#include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
-//#include "../HeaderFiles/Mutation.h"
+#include "../HeaderFiles/Mutation.h"
 #include "../HeaderFiles/Rank.h"
 #include "../HeaderFiles/Reproduction.h"
 #include "../HeaderFiles/Roulette.h"
@@ -45,6 +45,7 @@ float max_S=50;
 float max_H=50;
 int seed = time(NULL);
 default_random_engine generator(seed);
+string design;
 int generation;
 int population;
 int sections;
@@ -64,7 +65,7 @@ int main(int argc, char const *argv[])
   cout << "Genetic Algorithm initialized" << endl;
   
   //ARGUMENTS (read in all arguments that determine what functions get run) 
-  string design = string(argv[1]); // read in ARA or PUEO
+  design = string(argv[1]); // read in ARA or PUEO
   generation = atoi(argv[2]);
   population = atoi(argv[3]); // read in : atoi(argv[x])
   rank_no = atoi(argv[4]);
