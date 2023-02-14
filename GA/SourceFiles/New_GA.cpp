@@ -35,7 +35,7 @@ using namespace std;
 #include "../HeaderFiles/DataWrite.h"
 #include "../HeaderFiles/GenerateARA.h"
 #include "../HeaderFiles/GeneratePUEO.h"
-//#include "../HeaderFiles/Immigration.h"
+#include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 #include "../HeaderFiles/Mutation.h"
 #include "../HeaderFiles/Rank.h"
@@ -118,9 +118,6 @@ int main(int argc, char const *argv[])
   {
     // run initialization
     Initialize(varOutput, design);
-    
-    // write information to data files
-    DataWrite(varOutput, selected);
   }
   
   // Generation 1+ functions
@@ -128,15 +125,22 @@ int main(int argc, char const *argv[])
   {
     // Read in data from pervious generation
     DataRead(varInput, fitness);
+    
     // Sort vectors by fitness scores
     Sort(fitness, varInput, P_loc);
+    
     // Pass individuals from the previous generation into the current one
     Reproduction(varInput, varOutput, fitness, P_loc, selected);
+    
     // Create new individuals via sexual reproduction and mutations
     Crossover(varInput, varOutput, fitness, P_loc, selected);
+    
     // Introduce new individuals into the population by random generation
-    // Write all data into files
+    Immigration(varOutput);
   }
+  
+  // write information to data files
+  DataWrite(varOutput, selected);
   
   // End Flag
   cout << endl;
