@@ -122,7 +122,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 		selected.push_back(P_loc[locations[1+i]]);
 	}
 	// Call Mutation to apply mutations on children
-	mutation(varOutput);
+	Mutation(varOutput);
 	
 	// End Flag
 	cout << "Crossover Complete" << endl;
