@@ -4,6 +4,7 @@
 #include "ConstraintARA.h"
 #include "ConstraintPUEO.h"
 #include "Selection.h"
+#include "Mutation.h"
 
 // Global Variables
 extern int seed;
