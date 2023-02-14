@@ -1,7 +1,8 @@
 #pragma once
 extern int population;
+extern string design;
 
-void Initialize(std::vector<std::vector<std::vector<float> > > & varOutput, std::string design)
+void Initialize(std::vector<std::vector<std::vector<float> > > & varOutput)
 {
 // if the experiment is ARA, then call GenerateARA 
   if(design == "ARA")
