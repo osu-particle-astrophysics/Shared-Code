@@ -7,6 +7,9 @@ extern string design;
 
 void Immigration(vector<vector<vector<float> > > & varOutput)
 {
+  // Start Flag
+  cout << "Immigration Started" << endl;
+
   // if the experiment is ARA, then call GenerateARA 
   if(design == "ARA")
   {
@@ -24,4 +27,7 @@ void Immigration(vector<vector<vector<float> > > & varOutput)
       varOutput[i] = GeneratePUEO();
     }
   }
+  
+  // End Flag
+  cout << "Immigration Complete" << endl;
 }
