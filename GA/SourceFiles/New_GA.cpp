@@ -6,6 +6,12 @@
 // This New version of the GA is designed to house the functions as standalone functions that can be transplanted
 // to any GA  with the plan to make the GA as simple and flexible as possible
 
+// Compile using:
+// g++ -std=c++11 New_GA.cpp -o GA.exe
+
+// Call using
+// ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma
+
 // Libraries
 #include <time.h>
 #include <math.h>
