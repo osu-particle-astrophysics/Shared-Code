@@ -4,6 +4,8 @@
 extern int genes;
 extern int sections;
 extern int seed;
+extern float max_S;
+extern float max_H;
 extern std::default_random_engine generator;
 
 std::vector<std::vector<float> > GeneratePUEO()
