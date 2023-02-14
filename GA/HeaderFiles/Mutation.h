@@ -51,7 +51,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 					float s = select(generator);
 				
 					// See if this gene will be mutated
-					if(s <= mutation_rate)
+					if(s <= mutation_rate/100.0)
 					{
 						// Set distribution based on current gene
 						normal_distribution<float> mutate(varOutput[i][j][k], sigma*varOutput[i][j][k]);
