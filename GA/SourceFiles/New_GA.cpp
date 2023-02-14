@@ -117,7 +117,7 @@ int main(int argc, char const *argv[])
   if (generation == 0)
   {
     // run initialization
-    Initialize(varOutput, design);
+    Initialize(varOutput);
   }
   
   // Generation 1+ functions
