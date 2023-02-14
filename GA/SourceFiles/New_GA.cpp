@@ -140,7 +140,7 @@ int main(int argc, char const *argv[])
   
   // End Flag
   cout << endl;
-  cout << "Genetic Algorithm Completed" endl;
+  cout << "Genetic Algorithm Completed" << endl;
   
   return 0;
 }
