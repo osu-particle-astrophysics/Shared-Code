@@ -6,6 +6,7 @@
 
 // Global Variables
 extern int seed;
+extern std::default_random_engine generator;
 extern string design;
 extern int generation;
 extern int population;
