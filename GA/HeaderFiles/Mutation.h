@@ -65,7 +65,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 				}
 				else if (design == "PUEO")
 				{
-					// call PUEO constraint
+					intersect = ConstraintPUEO(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
 				}
 			}
 			// Save temp values back to the output vector
@@ -73,6 +73,8 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 			{
 				varOutput[i][j][k] = temp[k];
 			}
+			// Clear temp
+			temp.clear();
 		}
 	}
 	// End Flag
