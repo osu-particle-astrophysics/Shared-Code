@@ -66,6 +66,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 				}
 				else if (design == "PUEO")
 				{
+					cout << "Look Here" << endl;
 					intersect = ConstraintPUEO(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
 				}
 			}
