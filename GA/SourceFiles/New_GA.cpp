@@ -126,6 +126,7 @@ int main(int argc, char const *argv[])
     // Pass individuals from the previous generation into the current one
     Reproduction(varInput, varOutput, fitness, P_loc, selected);
     // Create new individuals via sexual reproduction and mutations
+    Crossover(varInput, varOutput, fitness, P_loc, selected);
     // Introduce new individuals into the population by random generation
     // Write all data into files
   }
