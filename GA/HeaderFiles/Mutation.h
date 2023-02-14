@@ -42,6 +42,8 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 			// Attempt mutations and check if viable
 			while (intersect == true)
 			{
+				// Make sure temp is cleared between loops
+				temp.clear();
 				for(int k=0; k<genes; k++)
 				{
 					// Save gene into temp
