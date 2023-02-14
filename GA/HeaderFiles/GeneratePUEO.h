@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <random>
+#include "ConstraintPUEO.h"
 extern int genes;
 extern int sections;
 extern int seed;
