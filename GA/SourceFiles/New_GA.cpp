@@ -69,6 +69,7 @@ int main(int argc, char const *argv[])
 {
   // Start Flag
   cout << "Genetic Algorithm initialized" << endl;
+  cout << endl;
   
   //ARGUMENTS (read in all arguments that determine what functions get run) 
   design = string(argv[1]); // read in ARA or PUEO
@@ -136,5 +137,10 @@ int main(int argc, char const *argv[])
     // Introduce new individuals into the population by random generation
     // Write all data into files
   }
+  
+  // End Flag
+  cout << endl;
+  cout << "Genetic Algorithm Completed" endl;
+  
   return 0;
 }
