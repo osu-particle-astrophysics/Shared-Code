@@ -118,8 +118,8 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 			}
 		}
 		// Save location of the parent antennas
-		selected.push_back(P_loc[parents_loc[i]]);
-		selected.push_back(P_loc[parents_loc[1+i]]);
+		selected.push_back(P_loc[locations[i]]);
+		selected.push_back(P_loc[locations[1+i]]);
 	}
 	// Call Mutation to apply mutations on children
 	mutation(varOutput);
