@@ -31,7 +31,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 	uniform_real_distribution<double> choice(0.0, 1.0);
 
 	// call selection methods
-	Selection(crossover_no, fitness, locations)
+	Selection(crossover_no, fitness, locations);
 
 	// Check the size of location vector
 	if(locations.size() != crossover_no)
