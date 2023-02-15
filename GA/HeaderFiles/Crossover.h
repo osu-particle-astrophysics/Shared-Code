@@ -85,7 +85,6 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 					if (intersect_A == false && intersect_B == false)
 					{
 						intersect = false;
-						cout << "New Sides Made" << endl;
 					}
 				}
 				
