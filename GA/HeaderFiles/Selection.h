@@ -46,6 +46,28 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
   {
     Tour_Select = Tour_Select + 1;
   }
+  else
+  {
+    if (Rank_Select > Roul_select && Rank_Select > Tour_Select)
+    {
+      Rank_Select = Rank_Select + 1;
+    }
+    
+    else if (Roul_Select > Rank_select && Roul_Select > Tour_Select)
+    {
+      Roul_Select = Roul_Select + 1;
+    }
+    
+    else if (Tour_Select > Roul_select && Tour_Select > Rank_Select)
+    {
+      Tour_Select = Tour_Select + 1;
+    }
+    
+    else
+    {
+      Rank_Select = Rank_Select+1;
+    }
+  }
            
  }
  cout << "Got Here" << endl;
