@@ -6,6 +6,12 @@
 // This New version of the GA is designed to house the functions as standalone functions that can be transplanted
 // to any GA  with the plan to make the GA as simple and flexible as possible
 
+// Compile using:
+// g++ -std=c++11 New_GA.cpp -o GA.exe
+
+// Call using
+// ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma
+
 // Libraries
 #include <time.h>
 #include <math.h>
@@ -41,9 +47,11 @@ using namespace std;
 
 
 // GLOBAL CONSTANTS
-
+float max_S=50;
+float max_H=50;
 int seed = time(NULL);
 default_random_engine generator(seed);
+string design;
 int generation;
 int population;
 int sections;
@@ -59,10 +67,12 @@ int tournament_no;
 
 int main(int argc, char const *argv[])
 {
+  // Start Flag
   cout << "Genetic Algorithm initialized" << endl;
+  cout << endl;
   
-  // ARGUMENTS (read in all arguments that determine what functions get run) 
-  string design = string(argv[1]); // read in ARA or PUEO
+  //ARGUMENTS (read in all arguments that determine what functions get run) 
+  design = string(argv[1]); // read in ARA or PUEO
   generation = atoi(argv[2]);
   population = atoi(argv[3]); // read in : atoi(argv[x])
   rank_no = atoi(argv[4]);
@@ -77,7 +87,7 @@ int main(int argc, char const *argv[])
   // VECTORS
   vector<int> P_loc (population); // Parent locations vector
   vector<float> fitness (population, 0.0f); // stores fitness score
-  vector<int> selected;
+  vector<int> selected (population);
   
   // Check the design and prepare input/output vectors
   if (design == "ARA")
@@ -95,9 +105,11 @@ int main(int argc, char const *argv[])
       sections = 1;
       genes = 7; 
   }
-  // create vectors based on parameters
+  
+  // create in/out vectors based on parameters
   vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
   vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
+  
   
   // FUNCTION CALLS
   
@@ -105,19 +117,34 @@ int main(int argc, char const *argv[])
   if (generation == 0)
   {
     // run initialization
-    Initialize(varOutput, design);
-    
-    // write information to data files
-    DataWrite(varOutput, selected);
+    Initialize(varOutput);
   }
   
   // Generation 1+ functions
-  //    DataRead
-  //    Sort
-  //    Reproduction
-  //    Crossover
-  //    Immigration
-  //    DataWrite
+  if (generation != 0)
+  {
+    // Read in data from pervious generation
+    DataRead(varInput, fitness);
+    
+    // Sort vectors by fitness scores
+    Sort(fitness, varInput, P_loc);
+    
+    // Pass individuals from the previous generation into the current one
+    Reproduction(varInput, varOutput, fitness, P_loc, selected);
+    
+    // Create new individuals via sexual reproduction and mutations
+    Crossover(varInput, varOutput, fitness, P_loc, selected);
+    
+    // Introduce new individuals into the population by random generation
+    Immigration(varOutput);
+  }
+  
+  // write information to data files
+  DataWrite(varOutput, selected);
+  
+  // End Flag
+  cout << endl;
+  cout << "Genetic Algorithm Completed" << endl;
   
   return 0;
 }

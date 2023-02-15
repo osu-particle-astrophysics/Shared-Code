@@ -1,7 +1,14 @@
 #pragma once
 
-extern int seed = time(NULL);
-extern default_random_engine generator(seed);
+
+// Libraries
+#include <vector>
+
+// User Functions
+#include "Selection.h"
+
+// Global variables
+extern int seed;
 extern int generation;
 extern int population;
 extern int sections;
@@ -14,4 +21,29 @@ extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected, float roul_percentage, float tour_percentage, float rank_percentage, int reproduction_no, int pool_size, int elite);
+void Reproduction(vector<vector<vector<float> > > & varInput, vector<vector<vector<float> > > & varOutput, vector<float> fitness, vector<int> P_loc, vector<int> & selected)
+{
+    // Start Flag
+    cout << "Starting Reproduction" << endl;
+	
+    // define storage vector	
+    vector<int> locations;
+	
+    // Call selection methods
+    Selection(reproduction_no, fitness, locations);
+	
+    // Place individuals into the output arrays
+    for(int i=0; i<reproduction_no; i++)
+    {
+    	selected.push_back(P_loc[locations[i]]);
+	for(int j=0; j<sections; j++)
+	{
+	    for(int k=0; k<genes; k++)
+	    {
+	    	varOutput[i][j][k] = varInput[locations[i]][j][k];
+	    }
+	}
+    }
+    // End Flag
+    cout << "Reproduction Finished" << endl;
+}

@@ -1,17 +1,26 @@
 #pragma once
 
-extern int seed;
-extern default_random_engine generator(seed);
-extern int generation;
 extern int population;
-extern int sections;
-extern int genes;
-extern int reproduction_no;
-extern int crossover_no;
-extern int mutation_rate;
-extern int sigma; 
-extern int rank_no; 
-extern int roulette_no;
-extern int tournament_no;
+extern string design;
 
-void Initialize(vector<vector<vector<float> > > & varOutput, string design);
+void Initialize(std::vector<std::vector<std::vector<float> > > & varOutput)
+{
+// if the experiment is ARA, then call GenerateARA 
+  if(design == "ARA")
+  {
+    for(int i=0; i<population; i++)
+    {
+      varOutput[i] = GenerateARA(); 
+    }
+  }
+  
+// if the experiment is PUEO, then call GeneratePUEO 
+   if(design == "PUEO")
+  {
+    for(int i=0; i<population; i++)
+    {
+      varOutput[i] = GeneratePUEO();
+    }
+  }
+}
+
