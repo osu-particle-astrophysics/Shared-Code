@@ -44,6 +44,5 @@ bool ConstraintARA(float R, float L, float A, float B)
     intersect = true;
   }
   
-  cout << intersect << endl;
   return intersect;
 }
