@@ -48,6 +48,7 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
   }
            
  }
+ cout << "Got Here" << endl;
  
  // Call each selection method
  for(int i=0; i<Roul_Select; i++)
