@@ -53,7 +53,6 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 				{
 					// Swap genes between parents to create the children
 					swap = choice(generator);
-					cout << swap << endl;
 					if(swap < .5)
 					{
 						varOutput[i+reproduction_no][j][k] = varInput[locations[i]][j][k];
@@ -86,6 +85,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 					if (intersect_A == false && intersect_B == false)
 					{
 						intersect = false;
+						cout << "New Sides Made" << endl;
 					}
 				}
 				
