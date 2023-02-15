@@ -56,7 +56,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 					if(s <= mutation_rate/100.0)
 					{
 						// Set distribution based on current gene
-						normal_distribution<float> mutate(varOutput[i][j][k], sigma*varOutput[i][j][k]);
+						normal_distribution<float> mutate(varOutput[i][j][k], sigma/100.0*varOutput[i][j][k]);
 					
 						// Save the mutated value into temp
 						temp[k] = (mutate(generator));
