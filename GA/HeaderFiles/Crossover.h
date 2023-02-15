@@ -41,7 +41,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 	}
 
 	// Crossover two antennas to make 2 children
-	for(int i=0; i<locations.size(); i=i+2)
+	for(int i=0; i<crossover_no; i=i+2)
 	{
 		for(int j=0; j<sections; j++)
 		{
