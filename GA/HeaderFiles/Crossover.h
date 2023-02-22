@@ -33,6 +33,11 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 
 	// call selection methods
 	Selection(crossover_no, fitness, locations);
+	
+	for(int x=0; x<locations.size(); x++)
+	{
+		cout << locations << endl;
+	}
 
 	// Check the size of location vector
 	if(locations.size() != crossover_no)
@@ -57,12 +62,12 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 					{
 						varOutput[i+reproduction_no][j][k] = varInput[locations[i]][j][k];
 						varOutput[i+1+reproduction_no][j][k] = varInput[locations[i+1]][j][k];
-	                }
+					}
 					else
-	                {
+					{
 						varOutput[i+reproduction_no][j][k] = varInput[locations[i+1]][j][k];
 						varOutput[i+1+reproduction_no][j][k] = varInput[locations[i]][j][k];
-	                }
+					}
 				}
 		  
 				// Call constraint functions to make sure the designs are applicable
