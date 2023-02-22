@@ -36,7 +36,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 	
 	for(int x=0; x<locations.size(); x++)
 	{
-		cout << locations << endl;
+		cout << locations[x] << endl;
 	}
 
 	// Check the size of location vector
