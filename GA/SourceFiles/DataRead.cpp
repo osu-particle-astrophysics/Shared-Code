@@ -1,4 +1,6 @@
+#pragma once
 
+// Libraries
 #include <time.h>
 #include <math.h>
 #include <random>
