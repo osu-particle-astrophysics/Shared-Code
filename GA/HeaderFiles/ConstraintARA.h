@@ -23,7 +23,6 @@ bool ConstraintARA(float R, float L, float A, float B)
     if(R < 0.0 || L < min_length || L > max_length || A < min_coeff || A > max_coeff || B < min_coeff || B > max_coeff)
     {
       intersect = true;
-      cout << "Condition 1" << endl;
     }
     else
     {
@@ -34,7 +33,6 @@ bool ConstraintARA(float R, float L, float A, float B)
     if(R < 0.0 || L < min_length || L > max_length || A < min_coeff || A > max_coeff || B < min_coeff || B > max_coeff)
     {
       intersect = true;
-      cout << "Condition 2" << endl;
     }
     else
     {
@@ -43,7 +41,6 @@ bool ConstraintARA(float R, float L, float A, float B)
   }
   else
   {
-    cout << "Condition 3" << endl;
     intersect = true;
   }
   
