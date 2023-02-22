@@ -34,10 +34,6 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 	// call selection methods
 	Selection(crossover_no, fitness, locations);
 	
-	for(int x=0; x<locations.size(); x++)
-	{
-		cout << locations[x] << endl;
-	}
 
 	// Check the size of location vector
 	if(locations.size() != crossover_no)
