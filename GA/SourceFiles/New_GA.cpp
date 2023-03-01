@@ -44,6 +44,7 @@ using namespace std;
 #include "../HeaderFiles/Selection.h"
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
+#include "../HeaderFiles/ParameterCheck.h"
 
 
 // GLOBAL CONSTANTS
@@ -63,6 +64,8 @@ int sigma;
 int rank_no; 
 int roulette_no;
 int tournament_no;
+bool termination = false;
+string error_code = ""
 
 
 int main(int argc, char const *argv[])
@@ -82,6 +85,16 @@ int main(int argc, char const *argv[])
   crossover_no = atoi(argv[8]);
   mutation_rate = atoi(argv[9]);
   sigma = atoi(argv[10]);
+  
+  ParameterCheck;
+  
+  if (termination == true;)
+  {
+    cout << error_code << endl;
+    cout << "Proper call format is :" << endl;
+    cout << './Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma' << endl;
+    exit;
+  }
   
   
   // VECTORS
