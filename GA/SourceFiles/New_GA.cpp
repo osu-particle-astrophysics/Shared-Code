@@ -130,7 +130,7 @@ int main(int argc, char const *argv[])
     {
       for(int j=0; j<sections; j++)
       {
-        cout << varInput[i][j][0] << ", " < varInput[i][j][1] << ", " < varInput[i][j][2] << ", " < varInput[i][j][3] << endl;
+        cout << varInput[i][j][0] << ", " << varInput[i][j][1] << ", " << varInput[i][j][2] << ", " << varInput[i][j][3] << endl;
       }
     }
     
