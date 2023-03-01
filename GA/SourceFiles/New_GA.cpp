@@ -126,14 +126,6 @@ int main(int argc, char const *argv[])
     // Read in data from pervious generation
     DataRead(varInput, fitness);
     
-    for(int i=0; i<population; i++)
-    {
-      for(int j=0; j<sections; j++)
-      {
-        cout << varInput[i][j][0] << ", " << varInput[i][j][1] << ", " << varInput[i][j][2] << ", " << varInput[i][j][3] << endl;
-      }
-    }
-    
     // Sort vectors by fitness scores
     Sort(fitness, varInput, P_loc);
     
