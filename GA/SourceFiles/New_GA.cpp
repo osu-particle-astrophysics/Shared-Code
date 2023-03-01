@@ -93,7 +93,7 @@ int main(int argc, char const *argv[])
     cout << message << endl;
     cout << "Proper call format is :" << endl;
     cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma" << endl;
-    exit();
+    exit(0);
   }
   
   
