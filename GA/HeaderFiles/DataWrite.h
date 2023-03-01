@@ -36,9 +36,10 @@ void DataWrite(std::vector<std::vector<std::vector<float> > >& varVector, std::v
 	{
 	  generationDNA << freqVector[i] << ",";
 	}
-     }
-     */
+     }*/
      
+  
+  generationDNA << "Frequencies go here: " << "\n";
   generationDNA << "Matrices for this Generation: " << "\n";
   for(int i=0;i<population;i++)
     {
