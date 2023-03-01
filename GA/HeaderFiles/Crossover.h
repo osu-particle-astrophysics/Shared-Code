@@ -76,7 +76,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 					float B_1= varOutput[i+reproduction_no][j][3];
 					intersect_A = ConstraintARA(R_1, L_1, A_1, B_1);
 					
-					cout << R_1 << ", " << L_1 << ", " << A_1 << ", "<< B_1 << endl; 
+					// cout << R_1 << ", " << L_1 << ", " << A_1 << ", "<< B_1 << endl; 
 		     
 					bool intersect_B = true;
 					float R_2= varOutput[i+1+reproduction_no][j][0];
