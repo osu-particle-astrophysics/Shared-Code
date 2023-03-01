@@ -65,7 +65,7 @@ int rank_no;
 int roulette_no;
 int tournament_no;
 bool termination = false;
-string error_code = "";
+string message = "";
 
 
 int main(int argc, char const *argv[])
@@ -90,7 +90,7 @@ int main(int argc, char const *argv[])
   
   if (termination == true)
   {
-    cout << error_code << endl;
+    cout << message << endl;
     cout << "Proper call format is :" << endl;
     cout << './Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma' << endl;
     exit;
