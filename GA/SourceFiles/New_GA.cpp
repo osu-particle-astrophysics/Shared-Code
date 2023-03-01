@@ -65,7 +65,7 @@ int rank_no;
 int roulette_no;
 int tournament_no;
 bool termination = false;
-string error_code = ""
+string error_code = "";
 
 
 int main(int argc, char const *argv[])
