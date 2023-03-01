@@ -86,7 +86,7 @@ int main(int argc, char const *argv[])
   mutation_rate = atoi(argv[9]);
   sigma = atoi(argv[10]);
   
-  ParameterCheck;
+  ParameterCheck(argc);
   
   if (termination == true)
   {
