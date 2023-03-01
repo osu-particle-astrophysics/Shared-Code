@@ -28,7 +28,7 @@ void ParameterCheck(int argc)
     message = "ERROR: Improper amount of arguments";
   }
   
-  else if (reproduction_no < 0 || crossover_no < 0 || mutation_rate>100 || mutation_rate<0 || sigma<0 || rank_no <0 || roulette_no < 0 || tournament_no < 0 || crossover_0%2 != 0)
+  else if (reproduction_no < 0 || crossover_no < 0 || mutation_rate>100 || mutation_rate<0 || sigma<0 || rank_no <0 || roulette_no < 0 || tournament_no < 0 || crossover_no%2 != 0)
   {
     termination = true;
     message = "ERROR: One or more arguments are of an improper value. For example, values may not be less than zero";
