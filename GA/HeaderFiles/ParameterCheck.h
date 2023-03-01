@@ -17,7 +17,7 @@ extern int tournament_no;
 extern bool termination;
 extern string error_code;
 
-void ParameterCheck()
+void ParameterCheck(int argc)
 {
   // Check to see if any arguments are not viable
   // If they arent update the termination clause
@@ -28,7 +28,7 @@ void ParameterCheck()
     error_code = "ERROR: Improper amount of arguments";
   }
   
-  else if (reproduction_no < 0 || crossover_no < 0 || mutation>100 || mutation<0 || sigma<0 || rank_no <0 || roulette_no < 0 || tournament_no < 0 || crossover_0%2 != 0)
+  else if (reproduction_no < 0 || crossover_no < 0 || mutation_rate>100 || mutation_rate<0 || sigma<0 || rank_no <0 || roulette_no < 0 || tournament_no < 0 || crossover_0%2 != 0)
   {
     termination = true;
     error_code = "ERROR: One or more arguments are of an improper value. For example, values may not be less than zero";
