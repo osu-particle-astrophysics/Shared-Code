@@ -34,7 +34,7 @@ void ParameterCheck(int argc)
     message = "ERROR: One or more arguments are of an improper value. For example, values may not be less than zero";
   }
   
-  else if (design != "PUEO" || design != "ARA")
+  else if (design != "PUEO" && design != "ARA")
   {
     termination = true;
     message = "ERROR: Unknown design. Known designs are PUEO and ARA";
