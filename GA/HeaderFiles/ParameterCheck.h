@@ -37,7 +37,7 @@ void ParameterCheck(int argc)
   else if (design != "PUEO" || design != "ARA")
   {
     termination = true;
-    message = "ERROR: Unknown design. Known designs are PEUO and ARA";
+    message = "ERROR: Unknown design. Known designs are PUEO and ARA";
   }
   
   else if (roulette_no+tournament_no+rank_no > population || reproduction_no + crossover_no > population || roulette_no+tournament_no+rank_no < reproduction_no+crossover_no)
