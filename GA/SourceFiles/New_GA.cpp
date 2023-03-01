@@ -88,7 +88,7 @@ int main(int argc, char const *argv[])
   
   ParameterCheck;
   
-  if (termination == true;)
+  if (termination == true)
   {
     cout << error_code << endl;
     cout << "Proper call format is :" << endl;
