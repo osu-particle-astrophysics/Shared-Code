@@ -71,8 +71,6 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 				else if (design == "PUEO")
 				{
 					intersect = ConstraintPUEO(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
-					
-					// cout << temp[0] << ", "<< temp[1] << ", " << temp[2] << ", " << temp[3] << ", " << temp[4] << ", " << temp[5] << ", " << temp[6] << ", " << endl;
 				}
 			}
 			// Save temp values back to the output vector
