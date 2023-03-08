@@ -104,20 +104,19 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 					intersect_A = ConstraintPUEO(S_1, H_1, x0_1, y0_1, yf_1, zf_1, b_1);
 		     
 		     			bool intersect_B = true;
-					float S_2= varOutput[i+reproduction_no][j][0];
-					float H_2= varOutput[i+reproduction_no][j][1];
-					float x0_2= varOutput[i+reproduction_no][j][2];
-					float y0_2= varOutput[i+reproduction_no][j][3];
-					float yf_2= varOutput[i+reproduction_no][j][4];
-					float zf_2= varOutput[i+reproduction_no][j][5];
-					float b_2= varOutput[i+reproduction_no][j][6];
+					float S_2= varOutput[i+1+reproduction_no][j][0];
+					float H_2= varOutput[i+1+reproduction_no][j][1];
+					float x0_2= varOutput[i+1+reproduction_no][j][2];
+					float y0_2= varOutput[i+1+reproduction_no][j][3];
+					float yf_2= varOutput[i+1+reproduction_no][j][4];
+					float zf_2= varOutput[i+1+reproduction_no][j][5];
+					float b_2= varOutput[i+1+reproduction_no][j][6];
 					intersect_B = ConstraintPUEO(S_2, H_2, x0_2, y0_2, yf_2, zf_2, b_2);
 					
 					if (intersect_A == false && intersect_B == false)
 					{
 						intersect = false;
 						
-						cout << i << ", " << i+1 << " Checked." << endl;
 					}
 				}     	  
 			}
