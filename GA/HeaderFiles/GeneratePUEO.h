@@ -7,6 +7,7 @@ extern int sections;
 extern int seed;
 extern float max_S;
 extern float max_H;
+float min_H =6;
 extern std::default_random_engine generator;
 
 std::vector<std::vector<float> > GeneratePUEO()
@@ -22,7 +23,7 @@ std::vector<std::vector<float> > GeneratePUEO()
       
       std::uniform_real_distribution <float> distribution_S(0, max_S);  //Side length (= x_f)
       S = distribution_S(generator);
-      std::uniform_real_distribution <float> distribution_H(0, max_H);  //Height 
+      std::uniform_real_distribution <float> distribution_H(min_H, max_H);  //Height 
       H = distribution_H(generator);
       std::uniform_real_distribution <float> distribution_X0(0, S);  //x_0
       X0 = distribution_X0(generator);
