@@ -2,12 +2,13 @@
 
 extern float max_S;
 extern float max_H;
+float min_H = 6;
 
 bool ConstraintPUEO(float S, float H, float x_0, float y_0, float y_f, float z_f, float beta)
 {
   bool intersect = true;
   float x_f = S;
-  if(S > max_S || H > max_H){
+  if(S > max_S || H > max_H || H < min_H){
     intersect = true;
   }else if(x_0 < 0 || x_0 > x_f){
     intersect = true;
