@@ -16,7 +16,7 @@ bool ConstraintPUEO(float S, float H, float x_0, float y_0, float y_f, float z_f
     intersect = true;
   }else if(y_f < 0 || y_f > z_f){
     intersect = true;
-  }else if(z_f < 0 || z_f > H){
+  }else if(z_f < 0 || z_f > H || z_f < x_0){
     intersect = true;
   }else if((4/30)*z_f > (beta*100) || (7*z_f) < (beta*100) || 2<beta){
     intersect = true;
