@@ -2,7 +2,6 @@
 
 extern float max_S;
 extern float max_H;
-// float min_H = 6;
 
 bool ConstraintPUEO(float S, float H, float x_0, float y_0, float y_f, float z_f, float beta)
 {
