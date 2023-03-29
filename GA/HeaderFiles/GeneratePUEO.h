@@ -31,7 +31,7 @@ std::vector<std::vector<float> > GeneratePUEO()
       Y0 = distribution_H(generator);
       std::uniform_real_distribution <float> distribution_ZF(0, H);  //z_f
       ZF = distribution_ZF(generator);
-      std::uniform_real_distribution <float> distribution_YF(X0, ZF);  //y_f
+      std::uniform_real_distribution <float> distribution_YF(0, ZF);  //y_f
       YF = distribution_YF(generator);
       std::uniform_real_distribution <float> distribution_beta((4/30)*ZF, 7*ZF);  //beta, upper bound is arbitrary, can adjust if needed
       beta = distribution_beta(generator)/100;
