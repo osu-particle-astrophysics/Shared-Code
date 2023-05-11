@@ -119,6 +119,13 @@ int main(int argc, char const *argv[])
       genes = 7; 
   }
   
+  else if (design == "AREA")
+  {
+    // determine sections and genes for AREA
+    sections = 2;
+    genes = 14;
+  }
+  
   // create in/out vectors based on parameters
   vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
   vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
