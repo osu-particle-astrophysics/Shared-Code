@@ -34,10 +34,10 @@ void ParameterCheck(int argc)
     message = "ERROR: One or more arguments are of an improper value. For example, values may not be less than zero";
   }
   
-  else if (design != "PUEO" && design != "ARA")
+  else if (design != "PUEO" && design != "ARA" && design != "AREA")
   {
     termination = true;
-    message = "ERROR: Unknown design. Known designs are PUEO and ARA";
+    message = "ERROR: Unknown design. Known designs are PUEO, AREA, and ARA";
   }
   
   else if (roulette_no+tournament_no+rank_no > population || reproduction_no + crossover_no > population || roulette_no+tournament_no+rank_no < reproduction_no+crossover_no)
