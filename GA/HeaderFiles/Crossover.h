@@ -3,6 +3,7 @@
 // User Functions
 #include "ConstraintARA.h"
 #include "ConstraintPUEO.h"
+#include "ConstraintAREA.h"
 #include "Selection.h"
 #include "Mutation.h"
 
