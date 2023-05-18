@@ -28,11 +28,11 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
     Phi_start = Phi_start + 5.0;
   }
   
-  float Frequency_start = 83.33*10.0**(6.0); // replace
+  float Frequency_start = pow(83.33*10.0, 6.0); // replace
   for(int i=0; i<Frequency_index; i++)
   {
     Frequency.push_back(Frequency_start);
-    Frequency_start = Frequency_start + 16.67*10.0**(6.0);
+    Frequency_start = Frequency_start + pow(16.67*10.0, 6.0);
   }
   
   // Loop over Theta, Phi, and Frequency and calculate gain for each point
