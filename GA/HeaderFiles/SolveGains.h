@@ -62,5 +62,5 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
   }
   
   // Return the Gain vector
-  return(Gains)
+  return(Gains);
 }
