@@ -118,7 +118,23 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 						intersect = false;
 						
 					}
-				}     	  
+				}     	 
+				
+				else if (design == "AREA")
+				{
+					// Call constraint AREA for variables
+					bool intersect_A = true;
+					intersect_A = ConstraintAREA(varOutput[i+reproduction_no]);
+					
+					bool intersect_B = true;
+					intersect_B = ConstraintAREA(varOutput[i+1+reproduction_no]);
+					
+					if (intersect_A == false && intersect_B == false)
+					{
+						intersect = false;
+					}
+					
+				}
 			}
 		}
 		// Save location of the parent antennas
