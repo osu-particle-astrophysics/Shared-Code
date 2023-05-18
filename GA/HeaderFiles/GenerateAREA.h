@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <random>
+#include "ConstraintAREA.h"
 extern int genes;
 extern int sections;
 extern int seed;
