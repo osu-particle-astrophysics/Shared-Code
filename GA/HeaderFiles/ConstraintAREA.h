@@ -1,4 +1,10 @@
 #pragma once
+
+// Includes
+#include "SolveGains.h"
+#include "FindMin.h"
+#include "ScaleAREA.h"
+
 bool ConstraintAREA(vector<vector<float> > & antenna)
 {
   bool intersect = true;
