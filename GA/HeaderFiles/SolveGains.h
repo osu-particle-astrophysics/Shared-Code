@@ -4,11 +4,11 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
   // Declare variables and value vectors
   long double PI = 3.14159265359;
   int Theta_index = 37;     
-  vector<float> Theta = [];
+  vector<float> Theta = {};
   int Phi_index = 72;       
-  vector<float> Phi = [];
+  vector<float> Phi = {};
   int Frequency_index = 60; 
-  vector<float> Frequency = [];
+  vector<float> Frequency = {};
   
   // Declare vectors to store important values
   vector<vector<vector<float>>> Gains (Theta_index,vector<vector<float> >(Phi_index,vector <float>(Frequency_index, 0.0f)));
