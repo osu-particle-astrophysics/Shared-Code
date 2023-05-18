@@ -30,11 +30,13 @@ using namespace std;
 // User functions
 #include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
+#include "../HeaderFiles/ConstraintAREA.h"
 #include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
 #include "../HeaderFiles/DataWrite.h"
 #include "../HeaderFiles/GenerateARA.h"
 #include "../HeaderFiles/GeneratePUEO.h"
+#include "../HeaderFiles/GenerateAREA.h"
 #include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 #include "../HeaderFiles/Mutation.h"
