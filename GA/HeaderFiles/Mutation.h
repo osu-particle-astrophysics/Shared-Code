@@ -4,6 +4,7 @@
 // User Functions
 #include "ConstraintARA.h"
 #include "ConstraintPUEO.h"
+#include "ConstraintAREA.h"
 
 // Global Variables
 extern int seed;
