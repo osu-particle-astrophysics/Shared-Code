@@ -17,7 +17,7 @@ float FindMin(vector<vector<vector<float> > > & Gains)
     {
       if(Gains[i][j][k] < Min)
       {
-        Min = Gain[i][j][k];
+        Min = Gains[i][j][k];
       }
     }
    }
