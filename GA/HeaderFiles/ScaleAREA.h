@@ -16,6 +16,7 @@ std::vector<std::vector<float> > ScaleAREA(vector<vector<float> > & antenna, vec
   {
     // Scale the individual to conserve energy
     // Loop over all non-constant gain coefficients
+    // Currently not adjusting extrapolating coefficient
     for(int i=1; i<13; i++)
     {
       antenna[0][i] = (1.0/(1.0-Min))*antenna[0][i];
