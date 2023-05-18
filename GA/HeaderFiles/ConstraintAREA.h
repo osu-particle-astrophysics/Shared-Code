@@ -14,20 +14,21 @@ bool ConstraintAREA(vector<vector<float> > & antenna)
     
   // Use gains to check energy conservation
   // Check if min gain value is negative, if it is, rescale gain coefficents 
-  float Min = 0.0;
+  float Min = FindMin(Gains);
   while (intersect == true)
   {
-    // Scale the antenna's coefficients
-    antenna = ScaleAREA(antenna, Gains);
-    
-    // Resolve Gains
-    vector<vector<vector<float>>> Gains = SolveGains(antenna);
-    
-    // Double Check that the Min of Gains is not negative
-    Min = FindMin(Gains);
     if (Min >= 0.0)
     {
       intersect = false;
+    }
+    else
+    {
+      // Scale the antenna's coefficients
+      antenna = ScaleAREA(antenna, Gains);
+    
+      // Re-solve Gains and Min
+      vector<vector<vector<float>>> Gains = SolveGains(antenna); 
+      Min = FindMin(Gains);
     }
   }
   
