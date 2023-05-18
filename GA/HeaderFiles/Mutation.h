@@ -89,7 +89,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 									}
 									else
 									{
-										antenna[a][b] = varOutput[i][a][b]
+										antenna[a][b] = varOutput[i][a][b];
 									}
 								}
 							}
