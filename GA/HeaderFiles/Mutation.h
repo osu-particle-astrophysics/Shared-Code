@@ -73,6 +73,28 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 						{
 							intersect = ConstraintPUEO(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
 						}
+						else if (design == "AREA")
+						{	
+							// create 2D antenna
+							std::vector<std::vector<float> > antenna (sections,std::vector <float>(genes, 0.0f));
+							
+							for(int a=0; a<sections; a++)
+							{	
+								for(int b=0; b<genes; b++)
+								{
+									if (a==0)
+									{
+										antenna[a][b] = temp[b];
+									}
+									else
+									{
+										antenna[a][b] = varOutput[i][a][b]
+									}
+								}
+							}
+							
+							intersect = ConstraintAREA(antenna);
+						}
 					}
 				}
 				// Save temp values back to the output vector
