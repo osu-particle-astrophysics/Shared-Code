@@ -1,5 +1,5 @@
 #pragma once
-vector<vector<vector<float> > > SolveGains(vector<vector<float> > antenna)
+vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
 {
   // Declare variables and value vectors
   long double PI = 3.14159265359
