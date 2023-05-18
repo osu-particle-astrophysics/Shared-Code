@@ -15,7 +15,7 @@ std::vector<std::vector<float> > GenerateAREA()
   std::vector<std::vector<float> > antenna (sections,std::vector <float>(genes, 0.0f));
   
   // variables
-  long double PI = 3.14159265359
+  long double PI = 3.14159265359;
   float min_gain_coeff = -5.0;
   float max_gain_coeff = 5.0;
   float min_phase_coeff = -5.0;
