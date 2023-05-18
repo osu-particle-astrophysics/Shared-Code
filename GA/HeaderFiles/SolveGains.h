@@ -2,7 +2,7 @@
 vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
 {
   // Declare variables and value vectors
-  long double PI = 3.14159265359
+  long double PI = 3.14159265359;
   int Theta_index = 37;     
   vector<float> Theta = [];
   int Phi_index = 72;       
