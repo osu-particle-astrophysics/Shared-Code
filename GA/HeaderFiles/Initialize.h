@@ -22,5 +22,14 @@ void Initialize(std::vector<std::vector<std::vector<float> > > & varOutput)
       varOutput[i] = GeneratePUEO();
     }
   }
+  
+  // if the experiment is AREA, then call GenerateAREA 
+  if(design == "AREA")
+  {
+    for(int i=0; i<population; i++)
+    {
+      varOutput[i] = GenerateAREA(); 
+    }
+  }
 }
 
