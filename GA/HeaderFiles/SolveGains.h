@@ -38,12 +38,7 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
   // Loop over Theta, Phi, and Frequency and calculate gain for each point
   for (int i=0; i<Theta_index; i++)
   {
-   for (int j=0; j<Phi_index; j++)
-   {
-    for (int k=0; k<Frequency_index; k++)
-    {
-      // Calculate the spherical harmonics at this point
-      Gains[i][j][k] = (antenna[0][0]*(1/2.0)*(1/sqrt(PI)) +
+    long double theta_gain = (antenna[0][0]*(1/2.0)*(1/sqrt(PI)) +
                         antenna[0][1]*(1/2.0)*sqrt(3/PI)*cos(Theta[i]*PI/180.0f) +
                         antenna[0][2]*(1/4.0)*sqrt(5/PI)*(3*pow(cos(Theta[i]*PI/180.0f), 2)- 1) +
                         antenna[0][3]*(1/4.0)*sqrt(7/PI)*(5*pow(cos(Theta[i]*PI/180.0f),3)- 3*cos(Theta[i]*PI/180.0f)) +
@@ -57,6 +52,12 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
                         antenna[0][11]*(1/512.0)*sqrt(23/PI)*(-693*pow(cos(Theta[i]*PI/180.0f),1) +15015*pow(cos(Theta[i]*PI/180.0f),3) - 90090*pow(cos(Theta[i]*PI/180.0f),5) +218790*pow((cos(Theta[i]*PI/180.0f)),7)-230945*pow(cos(Theta[i]*PI/180.0f),9)+88179*pow(cos(Theta[i]*PI/180.0f),11)) +
                         antenna[0][12]*(1/2048.0)*sqrt(25/PI)*(231 -18018*pow(cos(Theta[i]*PI/180.0f),2) +225225*pow(cos(Theta[i]*PI/180.0f),4) - 1021020*pow(cos(Theta[i]*PI/180.0f),6) +2078505*pow((cos(Theta[i]*PI/180.0f)),8)-1939938*pow(cos(Theta[i]*PI/180.0f),10)+676039*pow(cos(Theta[i]*PI/180.0f),12)));
                         /*(1+(genes[13]*(16.67*freq)/83.33))**/
+   for (int j=0; j<Phi_index; j++)
+   {
+    for (int k=0; k<Frequency_index; k++)
+    {
+      // Calculate the spherical harmonics at this point
+      Gains[i][j][k] = theta_gain
     }
    } 
   }
