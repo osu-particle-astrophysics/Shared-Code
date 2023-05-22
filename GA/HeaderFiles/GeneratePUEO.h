@@ -33,7 +33,7 @@ std::vector<std::vector<float> > GeneratePUEO()
       ZF = distribution_ZF(generator);
       std::uniform_real_distribution <float> distribution_YF(0, ZF);  //y_f
       YF = distribution_YF(generator);
-      std::uniform_real_distribution <float> distribution_beta((4/30)*ZF, 7*ZF);  //beta, upper bound is arbitrary, can adjust if needed
+      std::uniform_real_distribution <float> distribution_beta((4.0/30.0)*ZF, 7*ZF);  //beta, upper bound is arbitrary, can adjust if needed
       beta = distribution_beta(generator)/100;
       //float tau = 0.26;  tau must be 0.26, not evolving
       //float m = 1;  we are only evolving m = 1 for now.
