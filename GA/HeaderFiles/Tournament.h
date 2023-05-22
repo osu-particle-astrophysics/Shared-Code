@@ -44,6 +44,7 @@ int Tournament(vector<float> fitness)
     }
 
   // Return the best individual
+  cout << "Tournement selected, " << contenders[max] << endl;
   return(contenders[max]);
   
 }
