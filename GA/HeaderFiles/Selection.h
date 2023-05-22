@@ -91,11 +91,6 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
   locations.push_back(Tournament(Fitness));
  }
  
- for (int a=0; a<locations.size(); a++)
- {
-  cout << locations[a] << endl;
- }
- 
  // End Flag
  cout << "Selection Finished" << endl;
 }
