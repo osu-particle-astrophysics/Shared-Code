@@ -26,9 +26,9 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
  cout << "Begining Selection" << endl;
  
  // initialize Values
- int Roul_Select = roulette_no/population * Opp_no;
- int Rank_Select = rank_no/population * Opp_no;
- int Tour_Select = tournament_no/population * Opp_no;
+ int Roul_Select = roulette_no/population * 1.0*Opp_no;
+ int Rank_Select = rank_no/population * 1.0*Opp_no;
+ int Tour_Select = tournament_no/population * 1.0*Opp_no;
  
  cout << Opp_no << " " << roulette_no << " " <<  rank_no << " " << tournament_no << endl;
  cout << Roul_Select << " " << Rank_Select << " " << Tour_Select << endl;
