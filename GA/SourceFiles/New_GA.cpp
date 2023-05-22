@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
   // VECTORS
   vector<int> P_loc (population); // Parent locations vector
   vector<float> fitness (population, 0.0f); // stores fitness score
-  vector<int> selected (population);
+  vector<int> selected;
   
   // Check the design and prepare input/output vectors
   if (design == "ARA")
