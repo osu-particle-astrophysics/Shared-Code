@@ -30,9 +30,6 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
  int Rank_Select = (double)rank_no/population * 1.0*Opp_no;
  int Tour_Select = (double)tournament_no/population * 1.0*Opp_no;
  
- cout << Opp_no << " " << roulette_no << " " <<  rank_no << " " << tournament_no << endl;
- cout << Roul_Select << " " << Rank_Select << " " << Tour_Select << endl;
- 
  // Check to make sure values sum to correct value
  while(Roul_Select + Rank_Select + Tour_Select < Opp_no)
  {
