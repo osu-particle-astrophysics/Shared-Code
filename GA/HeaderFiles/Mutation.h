@@ -96,7 +96,11 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 							// rescale and replace antenna with gain corrected version
 							intersect = ConstraintAREA(antenna);
 							cout << intersect << endl;
-							varOutput[i] = antenna;
+							
+							for(int a=0; a<genes; a++)
+							{	
+								temp[a] = antenna[j][b];
+							}
 						}
 					}
 				}
