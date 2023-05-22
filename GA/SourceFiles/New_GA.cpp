@@ -152,11 +152,6 @@ int main(int argc, char const *argv[])
     Immigration(varOutput);
   }
   
-  for (int a=0; a<selected.size(); a++)
-  {
-    cout << selected[a] << endl;
-  }
-  
   // write information to data files
   DataWrite(varOutput, selected);
   
