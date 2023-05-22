@@ -83,7 +83,7 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 							{	
 								for(int b=0; b<genes; b++)
 								{
-									if (a==0)
+									if (a==j)
 									{
 										antenna[a][b] = temp[b];
 									}
