@@ -48,6 +48,5 @@ int Rank(vector<float> fitness)
     }
   
   // Return the chosen individual
-  cout << "Rank selected, " << x << endl;
   return(x);
 }
