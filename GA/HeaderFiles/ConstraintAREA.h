@@ -33,6 +33,5 @@ bool ConstraintAREA(vector<vector<float> > & antenna)
   }
   
   // Return the interesect constraint
-  cout << "AREA individuals Passed" << endl;
   return intersect;
 }
