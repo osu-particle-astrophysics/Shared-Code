@@ -49,5 +49,6 @@ int Roulette(vector<float> fitness)
     }
   
   // Return the chosen individual
+  cout << "Roulette selected, " << x << endl;
   return(x);
 }
