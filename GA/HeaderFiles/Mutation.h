@@ -79,14 +79,17 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 							// create 2D antenna
 							std::vector<std::vector<float> > antenna (sections,std::vector <float>(genes, 0.0f));
 							
+							// populate the antenna
 							for(int a=0; a<sections; a++)
 							{	
 								for(int b=0; b<genes; b++)
 								{
+									// if the section matches the outer loop, fill with temp values
 									if (a==j)
 									{
 										antenna[a][b] = temp[b];
 									}
+									// if the section does not match the outer loop, will with permanent values
 									else
 									{
 										antenna[a][b] = varOutput[i][a][b];
@@ -94,10 +97,9 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 								}
 							}
 							// rescale and replace antenna with gain corrected version
-							cout << "Check Antenna" << endl;
 							intersect = ConstraintAREA(antenna);
-							cout << intersect << endl;
 							
+							// replace temp values with the newly scaled ones
 							for(int a=0; a<genes; a++)
 							{	
 								temp[a] = antenna[j][a];
