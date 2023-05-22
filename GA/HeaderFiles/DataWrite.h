@@ -70,7 +70,7 @@ void DataWrite(std::vector<std::vector<std::vector<float> > >& varVector, std::v
       Parents << "Location of individuals used to make this generation:" << endl;
       Parents << "Seed: " << seed << endl;
       Parents << "\n" << endl;
-      Parents << "Current Gen, Parent 1, Parent 2, Operator" << endl;
+      Parents << "Individual, Parent 1, Parent 2, Operator" << endl;
       int j=0;
 
       for(int i=0; i<population; i++)
