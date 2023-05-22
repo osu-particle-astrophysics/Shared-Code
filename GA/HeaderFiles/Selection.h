@@ -31,21 +31,28 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
  int Tour_Select = tournament_no/population * Opp_no;
  
  // Check to make sure values sum to correct value
- while(Roul_Select + Rank_Select + Tour_Select != Opp_no)
+ while(Roul_Select + Rank_Select + Tour_Select < Opp_no)
  {
   
-  if(roulette_no/population * 1.0*Opp_no - Roul_Select >= 0.5)
+  float roul_cut = roulette_no/population * 1.0*Opp_no - Roul_Select;
+  float rank_cut = rank_no/population * 1.0*Opp_no - Rank_Select;
+  float tour_cut = tournament_no/population * 1.0*Opp_no - Tour_Select;
+
+  if (roul_cut > rank_cut && roul_cut > tour_cut)
   {
-    Roul_Select = Roul_Select + 1;
+   Roul_Select = Roul_Select+1;
   }
-  else if(rank_no/population*1.0*Opp_no - Rank_Select >= 0.5)
+  
+  else if (rank_cut > roul_cut && rank_cut > tour_cut)
   {
-    Rank_Select = Rank_Select + 1;
+   Rank_Select = Rank_Select+1;
   }
-  else if(tournament_no/population*1.0*Opp_no - Tour_Select >= 0.5)
+  
+  else if (tour_cut > roul_cut && tour_cut > rank_cut)
   {
-    Tour_Select = Tour_Select + 1;
+   Tour_Select = Tour_Select+1;
   }
+  
   else
   {
     if (Rank_Select > Roul_Select && Rank_Select > Tour_Select)
@@ -67,8 +74,7 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
     {
       Rank_Select = Rank_Select+1;
     }
-  }
-           
+  }          
  }
  
  // Call each selection method
