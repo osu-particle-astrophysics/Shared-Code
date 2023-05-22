@@ -34,9 +34,9 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
  while(Roul_Select + Rank_Select + Tour_Select < Opp_no)
  {
   
-  float roul_cut = roulette_no/population * 1.0*Opp_no - Roul_Select;
-  float rank_cut = rank_no/population * 1.0*Opp_no - Rank_Select;
-  float tour_cut = tournament_no/population * 1.0*Opp_no - Tour_Select;
+  float roul_cut = roulette_no/population * 1.0*Opp_no - 1.0*Roul_Select;
+  float rank_cut = rank_no/population * 1.0*Opp_no - 1.0*Rank_Select;
+  float tour_cut = tournament_no/population * 1.0*Opp_no - 1.0*Tour_Select;
 
   if (roul_cut > rank_cut && roul_cut > tour_cut)
   {
@@ -53,7 +53,7 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
    Tour_Select = Tour_Select+1;
   }
   
-  else
+  else if 
   {
     if (Rank_Select > Roul_Select && Rank_Select > Tour_Select)
     {
