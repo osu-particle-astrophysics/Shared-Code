@@ -36,6 +36,7 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
   }
   
   // Loop over Theta, Phi, and Frequency and calculate gain for each point
+  // Gain should be symetrical for phi and frequency
   for (int i=0; i<Theta_index; i++)
   {
     long double theta_gain = (antenna[0][0]*(1/2.0)*(1/sqrt(PI)) +
