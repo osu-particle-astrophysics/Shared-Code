@@ -53,7 +53,7 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
    Tour_Select = Tour_Select+1;
   }
   
-  else if 
+  else
   {
     if (Rank_Select > Roul_Select && Rank_Select > Tour_Select)
     {
