@@ -39,8 +39,8 @@ void DataWrite(std::vector<std::vector<std::vector<float> > >& varVector, std::v
      }*/
      
   
-  generationDNA << "Frequencies go here: " << "\n";
-  generationDNA << "Matrices for this Generation: " << "\n";
+  generationDNA << "Frequencies go here:\n";
+  generationDNA << "Matrices for this Generation:\n";
   for(int i=0;i<population;i++)
     {
       for(int j=0;j<sections;j++)
