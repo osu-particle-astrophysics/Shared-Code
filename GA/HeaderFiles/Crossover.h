@@ -66,26 +66,23 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 						varOutput[i+1+reproduction_no][j][k] = varInput[locations[i]][j][k];
 					}
 				}
+				
 		  
 				// Call constraint functions to make sure the designs are applicable
 				if (design == "ARA")
 				{
-					bool intersect_A = true;
-					float R_1= varOutput[i+reproduction_no][j][0];
-					float L_1= varOutput[i+reproduction_no][j][1];
-					float A_1= varOutput[i+reproduction_no][j][2];
-					float B_1= varOutput[i+reproduction_no][j][3];
-					intersect_A = ConstraintARA(R_1, L_1, A_1, B_1);
+					bool intersect_a = true;
+					
+					// define output vectors and check intersects
+					vector<float> output_a = varOutput[i+reproduction_no][j]
+					intersect_a = ConstraintARA(output_a[0], output_a[1], output_a[2], output_a[3],);
 					
 		     
-					bool intersect_B = true;
-					float R_2= varOutput[i+1+reproduction_no][j][0];
-					float L_2= varOutput[i+1+reproduction_no][j][1];
-					float A_2= varOutput[i+1+reproduction_no][j][2];
-					float B_2= varOutput[i+1+reproduction_no][j][3];
-					intersect_B = ConstraintARA(R_2, L_2, A_2, B_2);
+					bool intersect_b = true;
+					vector<float> output_b = varOutput[i+1+reproduction_no][j]
+					intersect_b = ConstraintARA(output_b[0], output_b[1], output_b[2], output_b[3],);
 			  
-					if (intersect_A == false && intersect_B == false)
+					if (intersect_a == false && intersect_b == false)
 					{
 						intersect = false;
 					}
@@ -94,27 +91,15 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 				else if (design == "PUEO")
 				{
 					// Call constraint PUEO for variables
-					bool intersect_A = true;
-					float S_1= varOutput[i+reproduction_no][j][0];
-					float H_1= varOutput[i+reproduction_no][j][1];
-					float x0_1= varOutput[i+reproduction_no][j][2];
-					float y0_1= varOutput[i+reproduction_no][j][3];
-					float yf_1= varOutput[i+reproduction_no][j][4];
-					float zf_1= varOutput[i+reproduction_no][j][5];
-					float b_1= varOutput[i+reproduction_no][j][6];
-					intersect_A = ConstraintPUEO(S_1, H_1, x0_1, y0_1, yf_1, zf_1, b_1);
+					bool intersect_a = true;
+					vector<float> output_a = varOutput[i+reproduction_no][j]
+					intersect_a = ConstraintPUEO(output_a[0], output_a[1], output_a[2], output_a[3], output_a[4], output_a[5], output_a[6]);
 		     
-		     			bool intersect_B = true;
-					float S_2= varOutput[i+1+reproduction_no][j][0];
-					float H_2= varOutput[i+1+reproduction_no][j][1];
-					float x0_2= varOutput[i+1+reproduction_no][j][2];
-					float y0_2= varOutput[i+1+reproduction_no][j][3];
-					float yf_2= varOutput[i+1+reproduction_no][j][4];
-					float zf_2= varOutput[i+1+reproduction_no][j][5];
-					float b_2= varOutput[i+1+reproduction_no][j][6];
-					intersect_B = ConstraintPUEO(S_2, H_2, x0_2, y0_2, yf_2, zf_2, b_2);
+		     			bool intersect_b = true;
+					vector<float> output_b = varOutput[i+1+reproduction_no][j]
+					intersect_b = ConstraintPUEO(output_b[0], output_b[1], output_b[2], output_b[3], output_b[4], output_b[5], output_b[6]);
 					
-					if (intersect_A == false && intersect_B == false)
+					if (intersect_a == false && intersect_b == false)
 					{
 						intersect = false;
 						
