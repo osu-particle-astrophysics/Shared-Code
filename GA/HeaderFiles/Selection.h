@@ -26,27 +26,55 @@ void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
  cout << "Begining Selection" << endl;
  
  // initialize Values
- int Roul_Select = roulette_no/100 * Opp_no;
- int Rank_Select = rank_no/100 * Opp_no;
- int Tour_Select = tournament_no/100 * Opp_no;
+ int Roul_Select = (double)roulette_no/population * 1.0*Opp_no;
+ int Rank_Select = (double)rank_no/population * 1.0*Opp_no;
+ int Tour_Select = (double)tournament_no/population * 1.0*Opp_no;
  
  // Check to make sure values sum to correct value
- while(Roul_Select + Rank_Select + Tour_Select != Opp_no)
+ while(Roul_Select + Rank_Select + Tour_Select < Opp_no)
  {
   
-  if(roulette_no/100.0*Opp_no - Roul_Select >= 0.5)
+  float roul_cut = roulette_no/population * 1.0*Opp_no - 1.0*Roul_Select;
+  float rank_cut = rank_no/population * 1.0*Opp_no - 1.0*Rank_Select;
+  float tour_cut = tournament_no/population * 1.0*Opp_no - 1.0*Tour_Select;
+
+  if (roul_cut > rank_cut && roul_cut > tour_cut)
   {
-    Roul_Select = Roul_Select + 1;
+   Roul_Select = Roul_Select+1;
   }
-  else if(rank_no/100.0*Opp_no - Rank_Select >= 0.5)
+  
+  else if (rank_cut > roul_cut && rank_cut > tour_cut)
   {
-    Rank_Select = Rank_Select + 1;
+   Rank_Select = Rank_Select+1;
   }
-  else if(tournament_no/100.0*Opp_no - Tour_Select >= 0.5)
+  
+  else if (tour_cut > roul_cut && tour_cut > rank_cut)
   {
-    Tour_Select = Tour_Select + 1;
+   Tour_Select = Tour_Select+1;
   }
-           
+  
+  else
+  {
+    if (Rank_Select > Roul_Select && Rank_Select > Tour_Select)
+    {
+      Rank_Select = Rank_Select + 1;
+    }
+    
+    else if (Roul_Select > Rank_Select && Roul_Select > Tour_Select)
+    {
+      Roul_Select = Roul_Select + 1;
+    }
+    
+    else if (Tour_Select > Roul_Select && Tour_Select > Rank_Select)
+    {
+      Tour_Select = Tour_Select + 1;
+    }
+    
+    else
+    {
+      Rank_Select = Rank_Select+1;
+    }
+  }          
  }
  
  // Call each selection method

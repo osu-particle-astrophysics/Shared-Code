@@ -28,6 +28,15 @@ void Immigration(vector<vector<vector<float> > > & varOutput)
     }
   }
   
+  // if the experiment is AREA, then call GenerateAREA
+   if(design == "AREA")
+  {
+    for(int i=reproduction_no + crossover_no; i<population; i++)
+    {
+      varOutput[i] = GenerateAREA();
+    }
+  }
+  
   // End Flag
   cout << "Immigration Complete" << endl;
 }

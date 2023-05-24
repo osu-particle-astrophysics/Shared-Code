@@ -30,11 +30,13 @@ using namespace std;
 // User functions
 #include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
+#include "../HeaderFiles/ConstraintAREA.h"
 #include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
 #include "../HeaderFiles/DataWrite.h"
 #include "../HeaderFiles/GenerateARA.h"
 #include "../HeaderFiles/GeneratePUEO.h"
+#include "../HeaderFiles/GenerateAREA.h"
 #include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 #include "../HeaderFiles/Mutation.h"
@@ -44,6 +46,7 @@ using namespace std;
 #include "../HeaderFiles/Selection.h"
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
+#include "../HeaderFiles/ParameterCheck.h"
 
 
 // GLOBAL CONSTANTS
@@ -63,6 +66,8 @@ int sigma;
 int rank_no; 
 int roulette_no;
 int tournament_no;
+bool termination = false;
+string message = "";
 
 
 int main(int argc, char const *argv[])
@@ -82,6 +87,16 @@ int main(int argc, char const *argv[])
   crossover_no = atoi(argv[8]);
   mutation_rate = atoi(argv[9]);
   sigma = atoi(argv[10]);
+  
+  ParameterCheck(argc);
+  
+  if (termination == true)
+  {
+    cout << message << endl;
+    cout << "Proper call format is :" << endl;
+    cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma" << endl;
+    exit(0);
+  }
   
   
   // VECTORS
@@ -104,6 +119,13 @@ int main(int argc, char const *argv[])
       // determine sections and genes for PUEO
       sections = 1;
       genes = 7; 
+  }
+  
+  else if (design == "AREA")
+  {
+    // determine sections and genes for AREA
+    sections = 2;
+    genes = 14;
   }
   
   // create in/out vectors based on parameters

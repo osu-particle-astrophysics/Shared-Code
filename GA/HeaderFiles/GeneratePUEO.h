@@ -7,6 +7,7 @@ extern int sections;
 extern int seed;
 extern float max_S;
 extern float max_H;
+float min_H =6;
 extern std::default_random_engine generator;
 
 std::vector<std::vector<float> > GeneratePUEO()
@@ -22,7 +23,7 @@ std::vector<std::vector<float> > GeneratePUEO()
       
       std::uniform_real_distribution <float> distribution_S(0, max_S);  //Side length (= x_f)
       S = distribution_S(generator);
-      std::uniform_real_distribution <float> distribution_H(0, max_H);  //Height 
+      std::uniform_real_distribution <float> distribution_H(min_H, max_H);  //Height 
       H = distribution_H(generator);
       std::uniform_real_distribution <float> distribution_X0(0, S);  //x_0
       X0 = distribution_X0(generator);
@@ -32,7 +33,7 @@ std::vector<std::vector<float> > GeneratePUEO()
       ZF = distribution_ZF(generator);
       std::uniform_real_distribution <float> distribution_YF(0, ZF);  //y_f
       YF = distribution_YF(generator);
-      std::uniform_real_distribution <float> distribution_beta((4/30)*ZF, 7*ZF);  //beta, upper bound is arbitrary, can adjust if needed
+      std::uniform_real_distribution <float> distribution_beta((4.0/30.0)*ZF, 7*ZF);  //beta, upper bound is arbitrary, can adjust if needed
       beta = distribution_beta(generator)/100;
       //float tau = 0.26;  tau must be 0.26, not evolving
       //float m = 1;  we are only evolving m = 1 for now.
