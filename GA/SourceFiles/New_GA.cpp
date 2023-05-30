@@ -3,8 +3,8 @@
 // Organization: GENETIS
 // Date: 12/5/2022
 // Info:
-// This New version of the GA is designed to house the functions as standalone functions that can be transplanted
-// to any GA  with the plan to make the GA as simple and flexible as possible
+// This version of the GA is designed to house all functions as standalone functions
+// This allows us to more quickly and efficiently add new designs and features
 
 // Compile using:
 // g++ -std=c++11 New_GA.cpp -o GA.exe
