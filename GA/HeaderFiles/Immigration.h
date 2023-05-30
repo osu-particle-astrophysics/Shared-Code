@@ -20,7 +20,7 @@ void Immigration(vector<vector<vector<float> > > & varOutput)
   }
   
 // if the experiment is PUEO, then call GeneratePUEO 
-   if(design == "PUEO")
+  if(design == "PUEO")
   {
     for(int i=reproduction_no + crossover_no; i<population; i++)
     {
@@ -29,12 +29,20 @@ void Immigration(vector<vector<vector<float> > > & varOutput)
   }
   
   // if the experiment is AREA, then call GenerateAREA
-   if(design == "AREA")
+  if(design == "AREA")
   {
     for(int i=reproduction_no + crossover_no; i<population; i++)
     {
       varOutput[i] = GenerateAREA();
     }
+  }
+
+  if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
+  {
+      for (int i = reproduction_no + crossover_no; i < population; i++)
+      {
+          varOutput[i] = GenerateDipole();
+      }
   }
   
   // End Flag

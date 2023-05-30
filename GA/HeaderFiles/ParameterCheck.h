@@ -34,10 +34,10 @@ void ParameterCheck(int argc)
     message = "ERROR: One or more arguments are of an improper value. For example, values may not be less than zero";
   }
   
-  else if (design != "PUEO" && design != "ARA" && design != "AREA")
+  else if (design != "PUEO" && design != "ARA" && design != "AREA" && design != "Symmetric Dipole" && design != "Asymmetric Dipole")
   {
     termination = true;
-    message = "ERROR: Unknown design. Known designs are PUEO, AREA, and ARA";
+    message = "ERROR: Unknown design. Known designs are PUEO, AREA, ARA, Symmetric Dipole, and Asymmetric Dipole";
   }
   
   else if (roulette_no+tournament_no+rank_no > population || reproduction_no + crossover_no > population || roulette_no+tournament_no+rank_no < reproduction_no+crossover_no)

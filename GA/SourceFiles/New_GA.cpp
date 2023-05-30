@@ -31,12 +31,14 @@ using namespace std;
 #include "../HeaderFiles/ConstraintARA.h"
 #include "../HeaderFiles/ConstraintPUEO.h"
 #include "../HeaderFiles/ConstraintAREA.h"
+#include "../HeaderFiles/ConstraintDipole.h"
 #include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
 #include "../HeaderFiles/DataWrite.h"
 #include "../HeaderFiles/GenerateARA.h"
 #include "../HeaderFiles/GeneratePUEO.h"
 #include "../HeaderFiles/GenerateAREA.h"
+#include "../HeaderFiles/GenerateDipole.h"
 #include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 #include "../HeaderFiles/Mutation.h"
@@ -126,6 +128,18 @@ int main(int argc, char const *argv[])
     // determine sections and genes for AREA
     sections = 2;
     genes = 14;
+  }
+  else if (design == "Symmetric Dipole")
+  {
+      // determine sections and genes for symetric dipole
+      sections = 1;
+      genes = 2;
+  }
+  else if (design == "Asymmetric Dipole")
+  {
+      // determine sections and genes for symetric dipole
+      sections = 2;
+      genes = 2;
   }
   
   // create in/out vectors based on parameters

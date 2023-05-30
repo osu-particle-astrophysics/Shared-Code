@@ -105,6 +105,10 @@ void Mutation(vector<vector<vector<float> > > & varOutput)
 								temp[a] = antenna[j][a];
 							}
 						}
+						else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
+						{
+							intersect = ConstraintDipole(temp[0], temp[1]);
+						}
 					}
 				}
 				// Save temp values back to the output vector

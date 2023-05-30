@@ -31,5 +31,12 @@ void Initialize(std::vector<std::vector<std::vector<float> > > & varOutput)
       varOutput[i] = GenerateAREA(); 
     }
   }
+  if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
+  {
+      for (int i =0; i < population; i++)
+      {
+          varOutput[i] = GenerateDipole();
+      }
+  }
 }
 
