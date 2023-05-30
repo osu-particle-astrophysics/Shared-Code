@@ -121,7 +121,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 					}
 					
 				}
-				else if (design == "Symmetric Dipole" || design = "Asymmetric Dipole")
+				else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
 				{
 					// Call constraint Dipole for variables
 					bool intersect_a = true;
