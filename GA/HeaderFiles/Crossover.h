@@ -130,7 +130,7 @@ void Crossover(vector<vector<vector<float> > > & varInput, vector<vector<vector<
 
 					bool intersect_b = true;
 					vector<float> output_b = varOutput[i + 1 + reproduction_no][j];
-					intersect_b = ConstraintDipole(output_b[0], output_b[1]]);
+					intersect_b = ConstraintDipole(output_b[0], output_b[1]);
 
 					if (intersect_a == false && intersect_b == false)
 					{
