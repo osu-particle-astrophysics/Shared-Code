@@ -13,11 +13,11 @@ std::vector<std::vector<float> > GenerateDipole()
     bool intersect = true;
     std::vector<std::vector<float> > antenna(sections, std::vector <float>(genes, 0.0f));
 
-    // variables
-    float max_radius = 1.0;
-    float min_radius = 0.0;
-    float max_length = 1.0;
-    float min_length = 0.0;  
+    // distances in cm
+    float max_radius = 10.0;
+    float min_radius = 0.25;
+    float max_length = 10000.0;
+    float min_length = 200.0;
     float R, L;
     for (int i = 0; i < sections; i++)
     {
