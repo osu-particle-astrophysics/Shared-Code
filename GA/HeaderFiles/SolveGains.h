@@ -1,6 +1,6 @@
 #pragma once
 
-vector<vector<vector<float> > > SolveGains(vector<vector<float> >& antenna)
+vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
 {
   // Solve for the gain pattern of an AREA antenna
 
