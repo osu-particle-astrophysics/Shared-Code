@@ -19,7 +19,7 @@ extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void Selection(int opp_no, vector<float> fitness, vector<int>& locations)
+void Selection(int opp_no, vector<float> fitness, vector<int> & locations)
 {
   // Calculate and call selection methods
 

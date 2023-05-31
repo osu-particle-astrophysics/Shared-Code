@@ -41,6 +41,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   // call selection methods
   Selection(crossover_no, fitness, locations);
 
+  cout << locations[0] << endl;
 
   // Check the size of location vector
   if (locations.size() != crossover_no)
