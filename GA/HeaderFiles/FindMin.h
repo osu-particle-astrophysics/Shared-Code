@@ -1,6 +1,6 @@
 #pragma once
 
-float FindMin(vector<vector<vector<float> > >& gains)
+float FindMin(vector<vector<vector<float> > > & gains)
 {
   // Find the minimum value of our gain pattern
 

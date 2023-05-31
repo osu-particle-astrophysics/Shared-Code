@@ -6,7 +6,7 @@
 #include "ScaleAREA.h"
 #include <vector>
 
-bool ConstraintAREA(vector<vector<float> >& antenna)
+bool ConstraintAREA(vector<vector<float> > & antenna)
 {
   // This function checks if the passed in antenna design is viable
 
@@ -14,7 +14,7 @@ bool ConstraintAREA(vector<vector<float> >& antenna)
   bool intersect = true;
 
   // Fetch Gains of this antenna design
-  vector<vector<vector<float>>> gains = SolveGains(antenna);
+  vector<vector<vector<float> > > gains = SolveGains(antenna);
 
   // Use gains to check energy conservation
   // Check if min gain value is negative, if it is, rescale gain coefficents 
