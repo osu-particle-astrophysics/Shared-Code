@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
 {
   // Solve for the gain pattern of an AREA antenna

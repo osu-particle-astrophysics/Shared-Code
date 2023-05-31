@@ -1,4 +1,6 @@
 #pragma once
+
+
 bool ConstraintARA(float radius, float length, 
                    float quadratic_coeff, float linear_coeff)
 {
