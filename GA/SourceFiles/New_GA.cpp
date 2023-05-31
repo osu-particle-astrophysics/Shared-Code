@@ -12,6 +12,8 @@
 // Call using
 // ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma
 
+using namespace std;
+
 // Libraries
 #include <time.h>
 #include <math.h>
@@ -65,8 +67,6 @@ int roulette_no;
 int tournament_no;
 bool termination = false;
 string message = "";
-
-using namespace std;
 
 
 int main(int argc, char const* argv[])
