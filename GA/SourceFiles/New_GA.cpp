@@ -103,7 +103,7 @@ int main(int argc, char const* argv[])
   // Vectors
   vector<int> p_loc(population);
   vector<float> fitness(population, 0.0f);
-  vector<int> selected(population);
+  vector<int> selected;
 
   // Check the design and prepare input/output vectors
   if (design == "ARA")
