@@ -1,6 +1,5 @@
 #pragma once
 
-
 // User Functions
 #include "Rank.h"
 #include "Roulette.h"
@@ -15,82 +14,87 @@ extern int genes;
 extern int reproduction_no;
 extern int crossover_no;
 extern int mutation_rate;
-extern int sigma; 
-extern int rank_no; 
+extern int sigma;
+extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void Selection(int Opp_no, vector<float> Fitness, vector<int> & locations)
+void Selection(int opp_no, vector<float> fitness, vector<int>& locations)
 {
- // Start Flag
- cout << "Begining Selection" << endl;
- 
- // initialize Values
- int Roul_Select = (double)roulette_no/population * 1.0*Opp_no;
- int Rank_Select = (double)rank_no/population * 1.0*Opp_no;
- int Tour_Select = (double)tournament_no/population * 1.0*Opp_no;
- 
- // Check to make sure values sum to correct value
- while(Roul_Select + Rank_Select + Tour_Select < Opp_no)
- {
-  
-  float roul_cut = roulette_no/population * 1.0*Opp_no - 1.0*Roul_Select;
-  float rank_cut = rank_no/population * 1.0*Opp_no - 1.0*Rank_Select;
-  float tour_cut = tournament_no/population * 1.0*Opp_no - 1.0*Tour_Select;
+  // Calculate and call selection methods
 
-  if (roul_cut > rank_cut && roul_cut > tour_cut)
+  // Start Flag
+  cout << "Begining Selection" << endl;
+
+  // Initialize Values
+  int roul_select = (double)roulette_no / population * 1.0 * opp_no;
+  int rank_select = (double)rank_no / population * 1.0 * opp_no;
+  int tour_select = (double)tournament_no / population * 1.0 * opp_no;
+
+  // Check to make sure values sum to correct value
+  while (roul_select + rank_select + tour_select < opp_no)
   {
-   Roul_Select = Roul_Select+1;
-  }
-  
-  else if (rank_cut > roul_cut && rank_cut > tour_cut)
-  {
-   Rank_Select = Rank_Select+1;
-  }
-  
-  else if (tour_cut > roul_cut && tour_cut > rank_cut)
-  {
-   Tour_Select = Tour_Select+1;
-  }
-  
-  else
-  {
-    if (Rank_Select > Roul_Select && Rank_Select > Tour_Select)
+
+    float roul_cut = roulette_no / population * 1.0 
+                     * opp_no - 1.0 * roul_select;
+    float rank_cut = rank_no / population * 1.0 
+                     * opp_no - 1.0 * rank_select;
+    float tour_cut = tournament_no / population * 1.0 
+                     * opp_no - 1.0 * tour_select;
+
+    if (roul_cut > rank_cut && roul_cut > tour_cut)
     {
-      Rank_Select = Rank_Select + 1;
+      roul_select = roul_select + 1;
     }
-    
-    else if (Roul_Select > Rank_Select && Roul_Select > Tour_Select)
+
+    else if (rank_cut > roul_cut && rank_cut > tour_cut)
     {
-      Roul_Select = Roul_Select + 1;
+      rank_select = rank_select + 1;
     }
-    
-    else if (Tour_Select > Roul_Select && Tour_Select > Rank_Select)
+
+    else if (tour_cut > roul_cut && tour_cut > rank_cut)
     {
-      Tour_Select = Tour_Select + 1;
+      tour_select = tour_select + 1;
     }
-    
+
     else
     {
-      Rank_Select = Rank_Select+1;
+      if (rank_select > roul_select && rank_select > tour_select)
+      {
+        rank_select = rank_select + 1;
+      }
+
+      else if (roul_select > rank_select && roul_select > tour_select)
+      {
+        roul_select = roul_select + 1;
+      }
+
+      else if (tour_select > roul_select && tour_select > rank_select)
+      {
+        tour_select = tour_select + 1;
+      }
+
+      else
+      {
+        rank_select = rank_select + 1;
+      }
     }
-  }          
- }
- 
- // Call each selection method
- for(int i=0; i<Roul_Select; i++)
- {
-  locations.push_back(Roulette(Fitness));
- }
- for(int i=0; i<Rank_Select; i++)
- {
-  locations.push_back(Rank(Fitness));
- }
- for(int i=0; i<Tour_Select; i++)
- {
-  locations.push_back(Tournament(Fitness));
- }
- 
- // End Flag
- cout << "Selection Finished" << endl;
+  }
+
+  // Call each selection method
+  for (int i = 0; i < roul_select; i++)
+  {
+    locations.push_back(Roulette(fitness));
+  }
+  for (int i = 0; i < rank_select; i++)
+  {
+    locations.push_back(Rank(fitness));
+  }
+  for (int i = 0; i < tour_select; i++)
+  {
+    locations.push_back(Tournament(fitness));
+  }
+
+  // End Flag
+  cout << "Selection Finished" << endl;
 }

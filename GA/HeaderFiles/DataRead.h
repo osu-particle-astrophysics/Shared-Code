@@ -8,39 +8,43 @@ extern int genes;
 extern int reproduction_no;
 extern int crossover_no;
 extern int mutation_rate;
-extern int sigma; 
-extern int rank_no; 
+extern int sigma;
+extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
 
-void DataRead(vector<vector<vector<float> > >& varInput, vector<float>& fitness)
+void DataRead(vector<vector<vector<float> > >& dna_input,
+              vector<float>& fitness)
 {
-  int DNA_GARBAGE_END = 9;
+  // This function reads in data from various files
+
+  // Establish variables
+  int dna_garbage_end = 9;
   ifstream generationDNA;
   generationDNA.open("generationDNA.csv");
-  int csv_file_size = DNA_GARBAGE_END + (population * sections);
-  string csvContent[csv_file_size];                              // Contain each line of the csv file
-  string strToDbl;                                               // Data change from string to float, then written into verInput or fitness
+  int csv_file_size = dna_garbage_end + (population * sections);
+  string csv_content[csv_file_size];
+  string str_to_dbl;
 
   // This loop reads through the .csv file line by line
   // If we're in data (past line 9), it reads in the line
 
-  for(int i=0; i<csv_file_size; i++)
+  for (int i = 0; i < csv_file_size; i++)
+  {
+    getline(generationDNA, csv_content[i]);
+    if (i >= dna_garbage_end)
     {
-      getline(generationDNA, csvContent[i]);
-      if (i>=DNA_GARBAGE_END)
-	{
-	  double j=floor((i-DNA_GARBAGE_END)/sections);         // Figure out which individual we're looking at
-	  int p=i-DNA_GARBAGE_END - sections * j;               // pulls out which row of their matrix we're looking at
-	  istringstream stream(csvContent[i]);
-	  for (int k=0; k<genes; k++)
-	    {
-	      getline(stream, strToDbl, ',');
-	      varInput[j][p][k] = atof(strToDbl.c_str());
-	    }
-	}
+      double j = floor((i - dna_garbage_end) / sections);
+      int p = i - dna_garbage_end - sections * j;
+      istringstream stream(csv_content[i]);
+      for (int k = 0; k < genes; k++)
+      {
+        getline(stream, str_to_dbl, ',');
+        dna_input[j][p][k] = atof(str_to_dbl.c_str());
+      }
     }
+  }
 
   generationDNA.close();
 
@@ -48,21 +52,21 @@ void DataRead(vector<vector<vector<float> > >& varInput, vector<float>& fitness)
 
   ifstream fitnessScores;
   fitnessScores.open("fitnessScores.csv");
-  string fitnessRead[population+2];
+  string fitness_read[population + 2];
 
-  for (int i=0; i<(population+2); i++)
+  for (int i = 0; i < (population + 2); i++)
+  {
+    getline(fitnessScores, fitness_read[i]);
+    if (i >= 2)
     {
-      getline(fitnessScores, fitnessRead[i]);
-      if (i>=2)
-	{
-	  fitness[i-2] = atof(fitnessRead[i].c_str());
-	  if (fitness[i-2]<0)
-	    {
-	      fitness[i-2] = 0;                                 // If the fitness Score is less than 0, we set it to 0 to not throw things off
- 	    }
-	}
+      fitness[i - 2] = atof(fitness_read[i].c_str());
+      if (fitness[i - 2] < 0)
+      {
+        fitness[i - 2] = 0;
+      }
     }
-  
+  }
+
   fitnessScores.close();
 
 }

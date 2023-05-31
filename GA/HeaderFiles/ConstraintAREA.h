@@ -5,33 +5,36 @@
 #include "FindMin.h"
 #include "ScaleAREA.h"
 
-bool ConstraintAREA(vector<vector<float> > & antenna)
+bool ConstraintAREA(vector<vector<float> >& antenna)
 {
+  // This function checks if the passed in antenna design is viable
+
+  // Set the condition
   bool intersect = true;
-  
+
   // Fetch Gains of this antenna design
-  vector<vector<vector<float>>> Gains = SolveGains(antenna);
-    
+  vector<vector<vector<float>>> gains = SolveGains(antenna);
+
   // Use gains to check energy conservation
   // Check if min gain value is negative, if it is, rescale gain coefficents 
-  float Min = FindMin(Gains);
+  float min = FindMin(gains);
   while (intersect == true)
   {
-    if (Min >= 0.0)
+    if (min >= 0.0)
     {
       intersect = false;
     }
     else
     {
       // Scale the antenna's coefficients
-      antenna = ScaleAREA(antenna, Gains);
-    
+      antenna = ScaleAREA(antenna, gains);
+
       // Re-solve Gains and Min
-      vector<vector<vector<float>>> Gains = SolveGains(antenna); 
-      Min = FindMin(Gains);
+      vector<vector<vector<float>>> gains = SolveGains(antenna);
+      min = FindMin(gains);
     }
   }
-  
+
   // Return the interesect constraint
   return intersect;
 }
