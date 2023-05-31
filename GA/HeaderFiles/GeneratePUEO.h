@@ -6,19 +6,19 @@
 extern int genes;
 extern int sections;
 extern int seed;
-float max_s = 50.0;
-float max_h = 50.0;
-float min_h = 6.0;
 extern std::default_random_engine generator;
 
 std::vector<std::vector<float> > GeneratePUEO()
 {
   // Create a PUEO antenna
-  // 
+ 
   //initialize variables
   std::vector<std::vector<float> > outputVector(sections,
                                                 std::vector<float>(genes, 
-                                                                   0.0f));
+                                                                  0.0f));
+  float max_s = 50.0;
+  float max_h = 50.0;
+  float min_h = 6.0;
   bool intersect = true;
   float s, h, x_0, y_0, z_f, y_f, beta;
 

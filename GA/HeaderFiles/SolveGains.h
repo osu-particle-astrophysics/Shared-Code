@@ -67,7 +67,7 @@ vector<vector<vector<float> > > SolveGains(vector<vector<float> > & antenna)
       for (int k = 0; k < frequency_index; k++)
       {
         // Calculate the spherical harmonics at this point
-        Gains[i][j][k] = theta_gain;
+        gains[i][j][k] = theta_gain;
       }
     }
   }

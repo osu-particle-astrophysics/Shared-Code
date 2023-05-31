@@ -12,6 +12,7 @@
 // Call using
 // ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma
 
+// Delcare the namespace (needs to happen here)
 using namespace std;
 
 // Libraries

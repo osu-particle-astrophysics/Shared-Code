@@ -66,7 +66,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             dna_output[i + reproduction_no][j][k]
             = dna_input[locations[i]][j][k];
 
-            dna_oOutput[i + 1 + reproduction_no][j][k]
+            dna_output[i + 1 + reproduction_no][j][k]
             = dna_input[locations[i + 1]][j][k];
           }
           else

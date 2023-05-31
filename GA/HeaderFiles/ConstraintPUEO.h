@@ -1,13 +1,19 @@
 #pragma once
-float max_s = 50.0;
-float max_h = 50.0;
-float min_h = 6.0;
+
 
 bool ConstraintPUEO(float s, float h, float x_0,
                     float y_0, float y_f, float z_f, float beta)
 {
+  // Check to see if PUEO antenna conforms
+
+  // Variables
+  float max_s = 50.0;
+  float max_h = 50.0;
+  float min_h = 6.0;
   bool intersect = true;
   float x_f = s;
+
+  // Run checks
   if (s > max_s || h > max_h || h < min_h) 
   {
     intersect = true;
