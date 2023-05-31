@@ -4,6 +4,7 @@
 #include "SolveGains.h"
 #include "FindMin.h"
 #include "ScaleAREA.h"
+#include <vector>
 
 bool ConstraintAREA(vector<vector<float> >& antenna)
 {

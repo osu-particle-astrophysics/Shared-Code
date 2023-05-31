@@ -7,7 +7,7 @@ bool ConstraintARA(float radius, float length,
   // Establish variables
   bool intersect = true;
   float max_radius = 7.5;
-  float min_length = 10.0
+  float min_length = 10.0;
   float max_length = 140.0;
   float min_coeff = -1.0;
   float max_coeff = 1.0;
