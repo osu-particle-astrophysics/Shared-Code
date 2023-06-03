@@ -15,5 +15,5 @@ jobs:
           step-summary: false
           file-annotations: true
           style: 'llvm'
-          lines-changed-only: true  # switch to false once the whole repo is linted
-          files-changed-only: true  # same as above
+          lines-changed-only: false  # switch to false once the whole repo is linted
+          files-changed-only: false  # same as above
