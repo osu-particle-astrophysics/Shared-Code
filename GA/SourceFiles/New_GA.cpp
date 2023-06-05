@@ -10,7 +10,7 @@
 // g++ -std=c++11 New_GA.cpp -o GA.exe
 
 // Call using
-// ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma
+// ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation, sigma
 
 // Delcare the namespace (needs to happen here)
 using namespace std;
@@ -61,7 +61,7 @@ int sections;
 int genes;
 int reproduction_no;
 int crossover_no;
-int mutation_rate;
+int mutation_no;
 int sigma;
 int rank_no;
 int roulette_no;
@@ -85,7 +85,7 @@ int main(int argc, char const* argv[])
   tournament_no = atoi(argv[6]);
   reproduction_no = atoi(argv[7]);
   crossover_no = atoi(argv[8]);
-  mutation_rate = atoi(argv[9]);
+  mutation_no = atoi(argv[9]);
   sigma = atoi(argv[10]);
 
   // Check the read in arguments
@@ -96,7 +96,7 @@ int main(int argc, char const* argv[])
   {
     cout << message << endl;
     cout << "Proper call format is :" << endl;
-    cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma" << endl;
+    cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_no, sigma" << endl;
     exit(0);
   }
 
@@ -171,8 +171,11 @@ int main(int argc, char const* argv[])
     // Pass individuals from the previous generation into the current one
     Reproduction(dna_input, dna_output, fitness, p_loc, selected);
 
-    // Create new individuals via sexual reproduction and mutations
+    // Create new individuals via sexual reproduction 
     Crossover(dna_input, dna_output, fitness, p_loc, selected);
+
+    // Mutate selected individuals
+    Mutation(dna_input, dna_output, fitness, p_loc, selected);
 
     // Introduce new individuals into the population by random generation
     Immigration(dna_output);

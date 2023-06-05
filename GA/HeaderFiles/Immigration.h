@@ -13,7 +13,7 @@ void Immigration(vector<vector<vector<float> > >& dna_output)
   cout << "Immigration Started" << endl;
 
   
-  for (int i = reproduction_no + crossover_no; i < population; i++)
+  for (int i = reproduction_no + crossover_no + mutation_no; i < population; i++)
   {
     // If the experiment is ARA, then call GenerateARA 
     if (design == "ARA")

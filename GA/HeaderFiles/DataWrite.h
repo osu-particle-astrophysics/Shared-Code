@@ -8,7 +8,7 @@ extern int sections;
 extern int genes;
 extern int reproduction_no;
 extern int crossover_no;
-extern int mutation_rate;
+extern int mutation_no;
 extern int sigma; 
 extern int rank_no; 
 extern int roulette_no;
@@ -86,6 +86,12 @@ void DataWrite(std::vector<std::vector<std::vector<float> > >& dna_output,
                   << selected[i] + 1 << ", Crossover" << endl;
         }
         j = j + 1;
+
+      }
+      else if (i >= crossover_no + reproduction_no && i < crossover_no + reproduction_no + mutation_no)
+      {
+        Parents << setw(2) << i + 1 << ", " << setw(2)
+                << selected[i] + 1 << setw(2) << ", NA, Mutation" << endl;
       }
       else
       {

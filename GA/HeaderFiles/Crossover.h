@@ -16,7 +16,7 @@ extern int sections;
 extern int genes;
 extern int reproduction_no;
 extern int crossover_no;
-extern int mutation_rate;
+extern int mutation_no;
 extern int sigma;
 extern int rank_no;
 extern int roulette_no;
@@ -161,8 +161,6 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     selected.push_back(p_loc[locations[i]]);
     selected.push_back(p_loc[locations[1 + i]]);
   }
-  // Call Mutation to apply mutations on children
-  Mutation(dna_output);
 
   // End Flag
   cout << "Crossover Complete" << endl;
