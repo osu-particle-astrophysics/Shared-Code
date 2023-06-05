@@ -50,8 +50,8 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   }
 
   // Create random number generators
-  uniform_real_distribution<int> select_section(0, sections);
-  uniform_real_distribution<int> select_gene(0, genes);
+  uniform_int_distribution<int> select_section(0, sections);
+  uniform_int_distribution<int> select_gene(0, genes);
 
   // itterate over individuals and genes to determine for mutations
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
