@@ -9,7 +9,7 @@ extern int sections;
 extern int genes;
 extern int reproduction_no;
 extern int crossover_no;
-extern int mutation_rate;
+extern int mutation_no;
 extern int sigma;
 extern int rank_no;
 extern int roulette_no;
@@ -28,8 +28,8 @@ void ParameterCheck(int argc)
     message = "ERROR: Improper amount of arguments";
   }
 
-  else if (reproduction_no < 0 || crossover_no < 0 || mutation_rate>100
-           || mutation_rate < 0 || sigma < 0 || rank_no < 0 || roulette_no < 0
+  else if (reproduction_no < 0 || crossover_no < 0 || mutation_no > 100
+           || mutation_no < 0 || sigma < 0 || rank_no < 0 || roulette_no < 0
            || tournament_no < 0 || crossover_no % 2 != 0)
   {
     termination = true;
@@ -44,9 +44,9 @@ void ParameterCheck(int argc)
   }
 
   else if (roulette_no + tournament_no + rank_no > population 
-           || reproduction_no + crossover_no > population 
+           || reproduction_no + crossover_no + mutation_no > population 
            || roulette_no + tournament_no + rank_no 
-           < reproduction_no + crossover_no)
+           < reproduction_no + crossover_no + mutation_no)
   {
     termination = true;
     message = "ERROR: Sum of selection or opperator parameters is improper.";
