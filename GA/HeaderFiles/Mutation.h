@@ -72,6 +72,8 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       }
     }
 
+    cout << "temp made" << endl;
+
     // Set the intersect condition
     bool intersect = true;
 
@@ -116,6 +118,9 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
                                      temp[mutate_section][1]);
       }
     }
+
+    cout << "mutated individual." endl;
+
     // Save temp values back to the output vector
     for (int x = 0; x < sections; x++)
     {
@@ -124,6 +129,9 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
         dna_output[i][x][y] = temp[x][y];
       }
     }
+
+    cout << "saved mutation" << endl;
+
     // Make sure temp is cleared between loops
     temp.clear();
 
