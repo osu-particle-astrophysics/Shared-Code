@@ -72,125 +72,129 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       swap(locations[i + 1], spare_locations[new_parent]);
 
     }
-    for (int j = 0; j < sections; j++)
+    // If the children are identical to their parent, find new parent
+    bool identical = true;
+    while (identical == true)
     {
-      // If the design self-intersects, find a new design
-      bool intersect = true;
-      // If the children's sections are identical to their parent, find new parent
-      bool identical = true;
-      while (intersect == true)
+      for (int j = 0; j < sections; j++)
       {
-        for (int k = 0; k < genes; k++)
+        // If the design self-intersects, find a new design
+        bool intersect = true;
+        while (intersect == true)
         {
-          // Swap genes between parents to create the children
-          exchange = choice(generator);
-          if (exchange < .5)
+          for (int k = 0; k < genes; k++)
           {
-            dna_output[i + reproduction_no][j][k]
-            = dna_input[locations[i]][j][k];
+            // Swap genes between parents to create the children
+            exchange = choice(generator);
+            if (exchange < .5)
+            {
+              dna_output[i + reproduction_no][j][k]
+                = dna_input[locations[i]][j][k];
 
-            dna_output[i + 1 + reproduction_no][j][k]
-            = dna_input[locations[i + 1]][j][k];
-          }
-          else
-          {
-            dna_output[i + reproduction_no][j][k]
-            = dna_input[locations[i + 1]][j][k];
+              dna_output[i + 1 + reproduction_no][j][k]
+                = dna_input[locations[i + 1]][j][k];
+            }
+            else
+            {
+              dna_output[i + reproduction_no][j][k]
+                = dna_input[locations[i + 1]][j][k];
 
-            dna_output[i + 1 + reproduction_no][j][k]
-            = dna_input[locations[i]][j][k];
+              dna_output[i + 1 + reproduction_no][j][k]
+                = dna_input[locations[i]][j][k];
+            }
           }
-          if (dna_output[i + reproduction_no][j] != dna_input[locations[i]][j]
-            && dna_output[i + 1 + reproduction_no][j] != dna_input[locations[i + 1]][j])
+
+          // Call constraint functions to make sure the designs are applicable
+          if (design == "ARA")
           {
-            identical = false;
+            bool intersect_a = true;
+
+            // define output vectors and check intersects
+            vector<float> output_a = dna_output[i + reproduction_no][j];
+            intersect_a = ConstraintARA(output_a[0], output_a[1],
+              output_a[2], output_a[3]);
+
+
+            bool intersect_b = true;
+            vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
+            intersect_b = ConstraintARA(output_b[0], output_b[1],
+              output_b[2], output_b[3]);
+
+            if (intersect_a == false && intersect_b == false)
+            {
+              intersect = false;
+            }
+          }
+
+          else if (design == "PUEO")
+          {
+            // Call constraint PUEO for variables
+            bool intersect_a = true;
+            vector<float> output_a = dna_output[i + reproduction_no][j];
+            intersect_a = ConstraintPUEO(output_a[0], output_a[1], output_a[2],
+              output_a[3], output_a[4], output_a[5],
+              output_a[6]);
+
+            bool intersect_b = true;
+            vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
+            intersect_b = ConstraintPUEO(output_b[0], output_b[1], output_b[2],
+              output_b[3], output_b[4], output_b[5],
+              output_b[6]);
+
+            if (intersect_a == false && intersect_b == false)
+            {
+              intersect = false;
+
+            }
+          }
+
+          else if (design == "AREA")
+          {
+            // Call constraint AREA for variables
+            bool intersect_a = true;
+            intersect_a = ConstraintAREA(dna_output[i + reproduction_no]);
+
+            bool intersect_b = true;
+            intersect_b = ConstraintAREA(dna_output[i + 1 + reproduction_no]);
+
+            if (intersect_a == false && intersect_b == false)
+            {
+              intersect = false;
+            }
+
+          }
+          else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole" && identical == false)
+          {
+            // Call constraint Dipole for variables
+            bool intersect_a = true;
+            vector<float> output_a = dna_output[i + reproduction_no][j];
+            intersect_a = ConstraintDipole(output_a[0], output_a[1]);
+
+            bool intersect_b = true;
+            vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
+            intersect_b = ConstraintDipole(output_b[0], output_b[1]);
+
+            if (intersect_a == false && intersect_b == false)
+            {
+              intersect = false;
+
+            }
           }
         }
-
-        // If children were identical to parents, 
-        // select a new parent
-        if (identical == true)
-        {
-          int new_parent = grab(generator);
-          swap(locations[i + 1], spare_locations[new_parent]);
-        }
-
-        // Call constraint functions to make sure the designs are applicable
-        if (design == "ARA" && identical == false)
-        {
-          bool intersect_a = true;
-
-          // define output vectors and check intersects
-          vector<float> output_a = dna_output[i + reproduction_no][j];
-          intersect_a = ConstraintARA(output_a[0], output_a[1], 
-                                      output_a[2], output_a[3]);
-
-
-          bool intersect_b = true;
-          vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
-          intersect_b = ConstraintARA(output_b[0], output_b[1], 
-                                      output_b[2], output_b[3]);
-
-          if (intersect_a == false && intersect_b == false)
-          {
-            intersect = false;
-          }
-        }
-
-        else if (design == "PUEO" && identical == false)
-        {
-          // Call constraint PUEO for variables
-          bool intersect_a = true;
-          vector<float> output_a = dna_output[i + reproduction_no][j];
-          intersect_a = ConstraintPUEO(output_a[0], output_a[1], output_a[2],
-                                       output_a[3], output_a[4], output_a[5],
-                                       output_a[6]);
-
-          bool intersect_b = true;
-          vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
-          intersect_b = ConstraintPUEO(output_b[0], output_b[1], output_b[2],
-                                       output_b[3], output_b[4], output_b[5],
-                                       output_b[6]);
-
-          if (intersect_a == false && intersect_b == false)
-          {
-            intersect = false;
-
-          }
-        }
-
-        else if (design == "AREA" && identical == false)
-        {
-          // Call constraint AREA for variables
-          bool intersect_a = true;
-          intersect_a = ConstraintAREA(dna_output[i + reproduction_no]);
-
-          bool intersect_b = true;
-          intersect_b = ConstraintAREA(dna_output[i + 1 + reproduction_no]);
-
-          if (intersect_a == false && intersect_b == false)
-          {
-            intersect = false;
-          }
-
-        }
-        else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole" && identical == false)
-        {
-          // Call constraint Dipole for variables
-          bool intersect_a = true;
-          vector<float> output_a = dna_output[i + reproduction_no][j];
-          intersect_a = ConstraintDipole(output_a[0], output_a[1]);
-
-          bool intersect_b = true;
-          vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
-          intersect_b = ConstraintDipole(output_b[0], output_b[1]);
-
-          if (intersect_a == false && intersect_b == false)
-          {
-            intersect = false;
-
-          }
-        }
+      }
+      // If a child is identical to a parent, 
+      // select a new parent
+      if ( dna_output[i + reproduction_no] == dna_input[locations[i]][j][k]
+        || dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]]
+        || dna_output[i + reproduction_no] == dna_input[locations[i + 1]]
+        || dna_output[i + 1 + reproduction_no] == dna_input[locations[i]][j][k])
+      {
+        int new_parent = grab(generator);
+        swap(locations[i + 1], spare_locations[new_parent]);
+      }
+      else()
+      {
+        identical == false;
       }
     }
     // Save location of the parent antennas
