@@ -59,6 +59,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   uniform_int_distribution<int> select_gene(0, genes-1);
 
   // itterate over individuals and genes to determine for mutations
+  int individual = 0;
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
   {
     // Select section and gene to mutate
@@ -141,7 +142,10 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     temp.clear();
 
     // Save location of the parent antenna
-    selected.push_back(p_loc[locations[i]]);
+    selected.push_back(p_loc[locations[individual]]);
+
+    // Update individual
+    individual = individual + 1;
   }
   // End Flag
   cout << "Mutation Complete" << endl;
