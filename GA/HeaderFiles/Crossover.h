@@ -184,15 +184,15 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       }
       // If a child is identical to a parent, 
       // select a new parent
-      if ( dna_output[i + reproduction_no] == dna_input[locations[i]][j][k]
+      if ( dna_output[i + reproduction_no] == dna_input[locations[i]]
         || dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]]
         || dna_output[i + reproduction_no] == dna_input[locations[i + 1]]
-        || dna_output[i + 1 + reproduction_no] == dna_input[locations[i]][j][k])
+        || dna_output[i + 1 + reproduction_no] == dna_input[locations[i]])
       {
         int new_parent = grab(generator);
         swap(locations[i + 1], spare_locations[new_parent]);
       }
-      else()
+      else
       {
         identical == false;
       }
