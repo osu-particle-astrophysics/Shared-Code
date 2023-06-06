@@ -198,6 +198,8 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       {
         identical == false;
       }
+
+      cout << identical << endl;
     }
     // Save location of the parent antennas
     selected.push_back(p_loc[locations[i]]);
