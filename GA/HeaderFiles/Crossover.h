@@ -192,7 +192,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         || dna_output[i + 1 + reproduction_no] == dna_input[locations[i]])
       {
         int new_parent = grab(generator);
-        swap(locations[i + 1], spare_locations[new_parent]);
+        //swap(locations[i + 1], spare_locations[new_parent]);
       }
       else
       {
