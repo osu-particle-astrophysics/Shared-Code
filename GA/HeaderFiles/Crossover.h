@@ -199,7 +199,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         cout << identical << endl;
       }
 
-      if (identical = true)
+      if (identical == true)
       {
         int new_parent = grab(generator);
         swap(locations[i + 1], spare_locations[new_parent]);
