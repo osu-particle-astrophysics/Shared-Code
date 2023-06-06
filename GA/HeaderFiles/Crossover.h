@@ -53,7 +53,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   // shuffle vector
   auto rng = default_random_engine{};
   shuffle(begin(locations), end(locations), rng);
-  shuffle(begin(spare_locations), end(spare_locations), rng)
+  shuffle(begin(spare_locations), end(spare_locations), rng);
 
 
   // Check the size of location vector
