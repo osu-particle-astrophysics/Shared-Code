@@ -37,10 +37,11 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   Selection(mutation_no, fitness, locations);
 
   // Place individuals into the output arrays
+  int individual = 0;
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
   {
-    cout << locations[i] << endl;
-    selected.push_back(p_loc[locations[i]]);
+    cout << locations[individual] << endl;
+    selected.push_back(p_loc[locations[individual]]);
     for (int j = 0; j < sections; j++)
     {
       for (int k = 0; k < genes; k++)
@@ -48,6 +49,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
         dna_output[i][j][k] = dna_input[locations[i]][j][k];
       }
     }
+    individual = individual + 1;
   }
 
   cout << "selected individuals copied" << endl;
