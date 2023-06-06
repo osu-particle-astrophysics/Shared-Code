@@ -53,6 +53,7 @@ using namespace std;
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
 #include "../HeaderFiles/ParameterCheck.h"
+#include "../HeaderFiles/Get_ranges.h"
 
 // Set global variables
 int seed = time(NULL);

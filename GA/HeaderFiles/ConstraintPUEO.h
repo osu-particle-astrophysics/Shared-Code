@@ -8,8 +8,8 @@ bool ConstraintPUEO(float s, float h, float x_0,
 
   // Variables
   float max_s = 50.0;
-  float max_h = 50.0;
-  float min_h = 6.0;
+  float max_h = 175.0;
+  float min_h = 75.0;
   bool intersect = true;
   float x_f = s;
 

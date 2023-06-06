@@ -17,8 +17,8 @@ std::vector<std::vector<float> > GeneratePUEO()
                                                 std::vector<float>(genes, 
                                                                   0.0f));
   float max_s = 50.0;
-  float max_h = 50.0;
-  float min_h = 6.0;
+  float max_h = 175.0;
+  float min_h = 75.0;
   bool intersect = true;
   float s, h, x_0, y_0, z_f, y_f, beta;
 

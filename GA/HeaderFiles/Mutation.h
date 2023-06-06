@@ -5,6 +5,9 @@
 #include "ConstraintPUEO.h"
 #include "ConstraintAREA.h"
 #include "ConstraintDipole.h"
+#include "Get_ranges.h"
+#include <random>
+
 
 // Global Variables
 extern int seed;
@@ -83,10 +86,13 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     // Attempt mutation and check if it is viable
     while (intersect == true)
     {
+      // set max and min for the RNG
+      float variable_max = 0.0;
+      float variable_min= 0.0;
+      Get_ranges(variable_max, variable_min, mutate_gene);
+
       // Set distribution based on current gene
-      normal_distribution<float> mutate(dna_output[i][mutate_section][mutate_gene],
-                                       (sigma / 100.0)
-                                        * dna_output[i][mutate_section][mutate_gene]);
+      uniform_real_distribution <float> mutate(variable_max, variable_min);
 
       // Save the mutated value into temp
       temp[mutate_section][mutate_gene] = mutate(generator);
