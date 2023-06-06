@@ -197,6 +197,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       else
       {
         identical == false;
+        cout << identical << endl;
       }
 
       cout << identical << endl;
