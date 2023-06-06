@@ -39,13 +39,13 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   // Place individuals into the output arrays
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
   {
+    cout << locations[i] << endl;
     selected.push_back(p_loc[locations[i]]);
     for (int j = 0; j < sections; j++)
     {
       for (int k = 0; k < genes; k++)
       {
         dna_output[i][j][k] = dna_input[locations[i]][j][k];
-        cout << locations[i] << " " << j << " " << k << endl;
       }
     }
   }
