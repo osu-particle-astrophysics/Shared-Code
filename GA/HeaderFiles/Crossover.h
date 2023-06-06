@@ -46,9 +46,9 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   Selection(crossover_no, fitness, locations);
 
   // call selection to populate spare locations
-  Selection(population, fitness, spare_locations)
+  Selection(population, fitness, spare_locations);
 
-  uniform_int_distribution<int> grab(0, spare_locations.size())
+  uniform_int_distribution<int> grab(0, spare_locations.size());
 
   // shuffle vector
   auto rng = default_random_engine{};
