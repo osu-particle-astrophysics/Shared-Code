@@ -1,5 +1,8 @@
 #pragma once
 
+#include <algorithm>
+#include <random>
+
 // User Functions
 #include "ConstraintARA.h"
 #include "ConstraintPUEO.h"
@@ -35,11 +38,23 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
 
   // Define Variables
   vector<int> locations;
-  double swap;
+  vector<int> spare_locations;
+  double exchange;
   uniform_real_distribution<double> choice(0.0, 1.0);
 
-  // call selection methods
+  // call selection methods to populate locations
   Selection(crossover_no, fitness, locations);
+
+  // call selection to populate spare locations
+  Selection(population, fitness, spare_locations)
+
+  uniform_int_distribution<int> grab(0, spare_locations.size())
+
+  // shuffle vector
+  auto rng = default_random_engine{};
+  shuffle(begin(locations), end(locations), rng);
+  shuffle(begin(spare_locations), end(spare_locations), rng)
+
 
   // Check the size of location vector
   if (locations.size() != crossover_no)
@@ -50,6 +65,13 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   // Crossover two antennas to make 2 children
   for (int i = 0; i < crossover_no; i = i + 2)
   {
+    // Force parents to be different
+    while (dna_input[locations[i]] == dna_input[locations[i + 1]])
+    {
+      int new_parent = grab(generator);
+      swap(locations[i + 1], spare_locations[new_parent]);
+
+    }
     for (int j = 0; j < sections; j++)
     {
       // If the design self-intersects, find a new design
@@ -59,8 +81,8 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         for (int k = 0; k < genes; k++)
         {
           // Swap genes between parents to create the children
-          swap = choice(generator);
-          if (swap < .5)
+          exchange = choice(generator);
+          if (exchange < .5)
           {
             dna_output[i + reproduction_no][j][k]
             = dna_input[locations[i]][j][k];
@@ -76,11 +98,24 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             dna_output[i + 1 + reproduction_no][j][k]
             = dna_input[locations[i]][j][k];
           }
+          bool identical = false;
+          if (dna_output[i + reproduction] == dna_input[locations[i]]
+            && dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]][j][k])
+          {
+            identical = true;
+          }
         }
 
+        // If children were identical to parents, 
+        // select a new parent
+        if (identical == true)
+        {
+          int new_parent = grab(generator);
+          swap(locations[i + 1], spare_locations[new_parent]);
+        }
 
         // Call constraint functions to make sure the designs are applicable
-        if (design == "ARA")
+        if (design == "ARA" && identical == false)
         {
           bool intersect_a = true;
 
@@ -101,7 +136,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
           }
         }
 
-        else if (design == "PUEO")
+        else if (design == "PUEO" && identical == false)
         {
           // Call constraint PUEO for variables
           bool intersect_a = true;
@@ -123,7 +158,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
           }
         }
 
-        else if (design == "AREA")
+        else if (design == "AREA" && identical == false)
         {
           // Call constraint AREA for variables
           bool intersect_a = true;
@@ -138,7 +173,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
           }
 
         }
-        else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
+        else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole" && identical == false)
         {
           // Call constraint Dipole for variables
           bool intersect_a = true;
