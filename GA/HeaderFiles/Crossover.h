@@ -82,7 +82,6 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         bool intersect = true;
         while (intersect == true)
         {
-          cout << "Try this crossover" << endl;
           for (int k = 0; k < genes; k++)
           {
             // Swap genes between parents to create the children
@@ -193,11 +192,11 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       {
         int new_parent = grab(generator);
         swap(locations[i + 1], spare_locations[new_parent]);
-        cout << "identical individual detected" << endl;
       }
       else
       {
         identical == false;
+        cout << "Children made" << endl;
       }
     }
     // Save location of the parent antennas
