@@ -100,7 +100,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             dna_output[i + 1 + reproduction_no][j][k]
             = dna_input[locations[i]][j][k];
           }
-          if (dna_output[i + reproduction_no][j] != dna_input[locations[i][j]]
+          if (dna_output[i + reproduction_no][j] != dna_input[locations[i]][j]
             && dna_output[i + 1 + reproduction_no][j] != dna_input[locations[i + 1]][j])
           {
             identical = false;
