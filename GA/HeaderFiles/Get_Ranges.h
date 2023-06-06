@@ -24,8 +24,8 @@ void Get_Ranges(float &variable_max, float &variable_min, int gene)
   else if (design == "AREA")
   {
     // AREA ranges
-    vector<float> max{5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, };
-    vector<float> min{-5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, };
+    vector<float> max{5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 };
+    vector<float> min{-5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0};
   }
   else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
   {
