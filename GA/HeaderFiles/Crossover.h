@@ -99,8 +99,8 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             = dna_input[locations[i]][j][k];
           }
           bool identical = false;
-          if (dna_output[i + reproduction] == dna_input[locations[i]]
-            && dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]][j][k])
+          if (dna_output[i + reproduction_no] == dna_input[locations[i]]
+            && dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]])
           {
             identical = true;
           }
