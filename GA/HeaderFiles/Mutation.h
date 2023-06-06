@@ -119,7 +119,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       }
     }
 
-    cout << "mutated individual." endl;
+    cout << "mutated individual." << endl;
 
     // Save temp values back to the output vector
     for (int x = 0; x < sections; x++)
