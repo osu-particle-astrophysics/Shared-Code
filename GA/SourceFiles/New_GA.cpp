@@ -10,7 +10,10 @@
 // g++ -std=c++11 New_GA.cpp -o GA.exe
 
 // Call using
-// ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation, sigma
+// ./GA.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation, sigma
+// Example:
+// ./GA.exe "ARA" 1 100 60 20 20 10 70 15 10
+
 
 // Delcare the namespace (needs to happen here)
 using namespace std;
