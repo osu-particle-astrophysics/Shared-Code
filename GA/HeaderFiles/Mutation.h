@@ -87,9 +87,9 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     while (intersect == true)
     {
       // set max and min for the RNG (method doesnt work well)
-      float variable_max = 0.0;
-      float variable_min= 0.0;
-      Get_Ranges(variable_max, variable_min, mutate_gene);
+      //float variable_max = 0.0;
+      //float variable_min= 0.0;
+      //Get_Ranges(variable_max, variable_min, mutate_gene);
 
       // Set distribution based on current gene
       // uniform_real_distribution <float> mutate(variable_max, variable_min);
