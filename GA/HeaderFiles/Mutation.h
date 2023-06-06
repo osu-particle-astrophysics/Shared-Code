@@ -34,7 +34,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   vector<int> locations;
 
   // Call selection methods
-  Selection(reproduction_no, fitness, locations);
+  Selection(mutation_no, fitness, locations);
 
   // Place individuals into the output arrays
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
