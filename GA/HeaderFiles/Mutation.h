@@ -5,7 +5,7 @@
 #include "ConstraintPUEO.h"
 #include "ConstraintAREA.h"
 #include "ConstraintDipole.h"
-#include "Get_ranges.h"
+#include "Get_Ranges.h"
 #include <random>
 
 
@@ -89,7 +89,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       // set max and min for the RNG
       float variable_max = 0.0;
       float variable_min= 0.0;
-      Get_ranges(variable_max, variable_min, mutate_gene);
+      Get_Ranges(variable_max, variable_min, mutate_gene);
 
       // Set distribution based on current gene
       uniform_real_distribution <float> mutate(variable_max, variable_min);
