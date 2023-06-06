@@ -52,7 +52,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     individual = individual + 1;
   }
 
-  cout << "selected individuals copied" << endl;
 
   // Create random number generators
   uniform_int_distribution<int> select_section(0, sections-1);
@@ -78,7 +77,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       }
     }
 
-    cout << "temp made" << endl;
 
     // Set the intersect condition
     bool intersect = true;
@@ -125,7 +123,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       }
     }
 
-    cout << "mutated individual." << endl;
 
     // Save temp values back to the output vector
     for (int x = 0; x < sections; x++)
@@ -136,7 +133,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       }
     }
 
-    cout << "saved mutation" << endl;
 
     // Make sure temp is cleared between loops
     temp.clear();
