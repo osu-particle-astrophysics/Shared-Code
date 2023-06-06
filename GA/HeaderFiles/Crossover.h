@@ -201,10 +201,10 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       if (identical = true)
       {
         int new_parent = grab(generator);
+        cout << "check me: " << locations[i + 1] << endl;
         swap(locations[i + 1], spare_locations[new_parent]);
+        cout << locations[i + 1] << endl;
       }
-
-      cout << identical << endl;
     }
     // Save location of the parent antennas
     selected.push_back(p_loc[locations[i]]);
