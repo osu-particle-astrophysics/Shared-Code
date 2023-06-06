@@ -86,18 +86,19 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     // Attempt mutation and check if it is viable
     while (intersect == true)
     {
-      // set max and min for the RNG
+      // set max and min for the RNG (method doesnt work well)
       float variable_max = 0.0;
       float variable_min= 0.0;
       Get_Ranges(variable_max, variable_min, mutate_gene);
 
       // Set distribution based on current gene
-      uniform_real_distribution <float> mutate(variable_max, variable_min);
+      // uniform_real_distribution <float> mutate(variable_max, variable_min);
+      normal_distribution<float> mutate(dna_output[i][mutate_section][mutate_gene],
+                                        (sigma / 100.0)
+                                        * dna_output[i][mutate_section][mutate_gene]);
 
       // Save the mutated value into temp
       temp[mutate_section][mutate_gene] = mutate(generator);
-
-      cout << temp[mutate_section][mutate_gene] << endl;
 
       // Check to see if the antenna is viable
       if (design == "ARA")
