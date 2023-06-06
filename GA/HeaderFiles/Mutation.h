@@ -59,7 +59,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   uniform_int_distribution<int> select_gene(0, genes-1);
 
   // itterate over individuals and genes to determine for mutations
-  int individual = 0;
+  individual = 0;
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
   {
     // Select section and gene to mutate
