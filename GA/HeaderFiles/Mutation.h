@@ -40,7 +40,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   int individual = 0;
   for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
   {
-    cout << locations[individual] << endl;
     selected.push_back(p_loc[locations[individual]]);
     for (int j = 0; j < sections; j++)
     {
