@@ -76,6 +76,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     {
       // If the design self-intersects, find a new design
       bool intersect = true;
+      bool identical = true;
       while (intersect == true)
       {
         for (int k = 0; k < genes; k++)
@@ -98,11 +99,10 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             dna_output[i + 1 + reproduction_no][j][k]
             = dna_input[locations[i]][j][k];
           }
-          bool identical = false;
-          if (dna_output[i + reproduction_no] == dna_input[locations[i]]
-            && dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]])
+          if (dna_output[i + reproduction_no] != dna_input[locations[i]]
+            && dna_output[i + 1 + reproduction_no] != dna_input[locations[i + 1]])
           {
-            identical = true;
+            identical = false;
           }
         }
 
