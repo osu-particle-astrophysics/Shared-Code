@@ -19,7 +19,7 @@ void Get_Ranges(float& variable_max, float& variable_min, int gene)
   {
     // PUEO ranges
     vector<float> max_value{50.0, 175, 50.0, 50.0, 175.0, 175.0, 12.25};
-    vector<float> min_value{0.0, 75.0, 0.0, 0.0, 0.0, 0.0, 0.0}
+    vector<float> min_value{0.0, 75.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   }
   else if (design == "AREA")
   {
