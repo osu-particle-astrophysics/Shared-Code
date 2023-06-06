@@ -5,7 +5,7 @@ extern string design;
 extern int genes;
 
 
-void Get_Ranges(float &variable_max, float &variable_min, int gene)
+void Get_Ranges(float& variable_max, float& variable_min, int gene)
 {
   // Establish max and min range vectors for each design
 
@@ -43,3 +43,4 @@ void Get_Ranges(float &variable_max, float &variable_min, int gene)
       variable_min = min_value[i];
     }
   }
+}
