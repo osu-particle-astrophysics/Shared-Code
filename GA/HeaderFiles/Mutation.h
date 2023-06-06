@@ -45,6 +45,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       for (int k = 0; k < genes; k++)
       {
         dna_output[i][j][k] = dna_input[locations[i]][j][k];
+        cout << locations[i] << " " << j << " " << k << endl;
       }
     }
   }
