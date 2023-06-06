@@ -82,6 +82,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         bool intersect = true;
         while (intersect == true)
         {
+          cout << "Try this crossover" << endl;
           for (int k = 0; k < genes; k++)
           {
             // Swap genes between parents to create the children
@@ -163,6 +164,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             }
 
           }
+
           else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
           {
             // Call constraint Dipole for variables
