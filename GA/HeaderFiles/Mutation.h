@@ -49,6 +49,8 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     }
   }
 
+  cout << "selected individuals copied" << endl;
+
   // Create random number generators
   uniform_int_distribution<int> select_section(0, sections-1);
   uniform_int_distribution<int> select_gene(0, genes-1);
