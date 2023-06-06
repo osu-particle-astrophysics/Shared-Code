@@ -163,7 +163,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             }
 
           }
-          else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole" && identical == false)
+          else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
           {
             // Call constraint Dipole for variables
             bool intersect_a = true;
@@ -191,6 +191,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       {
         int new_parent = grab(generator);
         swap(locations[i + 1], spare_locations[new_parent]);
+        cout << "identical individual detected" << endl;
       }
       else
       {
