@@ -40,7 +40,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   vector<int> locations;
   vector<int> spare_locations;
   double exchange;
-  uniform_real_distribution<double> choice(0.0, 1.0);
+  uniform_int_distribution<int> choice(0, 1);
 
   // call selection methods to populate locations
   Selection(crossover_no, fitness, locations);
@@ -87,7 +87,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
           {
             // Swap genes between parents to create the children
             exchange = choice(generator);
-            if (exchange < .5)
+            if (exchange == 1)
             {
               dna_output[i + reproduction_no][j][k]
                 = dna_input[locations[i]][j][k];
@@ -95,7 +95,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
               dna_output[i + 1 + reproduction_no][j][k]
                 = dna_input[locations[i + 1]][j][k];
             }
-            else
+            else if (exchange == 0)
             {
               dna_output[i + reproduction_no][j][k]
                 = dna_input[locations[i + 1]][j][k];
@@ -196,14 +196,13 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       else
       {
         identical = false;
+        cout << identical << endl;
       }
 
       if (identical = true)
       {
         int new_parent = grab(generator);
-        cout << "check me: " << locations[i + 1] << endl;
         swap(locations[i + 1], spare_locations[new_parent]);
-        cout << locations[i + 1] << endl;
       }
     }
     // Save location of the parent antennas
