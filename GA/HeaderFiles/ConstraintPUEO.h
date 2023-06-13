@@ -14,7 +14,7 @@ bool ConstraintPUEO(float s, float h, float x_0,
   float x_f = s;
 
   // Run checks
-  if (s < 0.0 || s > max_s || h > max_h || h < min_h) 
+  if (/*s < 0.0 ||*/ s > max_s || h > max_h || h < min_h)
   {
     intersect = true;
   }
