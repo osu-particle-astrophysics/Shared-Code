@@ -45,6 +45,6 @@ bool ConstraintPUEO(float s, float h, float x_0,
   }
 
   // Doing test remove later
-  bool intersect = false;
+  intersect = false;
   return intersect;
 }
