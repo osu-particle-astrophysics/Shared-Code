@@ -34,20 +34,20 @@ std::vector<std::vector<float> > GeneratePUEO()
       std::uniform_real_distribution <float> distribution_h(min_h, max_h);
       h = distribution_h(generator);
 
-      std::uniform_real_distribution <float> distribution_x_0(0, max_s); // s
+      std::uniform_real_distribution <float> distribution_x_0(0, s); // s
       x_0 = distribution_x_0(generator);
 
-      std::uniform_real_distribution <float> distribution_y_0(0, max_s); // x_o
+      std::uniform_real_distribution <float> distribution_y_0(0, x_0); // x_0
       y_0 = distribution_y_0(generator);
 
-      std::uniform_real_distribution <float> distribution_z_f(0, max_h); // h
+      std::uniform_real_distribution <float> distribution_z_f(0, h); // h
       z_f = distribution_z_f(generator);
 
-      std::uniform_real_distribution <float> distribution_y_f(0, max_h); // z_f
+      std::uniform_real_distribution <float> distribution_y_f(0, z_f); // z_f
       y_f = distribution_y_f(generator);
 
       std::uniform_real_distribution <float> distribution_beta((4.0 / 30.0) 
-                                                               * max_h, 7 * max_h); // z_f
+                                                               * z_f, 7 * z_f); // z_f
       beta = distribution_beta(generator) / 100;
 
       //float tau = 0.26;  tau must be 0.26, not evolving
