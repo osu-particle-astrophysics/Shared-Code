@@ -10,6 +10,7 @@ jobs:
       - uses: cpp-linter/cpp-linter-action@v2
         #env:
         #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: linter
         with:
           thread-comments: false
           step-summary: false
@@ -17,3 +18,6 @@ jobs:
           style: 'llvm'
           lines-changed-only: false  # switch to false once the whole repo is linted
           files-changed-only: false  # same as above
+      - name: Check results
+        if: steps.linter.outputs.checks-failed > 0
+        run: echo "Some files failed the linting checks!"
