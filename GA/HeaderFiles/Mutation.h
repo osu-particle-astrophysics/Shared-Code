@@ -1,122 +1,156 @@
 #pragma once
 
-
 // User Functions
 #include "ConstraintARA.h"
 #include "ConstraintPUEO.h"
 #include "ConstraintAREA.h"
+#include "ConstraintDipole.h"
+#include "Get_Ranges.h"
+#include <random>
+
 
 // Global Variables
 extern int seed;
 extern std::default_random_engine generator;
 extern string design;
-
 extern int generation;
 extern int population;
 extern int sections;
 extern int genes;
 extern int reproduction_no;
 extern int crossover_no;
-extern int mutation_rate;
-extern int sigma; 
-extern int rank_no; 
+extern int mutation_no;
+extern int sigma;
+extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void Mutation(vector<vector<vector<float> > > & varOutput)
+void Mutation(vector<vector<vector<float> > >& dna_input,
+              vector<vector<vector<float> > >& dna_output,
+              vector<float> fitness, vector<int> p_loc,
+              vector<int>& selected)
 {
-	// Start Flag
-	cout << "Mutation Started" << endl;
-	
-	// Set random number generator
-	uniform_real_distribution<float> select(0.0, 1.0);
+  // Start Flag
+  cout << "Mutation Started" << endl;
 
-	// itterate over individuals and genes to determine for mutations
-	for(int i=reproduction_no; i<crossover_no+reproduction_no; i++)
-	{
-		for(int j=0; j<sections; j++)
-		{	
-			for(int k=0; k<genes; k++)
-			{
-				// Initialize vector to store temporary values as to not lose data
-				vector<float> temp;
-				
-				// Save input genes into temp vector
-				for(int x=0; x<genes; x++)
-				{
-					temp.push_back(varOutput[i][j][x]);
-				}
-					
-				// generate random value for mutation
-				float s = select(generator);
-				
-				// See if this gene will be mutated
-				if(s < mutation_rate/100.0)
-				{
-					// Set the intersect condition
-					bool intersect = true;
-			
-					// Attempt mutations and check if viable
-					while (intersect == true)
-					{
-						// Set distribution based on current gene
-						normal_distribution<float> mutate(varOutput[i][j][k], sigma/100.0*varOutput[i][j][k]);
-					
-						// Save the mutated value into temp[k]
-						temp[k] = (mutate(generator));	
-				
-						// Check to see if the antenna is viable
-						if (design == "ARA")
-						{
-							intersect = ConstraintARA(temp[0], temp[1], temp[2], temp[3]);
-						}
-						else if (design == "PUEO")
-						{
-							intersect = ConstraintPUEO(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
-						}
-						else if (design == "AREA")
-						{	
-							// create 2D antenna
-							std::vector<std::vector<float> > antenna (sections,std::vector <float>(genes, 0.0f));
-							
-							// populate the antenna
-							for(int a=0; a<sections; a++)
-							{	
-								for(int b=0; b<genes; b++)
-								{
-									// if the section matches the outer loop, fill with temp values
-									if (a==j)
-									{
-										antenna[a][b] = temp[b];
-									}
-									// if the section does not match the outer loop, will with permanent values
-									else
-									{
-										antenna[a][b] = varOutput[i][a][b];
-									}
-								}
-							}
-							// rescale and replace antenna with gain corrected version
-							intersect = ConstraintAREA(antenna);
-							
-							// replace temp values with the newly scaled ones
-							for(int a=0; a<genes; a++)
-							{	
-								temp[a] = antenna[j][a];
-							}
-						}
-					}
-				}
-				// Save temp values back to the output vector
-				for (int y=0; y<genes; y++)
-				{
-					varOutput[i][j][y] = temp[y];
-				}
-				// Make sure temp is cleared between loops
-				temp.clear();
-			}
-		}
-	}
-	// End Flag
-	cout << "Mutation Complete" << endl;
+  // define storage vector	
+  vector<int> locations;
+
+  // Call selection methods
+  Selection(mutation_no, fitness, locations);
+
+  // Place individuals into the output arrays
+  int individual = 0;
+  for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
+  {
+    selected.push_back(p_loc[locations[individual]]);
+    for (int j = 0; j < sections; j++)
+    {
+      for (int k = 0; k < genes; k++)
+      {
+        dna_output[i][j][k] = dna_input[locations[individual]][j][k];
+      }
+    }
+    individual = individual + 1;
+  }
+
+
+  // Create random number generators
+  uniform_int_distribution<int> select_section(0, sections-1);
+  uniform_int_distribution<int> select_gene(0, genes-1);
+
+  // itterate over individuals and genes to determine for mutations
+  individual = 0;
+  for (int i = reproduction_no + crossover_no; i < reproduction_no + crossover_no + mutation_no; i++)
+  {
+    // Select section and gene to mutate
+    int mutate_section = select_section(generator);
+    int mutate_gene = select_gene(generator);
+
+    // Initialize vector to store temporary values as to not lose data
+    vector<vector<float> > temp(sections, vector <float> (genes, 0.0f));
+
+    // Save input genes into temp vector
+    for (int x = 0; x < sections; x++)
+    {
+      for (int y = 0; y < genes; y++)
+      {
+        temp[x][y] = dna_output[i][x][y];
+      }
+    }
+
+
+    // Set the intersect condition
+    bool intersect = true;
+
+    // Attempt mutation and check if it is viable
+    while (intersect == true)
+    {
+      // set max and min for the RNG (method doesnt work well)
+      //float variable_max = 0.0;
+      //float variable_min= 0.0;
+      //Get_Ranges(variable_max, variable_min, mutate_gene);
+
+      // Set distribution based on current gene
+      // uniform_real_distribution <float> mutate(variable_max, variable_min);
+      normal_distribution<float> mutate(dna_output[i][mutate_section][mutate_gene],
+                                        (sigma / 100.0)
+                                        * dna_output[i][mutate_section][mutate_gene]);
+
+      // Save the mutated value into temp
+      temp[mutate_section][mutate_gene] = mutate(generator);
+
+      // Check to see if the antenna is viable
+      if (design == "ARA")
+      {
+        intersect = ConstraintARA(temp[mutate_section][0],
+                                  temp[mutate_section][1],
+                                  temp[mutate_section][2],
+                                  temp[mutate_section][3]);
+      }
+      else if (design == "PUEO")
+      {
+        intersect = ConstraintPUEO(temp[mutate_section][0], 
+                                   temp[mutate_section][1],
+                                   temp[mutate_section][2],
+                                   temp[mutate_section][3],
+                                   temp[mutate_section][4],
+                                   temp[mutate_section][5],
+                                   temp[mutate_section][6]);
+      }
+      else if (design == "AREA")
+      {
+        // rescale and replace antenna with gain corrected version
+        intersect = ConstraintAREA(temp);
+      }
+      else if (design == "Symmetric Dipole" 
+               || design == "Asymmetric Dipole")
+      {
+        intersect = ConstraintDipole(temp[mutate_section][0],
+                                     temp[mutate_section][1]);
+      }
+    }
+
+
+    // Save temp values back to the output vector
+    for (int x = 0; x < sections; x++)
+    {
+      for (int y = 0; y < genes; y++)
+      {
+        dna_output[i][x][y] = temp[x][y];
+      }
+    }
+
+
+    // Make sure temp is cleared between loops
+    temp.clear();
+
+    // Save location of the parent antenna
+    selected.push_back(p_loc[locations[individual]]);
+
+    // Update individual
+    individual = individual + 1;
+  }
+  // End Flag
+  cout << "Mutation Complete" << endl;
 }

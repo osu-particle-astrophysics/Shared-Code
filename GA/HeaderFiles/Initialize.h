@@ -3,33 +3,34 @@
 extern int population;
 extern string design;
 
-void Initialize(std::vector<std::vector<std::vector<float> > > & varOutput)
+void Initialize(std::vector<std::vector<std::vector<float> > >& dna_output)
 {
-// if the experiment is ARA, then call GenerateARA 
-  if(design == "ARA")
+  // Create the inital population of antennas
+
+  for (int i = 0; i < population; i++)
   {
-    for(int i=0; i<population; i++)
+    // If the experiment is ARA, then call GenerateARA 
+    if (design == "ARA")
     {
-      varOutput[i] = GenerateARA(); 
+      dna_output[i] = GenerateARA();
     }
-  }
-  
-// if the experiment is PUEO, then call GeneratePUEO 
-   if(design == "PUEO")
-  {
-    for(int i=0; i<population; i++)
+
+    // If the experiment is PUEO, then call GeneratePUEO 
+    if (design == "PUEO")
     {
-      varOutput[i] = GeneratePUEO();
+      dna_output[i] = GeneratePUEO();
     }
-  }
-  
-  // if the experiment is AREA, then call GenerateAREA 
-  if(design == "AREA")
-  {
-    for(int i=0; i<population; i++)
+
+    // If the experiment is AREA, then call GenerateAREA 
+    if (design == "AREA")
     {
-      varOutput[i] = GenerateAREA(); 
+      dna_output[i] = GenerateAREA();
+    }
+
+    // If the experiment is a Dipole call GenerateDipole
+    if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
+    {
+      dna_output[i] = GenerateDipole();
     }
   }
 }
-
