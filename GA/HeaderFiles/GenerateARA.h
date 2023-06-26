@@ -46,7 +46,7 @@ std::vector<std::vector<float> > GenerateARA()
                                                                  max_coeff);
       linear_coeff = distribution_linear(generator);
 
-      // Pass antenna to constraint function and update the interesct condition
+      // Pass antenna to constraint function and update the intersect condition
       intersect = ConstraintARA(radius, length, quadratic_coeff, linear_coeff);
     }
     // store the variables into the antenna vector
