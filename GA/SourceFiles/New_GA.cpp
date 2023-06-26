@@ -10,7 +10,13 @@
 // g++ -std=c++11 New_GA.cpp -o GA.exe
 
 // Call using
-// ./Ga.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma
+// ./GA.exe "design", generation, population, rank, roulette, tournament, reproduction, crossover, mutation, sigma
+// Example:
+// ./GA.exe "ARA" 1 100 60 20 20 10 70 15 10
+
+
+// Delcare the namespace (needs to happen here)
+using namespace std;
 
 // Libraries
 #include <time.h>
@@ -24,8 +30,6 @@
 #include <chrono>
 #include <thread>
 #include <ctime>
-
-using namespace std;
 
 // User functions
 #include "../HeaderFiles/ConstraintARA.h"
@@ -49,11 +53,9 @@ using namespace std;
 #include "../HeaderFiles/Sort.h"
 #include "../HeaderFiles/Tournament.h"
 #include "../HeaderFiles/ParameterCheck.h"
+#include "../HeaderFiles/Get_Ranges.h"
 
-
-// GLOBAL CONSTANTS
-float max_S=50;
-float max_H=50;
+// Set global variables
 int seed = time(NULL);
 default_random_engine generator(seed);
 string design;
@@ -63,124 +65,132 @@ int sections;
 int genes;
 int reproduction_no;
 int crossover_no;
-int mutation_rate;
-int sigma; 
-int rank_no; 
+int mutation_no;
+int sigma;
+int rank_no;
 int roulette_no;
 int tournament_no;
 bool termination = false;
 string message = "";
 
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
   // Start Flag
   cout << "Genetic Algorithm initialized" << endl;
   cout << endl;
-  
-  //ARGUMENTS (read in all arguments that determine what functions get run) 
-  design = string(argv[1]); // read in ARA or PUEO
+
+  // Read in all arguments that determine what functions get run
+  design = string(argv[1]);
   generation = atoi(argv[2]);
-  population = atoi(argv[3]); // read in : atoi(argv[x])
+  population = atoi(argv[3]);
   rank_no = atoi(argv[4]);
   roulette_no = atoi(argv[5]);
   tournament_no = atoi(argv[6]);
   reproduction_no = atoi(argv[7]);
   crossover_no = atoi(argv[8]);
-  mutation_rate = atoi(argv[9]);
+  mutation_no = atoi(argv[9]);
   sigma = atoi(argv[10]);
-  
+
+  // Check the read in arguments
   ParameterCheck(argc);
-  
+
+  // If the Arguments are incorret, exit the code with a message
   if (termination == true)
   {
     cout << message << endl;
     cout << "Proper call format is :" << endl;
-    cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_rate, sigma" << endl;
+    cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_no, sigma" << endl;
     exit(0);
   }
-  
-  
-  // VECTORS
-  vector<int> P_loc (population); // Parent locations vector
-  vector<float> fitness (population, 0.0f); // stores fitness score
-  vector<int> selected (population);
-  
+
+  // Vectors
+  vector<int> p_loc(population);
+  vector<float> fitness(population, 0.0f);
+  vector<int> selected;
+
   // Check the design and prepare input/output vectors
   if (design == "ARA")
-    {
-      // determine sections and genes for ara
-      sections = 2;
-      genes = 4;
-      
-    }
-    
-    // if PUEO, create PUEO antennas
-  else if (design == "PUEO")
-    {
-      // determine sections and genes for PUEO
-      sections = 1;
-      genes = 7; 
+  {
+    // Determine sections and genes for ara
+    sections = 2;
+    genes = 4;
+
   }
-  
+
+  // if PUEO, create PUEO antennas
+  else if (design == "PUEO")
+  {
+    // Determine sections and genes for PUEO
+    sections = 1;
+    genes = 7;
+  }
+
   else if (design == "AREA")
   {
-    // determine sections and genes for AREA
+    // Determine sections and genes for AREA
     sections = 2;
     genes = 14;
   }
   else if (design == "Symmetric Dipole")
   {
-      // determine sections and genes for symetric dipole
-      sections = 1;
-      genes = 2;
+    // Determine sections and genes for symmetric dipole
+    sections = 1;
+    genes = 2;
   }
   else if (design == "Asymmetric Dipole")
   {
-      // determine sections and genes for symetric dipole
-      sections = 2;
-      genes = 2;
+    // determine sections and genes for symmetric dipole
+    sections = 2;
+    genes = 2;
   }
-  
-  // create in/out vectors based on parameters
-  vector<vector<vector<float>>> varInput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all input antennas
-  vector<vector<vector<float>>> varOutput (population,vector<vector<float> >(sections,vector <float>(genes, 0.0f))); // stores all output antennas
-  
-  
+
+  // create input/output dna vectors based on parameters
+  vector<vector<vector<float>>> dna_input(population,
+                                          vector<vector<float> >(sections,
+                                          vector <float>(genes, 0.0f)));
+  vector<vector<vector<float>>> dna_output(population,
+                                           vector<vector<float> >(sections,
+                                           vector <float>(genes, 0.0f)));
+
+
   // FUNCTION CALLS
-  
+
   // Generation zero functions
   if (generation == 0)
   {
     // run initialization
-    Initialize(varOutput);
+    Initialize(dna_output);
   }
-  
+
   // Generation 1+ functions
   if (generation != 0)
   {
-    // Read in data from pervious generation
-    DataRead(varInput, fitness);
-    
+    // Read in data from previous generation
+    DataRead(dna_input, fitness);
+
     // Sort vectors by fitness scores
-    Sort(fitness, varInput, P_loc);
-    
+    Sort(fitness, dna_input, p_loc);
+
     // Pass individuals from the previous generation into the current one
-    Reproduction(varInput, varOutput, fitness, P_loc, selected);
-    
-    // Create new individuals via sexual reproduction and mutations
-    Crossover(varInput, varOutput, fitness, P_loc, selected);
-    
+    Reproduction(dna_input, dna_output, fitness, p_loc, selected);
+
+    // Create new individuals via sexual reproduction 
+    Crossover(dna_input, dna_output, fitness, p_loc, selected);
+
+    // Mutate selected individuals
+    Mutation(dna_input, dna_output, fitness, p_loc, selected);
+
     // Introduce new individuals into the population by random generation
-    Immigration(varOutput);
+    Immigration(dna_output);
   }
-  
-  // write information to data files
-  DataWrite(varOutput, selected);
-  
+
+  // Write information to data files
+  DataWrite(dna_output, selected);
+
   // End Flag
   cout << endl;
   cout << "Genetic Algorithm Completed" << endl;
-  
+
   return 0;
 }
