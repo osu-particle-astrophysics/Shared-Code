@@ -28,7 +28,7 @@ std::vector<std::vector<float> > GenerateAREA()
   intersect = true;
   while (intersect == true)
   {
-    // Loop over genes (coeffs that weight the sphereical harm terms to calculate the gain/phase as a function of theta and phi)
+    // Loop over genes (coeffs that weight the spherical harm terms to calculate the gain/phase as a function of theta and phi)
     for (int i = 0; i < genes; i++)
     {
       if (i == 0) {
