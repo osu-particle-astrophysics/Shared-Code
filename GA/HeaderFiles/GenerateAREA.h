@@ -12,7 +12,7 @@ std::vector<std::vector<float> > GenerateAREA()
 {
   // Create an AREA antenna
 
-  // Initialize an interesect condidtion
+  // Initialize an intersect condition
   bool intersect = true;
   std::vector<std::vector<float> > antenna(sections, 
                                            std::vector <float>(genes, 0.0f));
