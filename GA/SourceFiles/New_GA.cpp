@@ -134,7 +134,7 @@ int main(int argc, char const* argv[])
   }
   else if (design == "Symmetric Dipole")
   {
-    // Determine sections and genes for symetric dipole
+    // Determine sections and genes for symmetric dipole
     sections = 1;
     genes = 2;
   }
