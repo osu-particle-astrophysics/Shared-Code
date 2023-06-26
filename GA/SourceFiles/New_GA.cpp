@@ -166,7 +166,7 @@ int main(int argc, char const* argv[])
   // Generation 1+ functions
   if (generation != 0)
   {
-    // Read in data from pervious generation
+    // Read in data from previous generation
     DataRead(dna_input, fitness);
 
     // Sort vectors by fitness scores
