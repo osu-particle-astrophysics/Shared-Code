@@ -33,14 +33,17 @@ void ParameterCheck(int argc)
            || tournament_no < 0 || crossover_no % 2 != 0)
   {
     termination = true;
-    message = "ERROR: One or more arguments are of an improper value. For example, values may not be less than zero";
+    message = "ERROR: One or more arguments are of an improper value. "
+              "For example, values may not be less than zero";
   }
 
-  else if (design != "PUEO" && design != "ARA" && design != "AREA" 
-           && design != "Symmetric Dipole" && design != "Asymmetric Dipole")
+  else if (design != "PUEO" && design != "ARA" && design != "AREA" &&
+           design != "Symmetric Dipole" && design != "Asymmetric Dipole" && 
+           design != "Hpol")
   {
     termination = true;
-    message = "ERROR: Unknown design. Known designs are PUEO, AREA, ARA, Symmetric Dipole, and Asymmetric Dipole";
+    message = "ERROR: Unknown design. Known designs are PUEO, " 
+              "AREA, ARA, Symmetric Dipole, Asymmetric Dipole, and Hpol";
   }
 
   else if (roulette_no + tournament_no + rank_no > population 
