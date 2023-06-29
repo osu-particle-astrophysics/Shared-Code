@@ -22,9 +22,11 @@ void DataWrite(std::vector<std::vector<std::vector<float> > >& dna_output,
   // Write the header
   ofstream generationDNA;
   generationDNA.open("generationDNA.csv");
-  generationDNA << "Hybrid of Roulette and Tournament -- Thanks to Cal Poly / Jordan Potter" << "\n";
+  generationDNA << "Hybrid of Roulette and Tournament -- "
+                   "Thanks to Cal Poly / Jordan Potter" << "\n";
   generationDNA << "Author was David Liu" << "\n";
-  generationDNA << "Notable contributors: Julie Rolla, Hannah Hasan, and Adam Blenk" << "\n";
+  generationDNA << "Notable contributors: Julie Rolla, Hannah Hasan, "
+                   "and Adam Blenk" << "\n";
   generationDNA << "Done at The Ohio State University" << "\n";
   generationDNA << "Working on behalf of Dr. Amy Connolly" << "\n";
   generationDNA << "And the ANITA project" << "\n";

@@ -36,6 +36,7 @@ using namespace std;
 #include "../HeaderFiles/ConstraintPUEO.h"
 #include "../HeaderFiles/ConstraintAREA.h"
 #include "../HeaderFiles/ConstraintDipole.h"
+#include "../HeaderFiles/ConstraintHPol.h"
 #include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
 #include "../HeaderFiles/DataWrite.h"
@@ -43,6 +44,7 @@ using namespace std;
 #include "../HeaderFiles/GeneratePUEO.h"
 #include "../HeaderFiles/GenerateAREA.h"
 #include "../HeaderFiles/GenerateDipole.h"
+#include "../HeaderFiles/GenerateHPol.h"
 #include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 #include "../HeaderFiles/Mutation.h"
@@ -100,12 +102,13 @@ int main(int argc, char const* argv[])
   {
     cout << message << endl;
     cout << "Proper call format is :" << endl;
-    cout << "./Ga.exe <design>, generation, population, rank, roulette, tournament, reproduction, crossover, mutation_no, sigma" << endl;
+    cout << "./Ga.exe <design>, generation, population, rank, roulette," 
+            "tournament, reproduction, crossover, mutation_no, sigma" << endl;
     exit(0);
   }
 
   // Vectors
-  vector<int> p_loc(population);
+  vector<int> p_loc(population); //"parent location"
   vector<float> fitness(population, 0.0f);
   vector<int> selected;
 
@@ -115,7 +118,6 @@ int main(int argc, char const* argv[])
     // Determine sections and genes for ara
     sections = 2;
     genes = 4;
-
   }
 
   // if PUEO, create PUEO antennas
@@ -132,17 +134,26 @@ int main(int argc, char const* argv[])
     sections = 2;
     genes = 14;
   }
+
   else if (design == "Symmetric Dipole")
   {
     // Determine sections and genes for symmetric dipole
     sections = 1;
     genes = 2;
   }
+
   else if (design == "Asymmetric Dipole")
   {
-    // determine sections and genes for symmetric dipole
+    // Determine sections and genes for Asymmetric dipole
     sections = 2;
     genes = 2;
+  }
+
+  else if (design == "HPol")
+  {
+    // Determine sections and genes for HPol
+    sections = 1; // TBD; 
+    genes = 1;    // TBD; 
   }
 
   // create input/output dna vectors based on parameters

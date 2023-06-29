@@ -32,5 +32,11 @@ void Initialize(std::vector<std::vector<std::vector<float> > >& dna_output)
     {
       dna_output[i] = GenerateDipole();
     }
+
+    // If the experiment is an HPol call GenerateHPol
+    if (design == "HPol")
+    {
+      dna_output[i] = GenerateHPol();
+    }
   }
 }

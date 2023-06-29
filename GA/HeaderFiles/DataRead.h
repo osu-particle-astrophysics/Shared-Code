@@ -20,29 +20,25 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
   // This function reads in data from various files
 
   // Establish variables
-  int dna_garbage_end = 9;
-  ifstream generationDNA;
-  generationDNA.open("generationDNA.csv");
-  int csv_file_size = dna_garbage_end + (population * sections);
+  int dna_garbage_end = 9;                      // number of header lines
+  int csv_file_size = population * sections;
+  ifstream generationDNA("generationDNA.csv");
   string csv_content[csv_file_size];
-  string str_to_dbl;
+  string str_to_dbl;                            // string to double
 
-  // This loop reads through the .csv file line by line
-  // If we're in data (past line 9), it reads in the line
+  string dumpster;                              // getting rid of headers
+  for (int i=0; i<dna_garbage_end; i++) getline(generationDNA, dumpster);
 
-  for (int i = 0; i < csv_file_size; i++)
+  for (int i=0; i<csv_file_size; i++)           // start reading
   {
-    getline(generationDNA, csv_content[i]);
-    if (i >= dna_garbage_end)
+    getline(generationDNA, csv_content[i]);     // std::getline()
+    int j = i / sections;                       // j: individual index
+    int p = i - sections * j;                   // p: section index
+    istringstream stream(csv_content[i]);
+    for (int k = 0; k < genes; k++)
     {
-      double j = floor((i - dna_garbage_end) / sections);
-      int p = i - dna_garbage_end - sections * j;
-      istringstream stream(csv_content[i]);
-      for (int k = 0; k < genes; k++)
-      {
-        getline(stream, str_to_dbl, ',');
-        dna_input[j][p][k] = atof(str_to_dbl.c_str());
-      }
+      getline(stream, str_to_dbl, ',');
+      dna_input[j][p][k] = atof(str_to_dbl.c_str());
     }
   }
 
@@ -50,20 +46,19 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
 
   // Now we need to read fitness scores:
 
-  ifstream fitnessScores;
-  fitnessScores.open("fitnessScores.csv");
-  string fitness_read[population + 2];
+  ifstream fitnessScores("fitnessScores.csv");
+  string fitness_read[population];
 
-  for (int i = 0; i < (population + 2); i++)
+  int num_header = 2;                           // getting rid of headers
+  for (int i=0; i<num_header; i++) getline(fitnessScores,dumpster); 
+
+  for (int i=0; i<population; i++)
   {
     getline(fitnessScores, fitness_read[i]);
-    if (i >= 2)
+    fitness[i] = atof(fitness_read[i].c_str());
+    if (fitness[i] < 0)
     {
-      fitness[i - 2] = atof(fitness_read[i].c_str());
-      if (fitness[i - 2] < 0)
-      {
-        fitness[i - 2] = 0;
-      }
+      fitness[i] = 0;
     }
   }
 
