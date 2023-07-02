@@ -36,7 +36,7 @@ void Initialize(std::vector<std::vector<std::vector<float> > >& dna_output)
     // If the experiment is an Hpol call GenerateHpol
     if (design == "Hpol")
     {
-      dna_output[i] = GenerateHpol();
+      dna_output[i] = GenerateHPol();
     }
   }
 }

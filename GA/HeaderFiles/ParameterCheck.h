@@ -25,7 +25,7 @@ void ParameterCheck(int argc)
   if (argc != 11)
   {
     termination = true;
-    message = "ERROR: Improper amount of arguments";
+    message = "ERROR: Improper number of arguments";
   }
 
   else if (reproduction_no < 0 || crossover_no < 0 || mutation_no < 0
@@ -34,7 +34,7 @@ void ParameterCheck(int argc)
   {
     termination = true;
     message = "ERROR: One or more arguments are of an improper value. "
-              "For example, values may not be less than zero";
+              "For example, values may not be less than zero.";
   }
 
   else if (design != "PUEO" && design != "ARA" && design != "AREA" &&
@@ -43,7 +43,7 @@ void ParameterCheck(int argc)
   {
     termination = true;
     message = "ERROR: Unknown design. Known designs are PUEO, " 
-              "AREA, ARA, Symmetric Dipole, Asymmetric Dipole, and HPol";
+              "AREA, ARA, Symmetric Dipole, Asymmetric Dipole, and HPol.";
   }
 
   else if (roulette_no + tournament_no + rank_no > population 

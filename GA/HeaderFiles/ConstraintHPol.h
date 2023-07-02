@@ -1,7 +1,7 @@
 #ifndef CONSTRAINTHPOL_H
 #define CONSTRAINTHPOL_H
 
-bool ConstraintHpol(float radius, float length)
+bool ConstraintHPol(float radius, float length)
 {
   // Set variables
   bool intersect = true;

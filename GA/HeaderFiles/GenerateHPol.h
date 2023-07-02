@@ -8,7 +8,7 @@ extern int sections;
 extern int seed;
 extern std::default_random_engine generator;
 
-std::vector<std::vector<float> > GenerateHpol()
+std::vector<std::vector<float> > GenerateHPol()
 {
   // Create an Hpol antenna
 
@@ -40,7 +40,7 @@ std::vector<std::vector<float> > GenerateHpol()
       length = distribution_length(generator);
 
       // Pass individual to the constraint function and update the interesct condition
-      intersect = ConstraintHpol(radius, length);
+      intersect = ConstraintHPol(radius, length);
     }
     // Store the variables into the antenna std::vector
     antenna[i][0] = radius;
