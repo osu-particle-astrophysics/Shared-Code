@@ -36,7 +36,7 @@ using namespace std;
 #include "../HeaderFiles/ConstraintPUEO.h"
 #include "../HeaderFiles/ConstraintAREA.h"
 #include "../HeaderFiles/ConstraintDipole.h"
-#include "../HeaderFiles/ConstraintHpol.h"
+#include "../HeaderFiles/ConstraintHPol.h"
 #include "../HeaderFiles/Crossover.h"
 #include "../HeaderFiles/DataRead.h"
 #include "../HeaderFiles/DataWrite.h"
@@ -44,7 +44,7 @@ using namespace std;
 #include "../HeaderFiles/GeneratePUEO.h"
 #include "../HeaderFiles/GenerateAREA.h"
 #include "../HeaderFiles/GenerateDipole.h"
-#include "../HeaderFiles/GenerateHpol.h"
+#include "../HeaderFiles/GenerateHPol.h"
 #include "../HeaderFiles/Immigration.h"
 #include "../HeaderFiles/Initialize.h"
 #include "../HeaderFiles/Mutation.h"
@@ -150,7 +150,7 @@ int main(int argc, char const* argv[])
     genes = 2;
   }
 
-  else if (design == "Hpol")
+  else if (design == "HPol")
   {
     // Determine sections and genes for Hpol
     sections = 1; // TBD; 

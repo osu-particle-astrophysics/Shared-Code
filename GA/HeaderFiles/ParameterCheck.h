@@ -39,11 +39,11 @@ void ParameterCheck(int argc)
 
   else if (design != "PUEO" && design != "ARA" && design != "AREA" &&
            design != "Symmetric Dipole" && design != "Asymmetric Dipole" && 
-           design != "Hpol")
+           design != "HPol")
   {
     termination = true;
     message = "ERROR: Unknown design. Known designs are PUEO, " 
-              "AREA, ARA, Symmetric Dipole, Asymmetric Dipole, and Hpol";
+              "AREA, ARA, Symmetric Dipole, Asymmetric Dipole, and HPol";
   }
 
   else if (roulette_no + tournament_no + rank_no > population 
