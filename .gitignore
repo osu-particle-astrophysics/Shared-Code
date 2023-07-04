@@ -27,9 +27,13 @@
 *.lib
 
 # Executables
+*.x
 *.exe
 *.out
 *.app
 
 # Folders and Repositories
 *.vs
+
+# makefiles
+*Makefile
