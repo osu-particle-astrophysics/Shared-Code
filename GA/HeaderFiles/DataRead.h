@@ -25,11 +25,9 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
   ifstream generationDNA("generationDNA.csv");
   string csv_content[csv_file_size];
   string str_to_dbl;                            // string to double
-  string dumpster;
-  for (int i=0; i<dna_garbage_end; i++)         // getting rid of headers
-  {
-    getline(generationDNA, dumpster);           // std::getline()
-  }
+
+  string dumpster;                              // getting rid of headers
+  for (int i=0; i<dna_garbage_end; i++) getline(generationDNA, dumpster);
 
   for (int i=0; i<csv_file_size; i++)           // start reading
   {
@@ -48,20 +46,19 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
 
   // Now we need to read fitness scores:
 
-  ifstream fitnessScores;
-  fitnessScores.open("fitnessScores.csv");
-  string fitness_read[population + 2];
+  ifstream fitnessScores("fitnessScores.csv");
+  string fitness_read[population];
 
-  for (int i = 0; i < (population + 2); i++)
+  int num_header = 2;                           // getting rid of headers
+  for (int i=0; i<num_header; i++) getline(fitnessScores,dumpster); 
+
+  for (int i=0; i<population; i++)
   {
     getline(fitnessScores, fitness_read[i]);
-    if (i >= 2)
+    fitness[i] = atof(fitness_read[i].c_str());
+    if (fitness[i] < 0)
     {
-      fitness[i - 2] = atof(fitness_read[i].c_str());
-      if (fitness[i - 2] < 0)
-      {
-        fitness[i - 2] = 0;
-      }
+      fitness[i] = 0;
     }
   }
 
