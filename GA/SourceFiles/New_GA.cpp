@@ -152,7 +152,7 @@ int main(int argc, char const* argv[])
 
   else if (design == "HPol")
   {
-    // Determine sections and genes for Hpol
+    // Determine sections and genes for HPol
     sections = 1; // TBD; 
     genes = 1;    // TBD; 
   }

@@ -35,5 +35,9 @@
 # Folders and Repositories
 *.vs
 
-# makefiles
+<<<<<<< HEAD
+# Makefiles
+=======
+# Makefiles
+>>>>>>> 01979d6 (modified DataRead)
 *Makefile

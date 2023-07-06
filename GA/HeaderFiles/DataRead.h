@@ -20,29 +20,27 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
   // This function reads in data from various files
 
   // Establish variables
-  int dna_garbage_end = 9;
-  ifstream generationDNA;
-  generationDNA.open("generationDNA.csv");
-  int csv_file_size = dna_garbage_end + (population * sections);
+  int dna_garbage_end = 9;                      // number of header lines
+  int csv_file_size = population * sections;
+  ifstream generationDNA("generationDNA.csv");
   string csv_content[csv_file_size];
-  string str_to_dbl;
-
-  // This loop reads through the .csv file line by line
-  // If we're in data (past line 9), it reads in the line
-
-  for (int i = 0; i < csv_file_size; i++)
+  string str_to_dbl;                            // string to double
+  string dumpster;
+  for (int i=0; i<dna_garbage_end; i++)         // getting rid of headers
   {
-    getline(generationDNA, csv_content[i]);
-    if (i >= dna_garbage_end)
+    getline(generationDNA, dumpster);           // std::getline()
+  }
+
+  for (int i=0; i<csv_file_size; i++)           // start reading
+  {
+    getline(generationDNA, csv_content[i]);     // std::getline()
+    int j = i / sections;                       // j: individual index
+    int p = i - sections * j;                   // p: section index
+    istringstream stream(csv_content[i]);
+    for (int k = 0; k < genes; k++)
     {
-      double j = floor((i - dna_garbage_end) / sections);
-      int p = i - dna_garbage_end - sections * j;
-      istringstream stream(csv_content[i]);
-      for (int k = 0; k < genes; k++)
-      {
-        getline(stream, str_to_dbl, ',');
-        dna_input[j][p][k] = atof(str_to_dbl.c_str());
-      }
+      getline(stream, str_to_dbl, ',');
+      dna_input[j][p][k] = atof(str_to_dbl.c_str());
     }
   }
 
