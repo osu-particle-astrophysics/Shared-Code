@@ -23,8 +23,8 @@ void Sort(vector<float>& fitness, vector<vector<vector<float> > >& dna_input,
   int i, j, x, y;
   int size = int(fitness.size()); // size=population=fitness.size()
 
-  // original_location = [0, 1, 2, 3, ..., (population-1) ]
-  vector<int> original_location(size, nan("")); // preallocate memory
+  // original_location = [0, 1, 2, ..., (population-1) ]; preallocating memory
+  vector<int> original_location(size, nan("")); 
   for (int z=0; z<size; z++) original_location[z]=z;
 
   for (i=0; i<size; i++)
@@ -34,7 +34,7 @@ void Sort(vector<float>& fitness, vector<vector<vector<float> > >& dna_input,
     double temp = fitness[i];     // for sorting fitness (high to low)
     int t = original_location[i]; 
     vector<vector<vector<float>>> location(1, vector<vector<float> >
-                                          (sections, vector <float>
+                                          (sections, vector<float>
                                           (genes, 0.0f)));
     location[0] = dna_input[i];   // for sorting dna_input based on fitness
 
