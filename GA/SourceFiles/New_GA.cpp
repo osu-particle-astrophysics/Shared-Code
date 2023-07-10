@@ -108,7 +108,7 @@ int main(int argc, char const* argv[])
   }
 
   // Vectors
-  vector<int> p_loc(population);
+  vector<int> p_loc(population); //"parent location"
   vector<float> fitness(population, 0.0f);
   vector<int> selected;
 
@@ -118,7 +118,6 @@ int main(int argc, char const* argv[])
     // Determine sections and genes for ara
     sections = 2;
     genes = 4;
-
   }
 
   // if PUEO, create PUEO antennas
