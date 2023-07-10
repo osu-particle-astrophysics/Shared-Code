@@ -30,7 +30,7 @@ void Sort(vector<float>& fitness, vector<vector<vector<float> > >& dna_input,
   for (i=0; i<size; i++)
   {
     // temporary variables: temp, t, location; these are used to store the
-    //                      current values in the for loop.
+    // current values in the for loop.
     double temp = fitness[i];     // for sorting fitness (high to low)
     int t = original_location[i]; 
     vector<vector<vector<float>>> location(1, vector<vector<float> >
