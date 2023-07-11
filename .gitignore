@@ -36,4 +36,4 @@
 *.vs
 
 # Makefiles
-*Makefile
+Makefile

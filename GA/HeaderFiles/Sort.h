@@ -19,12 +19,7 @@ void Sort(vector<float>& fitness, vector<vector<vector<float> > >& dna_input,
 {
   // Sort individuals by fitness score
 
-  // Establish variables
-  int i, j, x, y;
-  int size = int(fitness.size()); // size=population=fitness.size()
-
-  for (i=0; i<size; i++)
-  {
+  for (int i=0; i<int(fitness.size()); i++) {
     // temporary variables: temp, t, location; these are used to store the
     //                      current values in the for loop.
     double temp = fitness[i];     // for sorting fitness (high to low)
@@ -33,9 +28,8 @@ void Sort(vector<float>& fitness, vector<vector<vector<float> > >& dna_input,
                                           (genes, 0.0f)));
     location[0] = dna_input[i];   // for sorting dna_input based on fitness
 
-    
-    for (j = i; j > 0 && fitness[j - 1] < temp; j--)
-    {
+    int j;
+    for (j = i; j > 0 && fitness[j - 1] < temp; j--) {
       fitness[j] = fitness[j - 1]; // sorting fitness in order (high to low)
       parent_location[j] = parent_location[j - 1];
       dna_input[j]=dna_input[j-1]; // sorting dna_input based on fitness

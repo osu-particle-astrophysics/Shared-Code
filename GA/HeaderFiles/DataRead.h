@@ -27,7 +27,9 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
   string str_to_dbl;                            // string to double
 
   string dumpster;                              // getting rid of headers
-  for (int i=0; i<dna_garbage_end; i++) getline(generationDNA, dumpster);
+  for (int i=0; i<dna_garbage_end; i++) {
+    getline(generationDNA, dumpster);
+  }
 
   for (int i=0; i<csv_file_size; i++)           // start reading
   {
@@ -50,7 +52,9 @@ void DataRead(vector<vector<vector<float> > >& dna_input,
   string fitness_read[population];
 
   int num_header = 2;                           // getting rid of headers
-  for (int i=0; i<num_header; i++) getline(fitnessScores,dumpster); 
+  for (int i=0; i<num_header; i++) {
+    getline(fitnessScores,dumpster); 
+  }
 
   for (int i=0; i<population; i++)
   {
