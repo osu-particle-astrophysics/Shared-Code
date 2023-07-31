@@ -46,7 +46,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   Selection(crossover_no, fitness, locations);
 
   // call selection to populate spare locations
-  Selection(3*crossover_no, fitness, spare_locations);
+  Selection(4*crossover_no, fitness, spare_locations);
 
   uniform_int_distribution<int> grab(0, spare_locations.size()-1);
 
