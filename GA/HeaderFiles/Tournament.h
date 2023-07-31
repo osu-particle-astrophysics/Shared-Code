@@ -23,7 +23,11 @@ extern int tournament_no;
 int Tournament(vector<float> fitness)
 {
   // Define starting parameters
-  int pool_size = 0.07 * population;
+  int pool_size = 2; //0.07 * population;
+  if (pool_size < 2)
+  {
+    pool_size = 2;
+  }
   vector<int> contenders;
   int random_num = 0;
   uniform_real_distribution<float> choice(0, fitness.size());
