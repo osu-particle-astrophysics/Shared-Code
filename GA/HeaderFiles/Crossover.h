@@ -69,7 +69,9 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       int new_parent = grab(generator);
-      swap(locations[i + 1], spare_locations[new_parent]);
+      int new_parent2 = grab(generator);
+      swap(locations[i], spare_locations[new_parent]);
+      swap(locations[i + 1], spare_locations[new_parent2]);
 
     }
     // If the children are identical to their parent, find new parent
@@ -200,7 +202,9 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       if (identical == true)
       {
         int new_parent = grab(generator);
-        swap(locations[i + 1], spare_locations[new_parent]);
+        int new_parent2 = grab(generator);
+        swap(locations[i], spare_locations[new_parent]);
+        swap(locations[i + 1], spare_locations[new_parent2]);
       }
     }
     // Save location of the parent antennas
