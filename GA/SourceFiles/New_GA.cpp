@@ -56,7 +56,7 @@ using namespace std;
 #include "../HeaderFiles/Get_Ranges.h"
 
 // Set global variables
-int seed = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count(); //time(NULL);
+int seed = std::chrono duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count(); //time(NULL);
 cout << seed << endl;
 default_random_engine generator(seed);
 string design;
