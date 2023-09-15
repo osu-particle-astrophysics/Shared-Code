@@ -25,10 +25,10 @@ extern int rank_no;
 extern int roulette_no;
 extern int tournament_no;
 
-void failure()
+void Failure()
 {
   ofstream failure;
   failure.open("failure.txt");
   failure << "Evolution Failed" ;
-  failure.close()
+  failure.close();
 }

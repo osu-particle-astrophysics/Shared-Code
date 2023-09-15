@@ -210,7 +210,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         swap(locations[i], spare_locations[new_parent]);
         swap(locations[i + 1], spare_locations[new_parent2]);
       }
-      else if (identical == true && trials > max_trils)
+      else if (identical == true && trials > max_trials)
       {
         // If the trials is above threshold
         cout << "Crossover Failed" << endl;
