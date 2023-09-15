@@ -80,6 +80,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     // If the children are identical to their parent, find new parent
     bool identical = true;
     trials = trials + 1;
+    cout << trials << endl;
     while (identical == true)
     {
       for (int j = 0; j < sections; j++)
