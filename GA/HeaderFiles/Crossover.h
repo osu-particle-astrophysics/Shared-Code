@@ -66,6 +66,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   for (int i = 0; i < crossover_no; i = i + 2)
   {
     // Force parents to be different
+    int trials = 0;
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       int new_parent = grab(generator);
@@ -76,6 +77,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     }
     // If the children are identical to their parent, find new parent
     bool identical = true;
+    trials = trials + 1;
     while (identical == true)
     {
       for (int j = 0; j < sections; j++)
@@ -199,12 +201,17 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         identical = false;
       }
 
-      if (identical == true)
+      if (identical == true && trials <= 10)
       {
         int new_parent = grab(generator);
         int new_parent2 = grab(generator);
         swap(locations[i], spare_locations[new_parent]);
         swap(locations[i + 1], spare_locations[new_parent2]);
+      }
+      else if (identical == true && trials > 10)
+      {
+        cout << "Crossover Failed" << endl;
+        exit(0);
       }
     }
     // Save location of the parent antennas
