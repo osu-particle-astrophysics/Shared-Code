@@ -68,7 +68,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   {
     // Force parents to be different
     int trials = 0;
-    int max_trials = 5;
+    int max_trials = population;
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       int new_parent = grab(generator);
