@@ -9,6 +9,7 @@
 #include "ConstraintAREA.h"
 #include "Selection.h"
 #include "Mutation.h"
+#include "Failure.h"
 
 // Global Variables
 extern int seed;
@@ -67,6 +68,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
   {
     // Force parents to be different
     int trials = 0;
+    int max_trials = 1;
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       int new_parent = grab(generator);
@@ -201,16 +203,18 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         identical = false;
       }
 
-      if (identical == true && trials <= 10)
+      if (identical == true && trials <= max_trials)
       {
         int new_parent = grab(generator);
         int new_parent2 = grab(generator);
         swap(locations[i], spare_locations[new_parent]);
         swap(locations[i + 1], spare_locations[new_parent2]);
       }
-      else if (identical == true && trials > 10)
+      else if (identical == true && trials > max_trils)
       {
+        // If the trials is above threshold
         cout << "Crossover Failed" << endl;
+        Failure();
         exit(0);
       }
     }
