@@ -71,13 +71,26 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     int max_trials = population;
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
+      trials = trials + 1;
+      //cout << trials << endl;
       int new_parent = grab(generator);
       int new_parent2 = grab(generator);
       swap(locations[i], spare_locations[new_parent]);
       swap(locations[i + 1], spare_locations[new_parent2]);
 
+      // failsafe exit
+      if (dna_input[locations[i]] == dna_input[locations[i + 1]] && trials > max_trials)
+      {
+        // If the trials is above threshold, exit code
+        cout << "Crossover Failed" << endl;
+        string cause = "To many identical parents.";
+        Failure(cause);
+        exit(0);
+      }
     }
+
     // If the children are identical to their parent, find new parent
+    trials = 0;
     bool identical = true;
     while (identical == true)
     {
@@ -215,7 +228,8 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       {
         // If the trials is above threshold
         cout << "Crossover Failed" << endl;
-        Failure();
+        string cause = "No viable children.";
+        Failure(cause);
         exit(0);
       }
     }
