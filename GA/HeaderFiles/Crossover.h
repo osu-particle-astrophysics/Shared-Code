@@ -128,7 +128,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
           // Call constraint functions to make sure the designs are applicable
           if (design == "ARA")
           {
-            cout << "Checking Constraints."
+            cout << "Checking Constraints." << endl;
             bool intersect_a = true;
 
             // define output vectors and check intersects
