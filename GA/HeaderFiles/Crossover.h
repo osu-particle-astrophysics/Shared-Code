@@ -72,7 +72,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       trials = trials + 1;
-      //cout << trials << endl;
+      cout << "Choosing parents" << endl;
       int new_parent = grab(generator);
       int new_parent2 = grab(generator);
       swap(locations[i], spare_locations[new_parent]);
@@ -95,7 +95,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     while (identical == true)
     {
       trials = trials + 1;
-      //cout << trials << endl;
+      cout << "Attempting crossover" << endl;
       for (int j = 0; j < sections; j++)
       {
         // If the design self-intersects, find a new design
