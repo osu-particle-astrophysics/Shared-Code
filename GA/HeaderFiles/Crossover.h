@@ -69,10 +69,11 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     // Force parents to be different
     int trials = 0;
     int max_trials = population;
+    cout << "Choosing parents" << endl;
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       trials = trials + 1;
-      cout << "Choosing parents" << endl;
+      cout << "Identical parents detected, choosing new parents" << endl;
       int new_parent = grab(generator);
       int new_parent2 = grab(generator);
       swap(locations[i], spare_locations[new_parent]);
@@ -127,6 +128,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
           // Call constraint functions to make sure the designs are applicable
           if (design == "ARA")
           {
+            cout << "Checking Constraints."
             bool intersect_a = true;
 
             // define output vectors and check intersects
