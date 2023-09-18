@@ -94,8 +94,8 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       // Set distribution based on current gene
       // uniform_real_distribution <float> mutate(variable_max, variable_min);
       normal_distribution<float> mutate(dna_output[i][mutate_section][mutate_gene],
-                                        (sigma / 100.0)
-                                        * dna_output[i][mutate_section][mutate_gene]);
+                                        (sigma / 100.0) * 
+                                        dna_output[i][mutate_section][mutate_gene]);
 
       // Save the mutated value into temp
       temp[mutate_section][mutate_gene] = mutate(generator);
