@@ -135,8 +135,8 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       {
         // Try mutating another gene
         cout << "Try another gene" << endl;
-        int mutate_section = select_section(generator);
-        int mutate_gene = select_gene(generator);
+        mutate_section = select_section(generator);
+        mutate_gene = select_gene(generator);
         // Make sure temp is cleared between loops
         temp.clear();
         cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
