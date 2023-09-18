@@ -66,7 +66,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     // Select section and gene to mutate
     int mutate_section = select_section(generator);
     int mutate_gene = select_gene(generator);
-    cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
+   // cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
 
     // Set the intersect condition
     bool intersect = true;
@@ -99,7 +99,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
 
       // Save the mutated value into temp
       temp[mutate_section][mutate_gene] = mutate(generator);
-      cout << dna_output[i][mutate_section][mutate_gene] << " -> " << temp[mutate_section][mutate_gene] << endl;
+      //cout << dna_output[i][mutate_section][mutate_gene] << " -> " << temp[mutate_section][mutate_gene] << endl;
 
       // Check to see if the antenna is viable
       if (design == "ARA")
@@ -134,12 +134,12 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       if (intersect == true && trials <= max_trials)
       {
         // Try mutating another gene
-        cout << "Try another gene" << endl;
+        //cout << "Try another gene" << endl;
         mutate_section = select_section(generator);
         mutate_gene = select_gene(generator);
         // Make sure temp is cleared between loops
         temp.clear();
-        cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
+        //cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
       }
       else if ( intersect == true && trials > max_trials)
       {
