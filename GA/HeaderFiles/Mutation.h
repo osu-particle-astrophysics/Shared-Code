@@ -7,6 +7,7 @@
 #include "ConstraintDipole.h"
 #include "Get_Ranges.h"
 #include <random>
+#include "Failure.h"
 
 
 // Global Variables
