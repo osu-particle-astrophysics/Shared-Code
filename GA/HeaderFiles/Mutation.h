@@ -136,6 +136,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
         cout << "Try another gene" << endl;
         int mutate_section = select_section(generator);
         int mutate_gene = select_gene(generator);
+        cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
       }
       else if ( intersect == true && trials > max_trials)
       {
