@@ -67,9 +67,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     int mutate_section = select_section(generator);
     int mutate_gene = select_gene(generator);
 
-    // Initialize vector to store temporary values as to not lose data
-    vector<vector<float> > temp(sections, vector <float> (genes, 0.0f));
-
     // Set the intersect condition
     bool intersect = true;
 
@@ -80,6 +77,9 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     {
       // Count trials
       trials = trials + 1;
+
+      // Initialize vector to store temporary values as to not lose data
+      vector<vector<float> > temp(sections, vector <float>(genes, 0.0f));
 
       // Save input genes into temp vector
       for (int x = 0; x < sections; x++)
