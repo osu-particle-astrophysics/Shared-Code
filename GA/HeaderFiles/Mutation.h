@@ -148,21 +148,21 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
         Failure(cause);
         exit(0);
       }
-    }
-
-
-    // Save temp values back to the output vector
-    for (int x = 0; x < sections; x++)
-    {
-      for (int y = 0; y < genes; y++)
+      else if (intersect == false)
       {
-        dna_output[i][x][y] = temp[x][y];
+        // Save temp values back to the output vector
+        for (int x = 0; x < sections; x++)
+        {
+          for (int y = 0; y < genes; y++)
+          {
+            dna_output[i][x][y] = temp[x][y];
+          }
+        }
+
+        // Make sure temp is cleared between loops
+        temp.clear();
       }
     }
-
-
-    // Make sure temp is cleared between loops
-    temp.clear();
 
     // Save location of the parent antenna
     selected.push_back(p_loc[locations[individual]]);
