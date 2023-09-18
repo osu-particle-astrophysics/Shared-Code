@@ -90,127 +90,166 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       }
     }
 
-    // If the children are identical to their parent, find new parent
+    // If the children are identical to their parent,
+    // Or if an intersect is present on either side.
+    // Find a new parent set
     trials = 0;
     bool identical = true;
-    while (identical == true)
+    bool intersect = true;
+    while (identical == true || intersect == true)
     {
       trials = trials + 1;
-      cout << "Attempting crossover" << endl;
+      cout << "Attempting crossover, trial: " << trials << endl;
       for (int j = 0; j < sections; j++)
       {
-        // If the design self-intersects, find a new design
-        bool intersect = true;
-        while (intersect == true)
+        for (int k = 0; k < genes; k++)
         {
-          for (int k = 0; k < genes; k++)
+          // Swap genes between parents to create the children
+          exchange = choice(generator);
+          if (exchange == 1)
           {
-            // Swap genes between parents to create the children
-            exchange = choice(generator);
-            if (exchange == 1)
-            {
-              dna_output[i + reproduction_no][j][k]
-                = dna_input[locations[i]][j][k];
+            dna_output[i + reproduction_no][j][k]
+              = dna_input[locations[i]][j][k];
 
-              dna_output[i + 1 + reproduction_no][j][k]
-                = dna_input[locations[i + 1]][j][k];
-            }
-            else if (exchange == 0)
-            {
-              dna_output[i + reproduction_no][j][k]
-                = dna_input[locations[i + 1]][j][k];
-
-              dna_output[i + 1 + reproduction_no][j][k]
-                = dna_input[locations[i]][j][k];
-            }
+            dna_output[i + 1 + reproduction_no][j][k]
+              = dna_input[locations[i + 1]][j][k];
           }
-
-          // Call constraint functions to make sure the designs are applicable
-          if (design == "ARA")
+          else if (exchange == 0)
           {
-            cout << "Checking Constraints." << endl;
-            bool intersect_a = true;
+            dna_output[i + reproduction_no][j][k]
+              = dna_input[locations[i + 1]][j][k];
 
-            // define output vectors and check intersects
-            vector<float> output_a = dna_output[i + reproduction_no][j];
-            intersect_a = ConstraintARA(output_a[0], output_a[1],
-              output_a[2], output_a[3]);
-
-
-            bool intersect_b = true;
-            vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
-            intersect_b = ConstraintARA(output_b[0], output_b[1],
-              output_b[2], output_b[3]);
-
-            if (intersect_a == false && intersect_b == false)
-            {
-              intersect = false;
-            }
-          }
-
-          else if (design == "PUEO")
-          {
-            // Call constraint PUEO for variables
-            bool intersect_a = true;
-            vector<float> output_a = dna_output[i + reproduction_no][j];
-            intersect_a = ConstraintPUEO(output_a[0], output_a[1], output_a[2],
-              output_a[3], output_a[4], output_a[5],
-              output_a[6]);
-
-            bool intersect_b = true;
-            vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
-            intersect_b = ConstraintPUEO(output_b[0], output_b[1], output_b[2],
-              output_b[3], output_b[4], output_b[5],
-              output_b[6]);
-
-            if (intersect_a == false && intersect_b == false)
-            {
-              intersect = false;
-
-            }
-          }
-
-          else if (design == "AREA")
-          {
-            // Call constraint AREA for variables
-            bool intersect_a = true;
-            intersect_a = ConstraintAREA(dna_output[i + reproduction_no]);
-
-            bool intersect_b = true;
-            intersect_b = ConstraintAREA(dna_output[i + 1 + reproduction_no]);
-
-            if (intersect_a == false && intersect_b == false)
-            {
-              intersect = false;
-            }
-
-          }
-
-          else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
-          {
-            // Call constraint Dipole for variables
-            bool intersect_a = true;
-            vector<float> output_a = dna_output[i + reproduction_no][j];
-            intersect_a = ConstraintDipole(output_a[0], output_a[1]);
-
-            bool intersect_b = true;
-            vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
-            intersect_b = ConstraintDipole(output_b[0], output_b[1]);
-
-            if (intersect_a == false && intersect_b == false)
-            {
-              intersect = false;
-
-            }
+            dna_output[i + 1 + reproduction_no][j][k]
+              = dna_input[locations[i]][j][k];
           }
         }
       }
-      // If a child is identical to a parent, 
-      // select a new parent
-      if (( dna_output[i + reproduction_no] == dna_input[locations[i]] )
-          || (dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]] )
-          || (dna_output[i + reproduction_no] == dna_input[locations[i + 1]] )
-          || (dna_output[i + 1 + reproduction_no] == dna_input[locations[i]] ))
+
+      // Call constraint functions to check for intersects
+      if (design == "ARA")
+      {
+        cout << "Checking Constraints." << endl;
+        vector<vector<bool> > section_intersect(2, vector<bool>(sections, true));
+
+        // Define output vectors and check intersects
+        for (int a = 0; a < 2; a++)
+        {
+          for (int j = 0; j < sections; j++)
+          {
+            vector<float> output = dna_output[i + a + reproduction_no][j];
+            section_intersect[a][j] = ConstraintARA(output[0], output[1],
+                                                    output[2], output[3]);
+          }
+        }
+
+        // Count how many intersections there were
+        int intersections = 0;
+        for (int a = 0; a < 2; a++)
+        {
+          intersections = intersections + count(section_intersect[a].begin(),
+                                                section_intersect[a].end(),
+                                                true);
+        }
+        if (intersections == 0)
+        {
+          intersect = false;
+        }
+      }
+
+      else if (design == "PUEO")
+      {
+        // Call constraint PUEO for variables
+        cout << "Checking Constraints." << endl;
+        vector<vector<bool> > section_intersect(2, vector<bool>(sections, true));
+
+        // Define output vectors and check intersects
+        for (int a = 0; a < 2; a++)
+        {
+          for (int j = 0; j < sections; j++)
+          {
+            vector<float> output = dna_output[i + a + reproduction_no][j];
+            section_intersect[a][j] = ConstraintPUEO(output[0], output[1], output[2],
+                                                     output[3], output[4], output[5],
+                                                     output[6]);
+          }
+        }
+
+        // Count how many intersections there were
+        int intersections = 0;
+        for (int a = 0; a < 2; a++)
+        {
+          intersections = intersections + count(section_intersect[a].begin(),
+            section_intersect[a].end(),
+            true);
+        }
+        if (intersections == 0)
+        {
+          intersect = false;
+        }
+      }
+
+      else if (design == "AREA")
+      {
+        // Call constraint AREA for variables
+
+        cout << "Checking Constraints." << endl;
+        vector<bool> section_intersect(2, true);
+
+        // Define output vectors and check intersects
+        for (int a = 0; a < 2; a++)
+        {
+          section_intersect[a] = ConstraintAREA(dna_output[i + a + reproduction_no]);
+        }
+
+        // Count how many intersections there were
+        int intersections = 0;
+        for (int a = 0; a < 2; a++)
+        {
+          intersections = intersections + count(section_intersect.begin(),
+                                                section_intersect.end(),
+                                                true);
+        }
+        if (intersections == 0)
+        {
+          intersect = false;
+        }
+      }
+
+      else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
+      {
+        // Call constraint Dipole for variables
+        cout << "Checking Constraints." << endl;
+        vector<vector<bool> > section_intersect(2, vector<bool>(sections, true));
+
+        // Define output vectors and check intersects
+        for (int a = 0; a < 2; a++)
+        {
+          for (int j = 0; j < sections; j++)
+          {
+            vector<float> output = dna_output[i + a + reproduction_no][j];
+            section_intersect[a][j] = ConstraintDipole(output[0], output[1]);
+          }
+        }
+
+        // Count how many intersections there were
+        int intersections = 0;
+        for (int a = 0; a < 2; a++)
+        {
+          intersections = intersections + count(section_intersect[a].begin(),
+                                                section_intersect[a].end(),
+                                                true);
+        }
+        if (intersections == 0)
+        {
+          intersect = false;
+        }
+      }
+
+      // Check to see if children are identical to parents
+      if ((dna_output[i + reproduction_no] == dna_input[locations[i]])
+        || (dna_output[i + 1 + reproduction_no] == dna_input[locations[i + 1]])
+        || (dna_output[i + reproduction_no] == dna_input[locations[i + 1]])
+        || (dna_output[i + 1 + reproduction_no] == dna_input[locations[i]]))
       {
         identical = true;
       }
@@ -219,21 +258,26 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         identical = false;
       }
 
-      if (identical == true && trials <= max_trials)
+      // If either the intersect or inetical condition are true,
+      // Do one of two things
+      if ((identical == true || intersect == true) && trials <= max_trials)
       {
+        // Try new Parents
+        cout << "Try new parents" << endl;
         int new_parent = grab(generator);
         int new_parent2 = grab(generator);
         swap(locations[i], spare_locations[new_parent]);
         swap(locations[i + 1], spare_locations[new_parent2]);
       }
-      else if (identical == true && trials > max_trials)
+      else if ((identical == true || intersect == true) && trials > max_trials)
       {
-        // If the trials is above threshold
+        // Declare failure
         cout << "Crossover Failed" << endl;
         string cause = "No viable children.";
         Failure(cause);
         exit(0);
       }
+      
     }
     // Save location of the parent antennas
     selected.push_back(p_loc[locations[i]]);
