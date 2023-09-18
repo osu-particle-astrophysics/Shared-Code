@@ -152,7 +152,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
                                                 section_intersect[a].end(),
                                                 true);
         }
-        cout << intersections << endl;
+        cout << "intersections: " << intersections << endl;
         if (intersections == 0)
         {
           intersect = false;
