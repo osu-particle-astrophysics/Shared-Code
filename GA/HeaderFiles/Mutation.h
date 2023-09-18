@@ -66,6 +66,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     // Select section and gene to mutate
     int mutate_section = select_section(generator);
     int mutate_gene = select_gene(generator);
+    cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
 
     // Set the intersect condition
     bool intersect = true;
