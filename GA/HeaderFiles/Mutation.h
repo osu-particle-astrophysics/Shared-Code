@@ -99,6 +99,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
 
       // Save the mutated value into temp
       temp[mutate_section][mutate_gene] = mutate(generator);
+      cout << dna_output[i][mutate_section][mutate_gene] << " -> " << temp[mutate_section][mutate_gene] << endl;
 
       // Check to see if the antenna is viable
       if (design == "ARA")
