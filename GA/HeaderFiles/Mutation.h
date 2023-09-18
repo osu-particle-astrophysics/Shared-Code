@@ -7,6 +7,7 @@
 #include "ConstraintDipole.h"
 #include "Get_Ranges.h"
 #include <random>
+#include "Failure.h"
 
 
 // Global Variables
@@ -54,7 +55,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     individual = individual + 1;
   }
 
-
   // Create random number generators
   uniform_int_distribution<int> select_section(0, sections-1);
   uniform_int_distribution<int> select_gene(0, genes-1);
@@ -66,39 +66,40 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     // Select section and gene to mutate
     int mutate_section = select_section(generator);
     int mutate_gene = select_gene(generator);
-
-    // Initialize vector to store temporary values as to not lose data
-    vector<vector<float> > temp(sections, vector <float> (genes, 0.0f));
-
-    // Save input genes into temp vector
-    for (int x = 0; x < sections; x++)
-    {
-      for (int y = 0; y < genes; y++)
-      {
-        temp[x][y] = dna_output[i][x][y];
-      }
-    }
-
+   // cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
 
     // Set the intersect condition
     bool intersect = true;
 
     // Attempt mutation and check if it is viable
+    int trials = 0;
+    int max_trials = population;
     while (intersect == true)
     {
-      // set max and min for the RNG (method doesnt work well)
-      //float variable_max = 0.0;
-      //float variable_min= 0.0;
-      //Get_Ranges(variable_max, variable_min, mutate_gene);
+      // Count trials
+      trials = trials + 1;
+
+      // Initialize vector to store temporary values as to not lose data
+      vector<vector<float> > temp(sections, vector <float>(genes, 0.0f));
+
+      // Save input genes into temp vector
+      for (int x = 0; x < sections; x++)
+      {
+        for (int y = 0; y < genes; y++)
+        {
+          temp[x][y] = dna_output[i][x][y];
+        }
+      }
 
       // Set distribution based on current gene
       // uniform_real_distribution <float> mutate(variable_max, variable_min);
       normal_distribution<float> mutate(dna_output[i][mutate_section][mutate_gene],
-                                        (sigma / 100.0)
-                                        * dna_output[i][mutate_section][mutate_gene]);
+                                        (sigma / 100.0) * 
+                                        dna_output[i][mutate_section][mutate_gene]);
 
       // Save the mutated value into temp
       temp[mutate_section][mutate_gene] = mutate(generator);
+      //cout << dna_output[i][mutate_section][mutate_gene] << " -> " << temp[mutate_section][mutate_gene] << endl;
 
       // Check to see if the antenna is viable
       if (design == "ARA")
@@ -129,21 +130,40 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
         intersect = ConstraintDipole(temp[mutate_section][0],
                                      temp[mutate_section][1]);
       }
-    }
 
-
-    // Save temp values back to the output vector
-    for (int x = 0; x < sections; x++)
-    {
-      for (int y = 0; y < genes; y++)
+      if (intersect == true && trials <= max_trials)
       {
-        dna_output[i][x][y] = temp[x][y];
+        // Try mutating another gene
+        //cout << "Try another gene" << endl;
+        mutate_section = select_section(generator);
+        mutate_gene = select_gene(generator);
+        // Make sure temp is cleared between loops
+        temp.clear();
+        //cout << "Attempting: Section " << mutate_section << " gene " << mutate_gene << endl;
+      }
+      else if ( intersect == true && trials > max_trials)
+      {
+        // Declare failure
+        cout << "Mutation Failed" << endl;
+        string cause = "No viable mutations.";
+        Failure(cause);
+        exit(0);
+      }
+      else if (intersect == false)
+      {
+        // Save temp values back to the output vector
+        for (int x = 0; x < sections; x++)
+        {
+          for (int y = 0; y < genes; y++)
+          {
+            dna_output[i][x][y] = temp[x][y];
+          }
+        }
+
+        // Make sure temp is cleared between loops
+        temp.clear();
       }
     }
-
-
-    // Make sure temp is cleared between loops
-    temp.clear();
 
     // Save location of the parent antenna
     selected.push_back(p_loc[locations[individual]]);

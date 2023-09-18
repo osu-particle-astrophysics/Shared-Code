@@ -56,7 +56,7 @@ using namespace std;
 #include "../HeaderFiles/Get_Ranges.h"
 
 // Set global variables
-int seed = time(NULL);
+int seed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count(); //time(NULL);
 default_random_engine generator(seed);
 string design;
 int generation;
@@ -78,6 +78,7 @@ int main(int argc, char const* argv[])
 {
   // Start Flag
   cout << "Genetic Algorithm initialized" << endl;
+  cout << "Seed: " << seed << endl;
   cout << endl;
 
   // Read in all arguments that determine what functions get run

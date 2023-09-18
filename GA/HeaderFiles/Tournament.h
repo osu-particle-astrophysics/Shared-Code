@@ -2,9 +2,11 @@
 
 // Libraries
 #include <random>
+#include <algorithm>
 
 // Global Variables
 extern int seed;
+extern std::default_random_engine generator;
 extern int generation;
 extern int population;
 extern int sections;
@@ -21,16 +23,40 @@ extern int tournament_no;
 int Tournament(vector<float> fitness)
 {
   // Define starting parameters
-  int pool_size = 0.07 * population;
+  int pool_size = 2; //0.07 * population;
+  if (pool_size < 2)
+  {
+    pool_size = 2;
+  }
   vector<int> contenders;
   int random_num = 0;
   uniform_real_distribution<float> choice(0, fitness.size());
 
   // Select contenders for the tournament 
-  for (int i = 0; i < pool_size; i++)
+  // Don't allow for duplicates
+  int i = 0;
+  while (i < pool_size)
   {
-    random_num = rand() % fitness.size();
-    contenders.push_back(random_num);
+    // Choose random indvidual
+    random_num = choice(generator);
+
+    // If the list is empy add the individual
+    if (!contenders.empty())
+    {
+      contenders.push_back(random_num);
+      i = i + 1;
+    }
+    // If the list contains the individual, do not itterate
+    else if (find(contenders.begin(), contenders.end(), random_num) != contenders.end())
+    {
+      i = i;
+    }
+    // Otherwise add the individual to the list
+    else
+    {
+      contenders.push_back(random_num);
+      i = i + 1;
+    }
   }
 
   // Find the best individual from the contenders
