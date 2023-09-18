@@ -55,7 +55,6 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     individual = individual + 1;
   }
 
-
   // Create random number generators
   uniform_int_distribution<int> select_section(0, sections-1);
   uniform_int_distribution<int> select_gene(0, genes-1);
@@ -134,10 +133,10 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       if (intersect == true && trials <= max_trials)
       {
         // Try mutating another gene
+        cout << "Try another gene" << endl;
         int mutate_section = select_section(generator);
         int mutate_gene = select_gene(generator);
       }
-
       else if ( intersect == true && trials > max_trials)
       {
         // Declare failure
