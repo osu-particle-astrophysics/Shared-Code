@@ -69,11 +69,11 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     // Force parents to be different
     int trials = 0;
     int max_trials = population;
-    cout << "Choosing parents" << endl;
+    //cout << "Choosing parents" << endl;
     while (dna_input[locations[i]] == dna_input[locations[i + 1]])
     {
       trials = trials + 1;
-      cout << "Identical parents detected, choosing new parents" << endl;
+      //cout << "Identical parents detected, choosing new parents" << endl;
       int new_parent = grab(generator);
       int new_parent2 = grab(generator);
       swap(locations[i], spare_locations[new_parent]);
@@ -99,7 +99,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     while (identical == true || intersect == true)
     {
       trials = trials + 1;
-      cout << "Attempting crossover, trial: " << trials << endl;
+      //cout << "Attempting crossover, trial: " << trials << endl;
       for (int j = 0; j < sections; j++)
       {
         for (int k = 0; k < genes; k++)
@@ -128,7 +128,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       // Call constraint functions to check for intersects
       if (design == "ARA")
       {
-        cout << "Checking Constraints." << endl;
+        //cout << "Checking Constraints." << endl;
         vector<vector<bool> > section_intersect(2, vector<bool>(sections, true));
 
         // Define output vectors and check intersects
@@ -159,7 +159,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       else if (design == "PUEO")
       {
         // Call constraint PUEO for variables
-        cout << "Checking Constraints." << endl;
+        //cout << "Checking Constraints." << endl;
         vector<vector<bool> > section_intersect(2, vector<bool>(sections, true));
 
         // Define output vectors and check intersects
@@ -192,7 +192,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       {
         // Call constraint AREA for variables
 
-        cout << "Checking Constraints." << endl;
+        //cout << "Checking Constraints." << endl;
         vector<bool> section_intersect(2, true);
 
         // Define output vectors and check intersects
@@ -218,7 +218,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
       else if (design == "Symmetric Dipole" || design == "Asymmetric Dipole")
       {
         // Call constraint Dipole for variables
-        cout << "Checking Constraints." << endl;
+        //cout << "Checking Constraints." << endl;
         vector<vector<bool> > section_intersect(2, vector<bool>(sections, true));
 
         // Define output vectors and check intersects
@@ -258,12 +258,12 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         identical = false;
       }
 
-      // If either the intersect or inetical condition are true,
+      // If either the intersect or identical condition are true,
       // Do one of two things
       if ((identical == true || intersect == true) && trials <= max_trials)
       {
         // Try new Parents
-        cout << "Try new parents" << endl;
+        //cout << "Try new parents" << endl;
         int new_parent = grab(generator);
         int new_parent2 = grab(generator);
         swap(locations[i], spare_locations[new_parent]);
