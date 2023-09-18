@@ -70,26 +70,25 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
     // Initialize vector to store temporary values as to not lose data
     vector<vector<float> > temp(sections, vector <float> (genes, 0.0f));
 
-    // Save input genes into temp vector
-    for (int x = 0; x < sections; x++)
-    {
-      for (int y = 0; y < genes; y++)
-      {
-        temp[x][y] = dna_output[i][x][y];
-      }
-    }
-
-
     // Set the intersect condition
     bool intersect = true;
 
     // Attempt mutation and check if it is viable
+    int trials = 0;
+    int max_trials = population;
     while (intersect == true)
     {
-      // set max and min for the RNG (method doesnt work well)
-      //float variable_max = 0.0;
-      //float variable_min= 0.0;
-      //Get_Ranges(variable_max, variable_min, mutate_gene);
+      // Count trials
+      trials = trials + 1;
+
+      // Save input genes into temp vector
+      for (int x = 0; x < sections; x++)
+      {
+        for (int y = 0; y < genes; y++)
+        {
+          temp[x][y] = dna_output[i][x][y];
+        }
+      }
 
       // Set distribution based on current gene
       // uniform_real_distribution <float> mutate(variable_max, variable_min);
@@ -129,6 +128,22 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
       {
         intersect = ConstraintDipole(temp[mutate_section][0],
                                      temp[mutate_section][1]);
+      }
+
+      if (intersect == true && trials <= max_trials)
+      {
+        // Try mutating another gene
+        int mutate_section = select_section(generator);
+        int mutate_gene = select_gene(generator);
+      }
+
+      else if ( intersect == true && trials > max_trials)
+      {
+        // Declare failure
+        cout << "Mutation Failed" << endl;
+        string cause = "No viable mutations.";
+        Failure(cause);
+        exit(0);
       }
     }
 
