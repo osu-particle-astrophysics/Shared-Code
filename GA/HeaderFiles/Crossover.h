@@ -139,6 +139,8 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             vector<float> output = dna_output[i + a + reproduction_no][j];
             section_intersect[a][j] = ConstraintARA(output[0], output[1],
                                                     output[2], output[3]);
+            cout << section_intersect[a][j] << endl;
+            output.clear()
           }
         }
 
@@ -150,6 +152,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
                                                 section_intersect[a].end(),
                                                 true);
         }
+        cout << intersections << endl;
         if (intersections == 0)
         {
           intersect = false;
