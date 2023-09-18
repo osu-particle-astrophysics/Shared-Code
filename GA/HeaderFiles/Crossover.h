@@ -99,7 +99,7 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
     while (identical == true || intersect == true)
     {
       trials = trials + 1;
-      //cout << "Attempting crossover, trial: " << trials << endl;
+      cout << "Attempting crossover, trial: " << trials << endl;
       for (int j = 0; j < sections; j++)
       {
         for (int k = 0; k < genes; k++)
@@ -157,6 +157,10 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         {
           intersect = false;
         }
+        else
+        {
+          intersect = true;
+        }
       }
 
       else if (design == "PUEO")
@@ -189,6 +193,10 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         {
           intersect = false;
         }
+        else
+        {
+          intersect = true;
+        }
       }
 
       else if (design == "AREA")
@@ -215,6 +223,10 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         if (intersections == 0)
         {
           intersect = false;
+        }
+        else
+        {
+          intersect = true;
         }
       }
 
@@ -245,6 +257,10 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
         if (intersections == 0)
         {
           intersect = false;
+        }
+        else
+        {
+          intersect = true;
         }
       }
 
