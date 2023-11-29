@@ -123,7 +123,7 @@ int main(int argc, char const* argv[])
   {
     // Determine sections and genes for PUEO
     sections = 1;
-    genes = 7;
+    genes = 9; // MACHTAY LOOK HERE: changed to 9
   }
 
   else if (design == "AREA")

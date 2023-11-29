@@ -2,7 +2,8 @@
 
 
 bool ConstraintPUEO(float s, float h, float x_0,
-                    float y_0, float y_f, float z_f, float beta)
+                    float y_0, float y_f, float z_f, float beta,
+										float l, float H)
 {
   // Check to see if PUEO antenna conforms
 
@@ -34,6 +35,10 @@ bool ConstraintPUEO(float s, float h, float x_0,
   {
     intersect = true;
   }
+	else if( (-2*(y_0) + x_0 * (2*H/l + l/(2*H)))/(l/(2*H) - 2*H/l) > (x_0 - H) && (-2*(y_0) + x_0 * (2*H/l + l/(2*H)))/(l/(2*H) - 2*H/l) < x_0 )
+	{
+		intersect = true;
+	}
   else if ((4.0 / 30.0) * z_f > (beta * 100) 
            || (7 * z_f) < (beta * 100) || 2 < beta) 
   {
