@@ -1,55 +1,105 @@
 Location of individuals used to make this generation:
-Seed: 1701293139
+Seed: 1701294480
 
 
 Current Gen, Parent 1, Parent 2, Operator
- 1, 40, NA, Reproduction
- 2,  3, NA, Reproduction
- 3, 26, NA, Reproduction
- 4, 29, NA, Reproduction
- 5, 17, NA, Reproduction
- 6, 26, NA, Reproduction
- 7, 23, NA, Reproduction
- 8, 32, NA, Reproduction
- 9, 30, NA, Reproduction
-10,  9, NA, Reproduction
-11, 22, NA, Reproduction
-12, 28, NA, Reproduction
-13, 28, NA, Reproduction
-14, 26, NA, Reproduction
-15, 12, NA, Reproduction
-16, 29, NA, Reproduction
-17, 27, NA, Reproduction
-18, 27, NA, Reproduction
-19, 16, NA, Reproduction
-20, 28, NA, Reproduction
-21, 43, NA, Reproduction
-22, 30, NA, Reproduction
-23, 31, NA, Reproduction
-24, 14, NA, Reproduction
-25, 36, NA, Reproduction
-26, 39, NA, Reproduction
-27, 24, NA, Reproduction
-28, 16, NA, Reproduction
-29, 29, NA, Reproduction
-30, 11, NA, Reproduction
-31, 15, NA, Reproduction
-32, 11, NA, Reproduction
-33, 26, NA, Reproduction
-34, 31, NA, Reproduction
-35, 45, NA, Reproduction
-36, 12, NA, Reproduction
-37, 16, NA, Reproduction
-38, 16, NA, Reproduction
+ 1, 42, NA, Reproduction
+ 2, 68, NA, Reproduction
+ 3, 13, NA, Reproduction
+ 4, 17, NA, Reproduction
+ 5, 32, NA, Reproduction
+ 6, 39, NA, Reproduction
+ 7, 68, NA, Reproduction
+ 8, 61, NA, Reproduction
+ 9, 81, NA, Reproduction
+10, 27, NA, Reproduction
+11, 53, NA, Reproduction
+12,  2, NA, Reproduction
+13, 87, NA, Reproduction
+14, 73, NA, Reproduction
+15, 30, NA, Reproduction
+16, 46, NA, Reproduction
+17, 77, NA, Reproduction
+18, 13, NA, Reproduction
+19, 56, NA, Reproduction
+20, 63, NA, Reproduction
+21, 35, NA, Reproduction
+22, 60, NA, Reproduction
+23, 25, NA, Reproduction
+24, 61, NA, Reproduction
+25, 48, NA, Reproduction
+26, 79, NA, Reproduction
+27, 99, NA, Reproduction
+28, 70, NA, Reproduction
+29, 53, NA, Reproduction
+30, 14, NA, Reproduction
+31,  4, NA, Reproduction
+32, 57, NA, Reproduction
+33, 77, NA, Reproduction
+34,  6, NA, Reproduction
+35, 89, NA, Reproduction
+36, 89, NA, Reproduction
+37, 77, NA, Reproduction
+38, 27, NA, Reproduction
 39,  3, NA, Reproduction
-40,  1, NA, Reproduction
-41, 32, NA, Reproduction
-42, 29, NA, Reproduction
-43, 24, NA, Reproduction
-44, 36, NA, Reproduction
-45,  6, NA, Reproduction
-46, 41, NA, Reproduction
-47, 36, NA, Reproduction
-48, 18, NA, Reproduction
-49, 37, NA, Reproduction
-50, 15, NA, Reproduction
+40, 85, NA, Reproduction
+41, 87, NA, Reproduction
+42, 72, NA, Reproduction
+43, 14, NA, Reproduction
+44, 81, NA, Reproduction
+45, 83, NA, Reproduction
+46, 26, NA, Reproduction
+47, 86, NA, Reproduction
+48, 36, NA, Reproduction
+49, 28, NA, Reproduction
+50, 76, NA, Reproduction
+51, 73, 81, Crossover
+52, 73, 81, Crossover
+53, 66, 72, Crossover
+54, 66, 72, Crossover
+55, 58, 20, Crossover
+56, 58, 20, Crossover
+57, 88,  7, Crossover
+58, 88,  7, Crossover
+59, 29,  6, Crossover
+60, 29,  6, Crossover
+61, 75,  5, Crossover
+62, 75,  5, Crossover
+63, 22, 53, Crossover
+64, 22, 53, Crossover
+65, 76, 25, Crossover
+66, 76, 25, Crossover
+67, 53, 82, Crossover
+68, 53, 82, Crossover
+69, 67, 53, Crossover
+70, 67, 53, Crossover
+71, 82, 27, Crossover
+72, 82, 27, Crossover
+73, 72, 17, Crossover
+74, 72, 17, Crossover
+75, 74, 61, Crossover
+76, 74, 61, Crossover
+77, 84, 82, Crossover
+78, 84, 82, Crossover
+79, 87, 37, Crossover
+80, 87, 37, Crossover
+81, 64, 75, Crossover
+82, 64, 75, Crossover
+83,  1, 16, Crossover
+84,  1, 16, Crossover
+85, 11, 34, Crossover
+86, 11, 34, Crossover
+87, 58, 72, Crossover
+88, 58, 72, Crossover
+89,  3,  6, Crossover
+90,  3,  6, Crossover
+91, 22, 21, Crossover
+92, 22, 21, Crossover
+93, 68, 89, Crossover
+94, 68, 89, Crossover
+95, 60, 31, Crossover
+96, 60, 31, Crossover
+97, 54, 66, Crossover
+98, 54, 66, Crossover
+99, 65, 89, Crossover
+100, 65, 89, Crossover

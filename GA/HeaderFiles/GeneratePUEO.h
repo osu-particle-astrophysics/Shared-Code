@@ -52,10 +52,13 @@ std::vector<std::vector<float> > GeneratePUEO()
 
       // Machtay look here:
       // Added gene for length of trapezoid in waveguide
-      std::uniform_real_distribution <float> distribution_l(0, y_0); // z_f
+			// The minor length maxes out at the major length, so 2*y_0
+      std::uniform_real_distribution <float> distribution_l(0, y_0); 
       l = distribution_l(generator);
       // Added gene for height of trapezoid
-      std::uniform_real_distribution <float> distribution_H(0, x_0); // z_f
+			// The trapezoid can't be any taller than the distance between the ridge
+			// and the center of the antenna (x_0)
+      std::uniform_real_distribution <float> distribution_H(0, x_0); 
       H = distribution_H(generator);
       //float tau = 0.26;  tau must be 0.26, not evolving
       //float m = 1;  we are only evolving m = 1 for now.
