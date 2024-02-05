@@ -20,7 +20,7 @@ std::vector<std::vector<float> > GeneratePUEO()
   float max_h = 175.0;
   float min_h = 75.0;
   bool intersect = true;
-  float s, h, x_0, y_0, z_f, y_f, beta;
+  float s, h, x_0, y_0, z_f, y_f, beta, l, H;
 
 
   for (int i = 0; i < sections; i++) {
@@ -50,12 +50,22 @@ std::vector<std::vector<float> > GeneratePUEO()
                                                                * z_f, 7 * z_f); // z_f
       beta = distribution_beta(generator) / 100;
 
+      // Machtay look here:
+      // Added gene for length of trapezoid in waveguide
+			// The minor length maxes out at the major length, so 2*y_0
+      std::uniform_real_distribution <float> distribution_l(0, y_0); 
+      l = distribution_l(generator);
+      // Added gene for height of trapezoid
+			// The trapezoid can't be any taller than the distance between the ridge
+			// and the center of the antenna (x_0)
+      std::uniform_real_distribution <float> distribution_H(0, x_0); 
+      H = distribution_H(generator);
       //float tau = 0.26;  tau must be 0.26, not evolving
       //float m = 1;  we are only evolving m = 1 for now.
       //flaot Z0 = 0; not evolving
       //outputVector[i][7] = m;
       //outputVector[i][8] = tau;
-      intersect = ConstraintPUEO(s, h, x_0, y_0, y_f, z_f, beta);
+      intersect = ConstraintPUEO(s, h, x_0, y_0, y_f, z_f, beta, l, H);
     }
     outputVector[i][0] = s;
     outputVector[i][1] = h;
@@ -64,6 +74,8 @@ std::vector<std::vector<float> > GeneratePUEO()
     outputVector[i][4] = y_f;
     outputVector[i][5] = z_f;
     outputVector[i][6] = beta;
+    outputVector[i][7] = l;
+    outputVector[i][8] = H;
   }
   return outputVector;
 

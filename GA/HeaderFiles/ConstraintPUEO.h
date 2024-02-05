@@ -2,7 +2,8 @@
 
 
 bool ConstraintPUEO(float s, float h, float x_0,
-                    float y_0, float y_f, float z_f, float beta)
+                    float y_0, float y_f, float z_f, float beta,
+                    float l, float H)
 {
   // Check to see if PUEO antenna conforms
 
@@ -12,7 +13,12 @@ bool ConstraintPUEO(float s, float h, float x_0,
   float min_h = 75.0;
   bool intersect = true;
   float x_f = s;
-
+  // We need to make sure the trapezoid extensions of the ridges
+  // don't intersect. To do this, we solve an system of two 
+  // equations, each one representing the line of adjacent edges
+  // of the trapezoids. Then we check if that intersection is
+  // between x_0 - H and x_0 (the height range of the trapezoid)
+  float I = (l * x_0 + h * y_0 - x_0 * y_0)/(h + l - y_0);
   // Run checks
   if (s < 0.0 || s > max_s || h > max_h || h < min_h)
   {
@@ -31,6 +37,11 @@ bool ConstraintPUEO(float s, float h, float x_0,
     intersect = true;
   }
   else if (z_f < 0 || z_f > h) 
+  {
+    intersect = true;
+  }
+	// Check if trapezoids touch
+  else if( I > (x_0 - H) && I < x_0 )
   {
     intersect = true;
   }

@@ -133,13 +133,13 @@ void Crossover(vector<vector<vector<float> > >& dna_input,
             vector<float> output_a = dna_output[i + reproduction_no][j];
             intersect_a = ConstraintPUEO(output_a[0], output_a[1], output_a[2],
               output_a[3], output_a[4], output_a[5],
-              output_a[6]);
+              output_a[6], output_a[7], output_a[8]);
 
             bool intersect_b = true;
             vector<float> output_b = dna_output[i + 1 + reproduction_no][j];
             intersect_b = ConstraintPUEO(output_b[0], output_b[1], output_b[2],
               output_b[3], output_b[4], output_b[5],
-              output_b[6]);
+              output_b[6], output_b[7], output_b[8]);
 
             if (intersect_a == false && intersect_b == false)
             {

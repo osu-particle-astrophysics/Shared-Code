@@ -33,7 +33,7 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
   // Start Flag
   cout << "Mutation Started" << endl;
 
-  // define storage vector	
+  // define storage vector
   vector<int> locations;
 
   // Call selection methods
@@ -116,7 +116,9 @@ void Mutation(vector<vector<vector<float> > >& dna_input,
                                    temp[mutate_section][3],
                                    temp[mutate_section][4],
                                    temp[mutate_section][5],
-                                   temp[mutate_section][6]);
+                                   temp[mutate_section][6],
+                                   temp[mutate_section][7],
+                                   temp[mutate_section][8]);
       }
       else if (design == "AREA")
       {
