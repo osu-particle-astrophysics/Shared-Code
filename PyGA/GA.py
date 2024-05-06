@@ -200,9 +200,9 @@ class GA:
         no_rank = int(num_parents - no_tournament - no_roulette)
         
         parents = []
-        parents.extend(self.tournament_selection() for i in range(no_tournament))
-        parents.extend(self.roulette_selection() for i in range(no_roulette))
-        parents.extend(self.rank_selection() for i in range(no_rank))
+        parents.extend([self.tournament_selection() for i in range(no_tournament)])
+        parents.extend([self.roulette_selection() for i in range(no_roulette)])
+        parents.extend([self.rank_selection() for i in range(no_rank)])
         
         return parents
     
