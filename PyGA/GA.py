@@ -471,7 +471,7 @@ class GA:
         
         self.save_files()
         self.generation += 1
-        return 0
+        return
     
     
     def advance_generation_steady_state(self):
