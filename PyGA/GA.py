@@ -533,7 +533,7 @@ class GA:
                 
                 if self.settings["forced_diversity"]:
                     valid_children = (self.test_diverse(children[0], new_population) and
-                                    self.test_diverse(children[1], new_population))
+                                      self.test_diverse(children[1], new_population))
                 else:
                     valid_children = True
                 
