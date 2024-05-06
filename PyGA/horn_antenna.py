@@ -45,7 +45,7 @@ class horn_antenna:
         
         # Load genes
         (side_length, height, x_0, y_0, z_f, y_f, 
-        beta, trpzd_length, trpzd_height) = self.genes
+         beta, trpzd_length, trpzd_height) = self.genes
 
         # Variables
         valid_design = False
