@@ -75,8 +75,9 @@ class GA:
         antenna_type = self.settings['a_type']
         if self.custom_init is None:
             for i in range(self.settings["npop"]):
-                self.population.append(self.make_antenna(antenna_type))
-                self.population[i].initialize()
+                antenna = self.make_antenna(antenna_type)
+                antenna.initialize()
+                self.population.append(antenna)
         else:
             # load in the population from a file
             init_path = Path(f"initializations/{self.custom_init}.pkl")
