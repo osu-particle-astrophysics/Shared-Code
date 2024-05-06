@@ -2,6 +2,7 @@ import sys
 import copy
 import pickle
 import random
+import csv
 
 from pathlib import Path
 
@@ -103,10 +104,13 @@ class GA:
             gene_files.mkdir(parents=True, exist_ok=True)
         
     
-    def initialize_tracker(self):    
+    def initialize_tracker(self):
+        '''Initialize the tracker file for the run.'''
         tracker_path = self.run_dir / "tracker.csv"
-        with open(tracker_path, 'w') as file:
-            file.write("Generation,Best Fitness,Best Individual Genes\n")
+        
+        with open(tracker_path, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Generation", "Best Fitness", "Best Individual Genes"])
     
     
     def make_antenna(self, type, genes=None):
@@ -130,11 +134,8 @@ class GA:
         
         tournament = random.sample(self.population, tournament_count)
         
-        # Find the best individual in the tournament
-        best_individual = tournament[0]
-        for individual in tournament:
-            if individual.fitness > best_individual.fitness:
-                best_individual = individual
+        # Find the best individual in the tournament 
+        best_individual = max(tournament, key=lambda ind: ind.fitness)
         
         return best_individual
     
@@ -149,12 +150,7 @@ class GA:
         probabilities = [individual.fitness / total_fitness for individual in self.population]
         
         # Select an individual
-        selection = random.uniform(0, 1)
-        cumulative_probability = 0
-        for probability, individual in zip(probabilities, self.population):
-            cumulative_probability += probability
-            if cumulative_probability > selection:
-                return individual
+        return self.get_indiv_from_prob(probabilities, self.population)
     
     
     def rank_selection(self):
@@ -167,12 +163,17 @@ class GA:
         probabilities = [i / len(self.population) for i in range(1, len(self.population) + 1)]
         
         # Select an individual
+        return self.get_indiv_from_prob(probabilities, sorted_population)
+    
+    
+    def get_indiv_from_prob(self, probabilities, population):
+        '''Get an individual from a probability distribution.'''
         selection = random.uniform(0, 1)
         cumulative_probability = 0
-        for i in range(len(self.population)):
-            cumulative_probability += probabilities[i]
+        for probability, individual in zip(probabilities, population):
+            cumulative_probability += probability
             if cumulative_probability > selection:
-                return sorted_population[i]
+                return individual
     
     
     def selection(self, num_parents):
@@ -200,9 +201,9 @@ class GA:
         no_rank = int(num_parents - no_tournament - no_roulette)
         
         parents = []
-        parents.extend([self.tournament_selection() for i in range(no_tournament)])
-        parents.extend([self.roulette_selection() for i in range(no_roulette)])
-        parents.extend([self.rank_selection() for i in range(no_rank)])
+        parents.extend(self.tournament_selection() for i in range(no_tournament))
+        parents.extend(self.roulette_selection() for i in range(no_roulette))
+        parents.extend(self.rank_selection() for i in range(no_rank))
         
         return parents
     
@@ -220,10 +221,7 @@ class GA:
             child2_genes = []
             
             # Crossover genes
-            for gene in range(len(parent1.genes)):
-                gene_1 = parent1.genes[gene]
-                gene_2 = parent2.genes[gene]
-                
+            for gene_1, gene_2 in zip(parent1.genes, parent2.genes):
                 coinflip = random.randint(0, 1)
                 child1_genes.append(gene_1 if coinflip == 0 else gene_2)
                 child2_genes.append(gene_2 if coinflip == 0 else gene_1)
@@ -278,20 +276,18 @@ class GA:
         '''Write the genes of the population to the run directory.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_generationDNA.csv"
+
         with open(filepath, "w") as file:
+            writer = csv.writer(file)
             for individual in self.population:
-                for gene in individual.genes[:-1]:
-                    file.write(f"{gene},")
-                file.write(f"{individual.genes[-1]}\n")
+                writer.writerow(individual.genes)
     
     
     def write_population_fitness(self, filepath=None):
         '''Write the fitness of the population to the run directory.'''
         if filepath is None:
-            filepath = self.run_dir / "Generation_Data" / f"{self.generation}_fitnessScores.csv"
-        with open(filepath, "w") as file:
-            for individual in self.population:
-                file.write(f"{individual.fitness}\n")
+            filepath = self.run_dir / "Generation_Data" / f"{self.generation}_fitnessScores.csv"   
+        np.savetxt(filepath, [individual.fitness for individual in self.population])
     
     
     def save_population(self, filepath=None):
@@ -326,8 +322,9 @@ class GA:
     def save_to_tracker(self):
         '''Append the current best to the tracker file.'''
         filepath = self.run_dir / "tracker.csv"
-        with open(filepath, 'a') as file:
-            file.write(f"{self.generation-1},{self.best_fitness},{self.best_individual.genes}\n")
+        with open(filepath, 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([self.generation-1, self.best_fitness, self.best_individual.genes])
     
     
     def save_files(self):
@@ -596,4 +593,4 @@ class GA:
             if self.settings["verbose"]:
                 self.print_stats()
         print("Genetic Algorithm Complete")
-                
+    
