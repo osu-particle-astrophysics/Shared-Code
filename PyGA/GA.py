@@ -59,8 +59,8 @@ class GA:
     def check_settings(self, settings):
         '''Checks if the settings are valid'''
         valid_settings = True
-        if not(settings['crossover_rate'] + settings['mutation_rate'] +
-               settings['reproduction_rate'] <= 1.0):
+        if (settings['crossover_rate'] + settings['mutation_rate'] +
+            settings['reproduction_rate']) > 1.0:
             print('Operator rates exceed 1.0. Exiting.')
             valid_settings = False
         if not(settings['tournament_rate'] + settings['roulette_rate'] + 
