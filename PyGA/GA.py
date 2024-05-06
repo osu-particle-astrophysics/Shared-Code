@@ -429,7 +429,7 @@ class GA:
     def replace_individual(self, new_indiv):
         '''Choose an individual in the population to replace'''
         if self.settings["replacement_method"] == "random":
-            index = random.randint(0, len(self.population) - 1)
+            index = random.randrange(len(self.population))
             self.population[index] = new_indiv
         else:
             sys.exit('Invalid replacement method. Exiting.')
