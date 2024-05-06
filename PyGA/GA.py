@@ -46,14 +46,12 @@ class GA:
             with open(settingspath, 'r') as file:
                 settings = yaml.load(file, Loader=yaml.FullLoader)
         else:
-            print('Settings file not found. Exiting.')
-            exit(1)
+            sys.exit('Settings file not found. Exiting.')
             
         if self.check_settings(settings):
             self.settings = settings
         else:
-            print('Invalid settings. Exiting.')
-            exit(1)
+            sys.exit('Invalid settings. Exiting.')
     
     
     def check_settings(self, settings):
@@ -93,8 +91,7 @@ class GA:
         if comparison_path.exists():
             self.comparison = np.loadtxt(comparison_path)
         else:
-            print('Comparison file not found. Exiting.')
-            exit(1)
+            sys.exit('Comparison file not found. Exiting.')
     
     
     def make_run_directory(self):
@@ -118,8 +115,7 @@ class GA:
         if type == 'horn':
             return HornAntenna(genes)
         else:
-            print('Invalid antenna type. Exiting.')
-            exit(1)
+            sys.exit('Invalid antenna type. Exiting.')
     
     
     ### Selection ############################################################
@@ -439,8 +435,7 @@ class GA:
             index = random.randint(0, len(self.population) - 1)
             self.population[index] = new_indiv
         else:
-            print("Invalid replacement method. Exiting.")
-            exit(1)
+            sys.exit('Invalid replacement method. Exiting.')
     
     
     ### Constraint Functions #################################################
