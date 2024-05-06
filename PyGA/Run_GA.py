@@ -1,7 +1,9 @@
 '''Run the genetic algorithm for a generation'''
 import argparse
-from GA import GA
+
 from pathlib import Path
+
+from GA import GA
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Run the genetic algorithm')

@@ -75,8 +75,9 @@ class GA:
         antenna_type = self.settings['a_type']
         if self.custom_init is None:
             for i in range(self.settings["npop"]):
-                self.population.append(self.make_antenna(antenna_type))
-                self.population[i].initialize()
+                antenna = self.make_antenna(antenna_type)
+                antenna.initialize()
+                self.population.append(antenna)
         else:
             # load in the population from a file
             init_path = Path(f"initializations/{self.custom_init}.pkl")
@@ -142,7 +143,7 @@ class GA:
         '''Select a parent using roulette selection.'''
         
         # Calculate the total fitness of the population
-        total_fitness = sum([individual.fitness for individual in self.population])
+        total_fitness = sum(individual.fitness for individual in self.population)
         
         # Calculate the probability of selection for each individual
         probabilities = [individual.fitness / total_fitness for individual in self.population]
@@ -150,10 +151,10 @@ class GA:
         # Select an individual
         selection = random.uniform(0, 1)
         cumulative_probability = 0
-        for i in range(len(self.population)):
-            cumulative_probability += probabilities[i]
+        for probability, individual in zip(probabilities, self.population):
+            cumulative_probability += probability
             if cumulative_probability > selection:
-                return self.population[i]
+                return individual
     
     
     def rank_selection(self):
@@ -277,7 +278,7 @@ class GA:
         '''Write the genes of the population to the run directory.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_generationDNA.csv"
-        with open (filepath, "w") as file:
+        with open(filepath, "w") as file:
             for individual in self.population:
                 for gene in individual.genes[:-1]:
                     file.write(f"{gene},")
