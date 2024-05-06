@@ -278,7 +278,7 @@ class GA:
         '''Write the genes of the population to the run directory.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_generationDNA.csv"
-        with open (filepath, "w") as file:
+        with open(filepath, "w") as file:
             for individual in self.population:
                 for gene in individual.genes[:-1]:
                     file.write(f"{gene},")
