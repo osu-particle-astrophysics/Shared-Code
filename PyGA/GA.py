@@ -462,7 +462,7 @@ class GA:
             self.initialize_population()
             self.save_files()
             self.generation += 1
-            return 0
+            return
         
         if self.settings["steady_state"]:
             self.advance_generation_steady_state()
