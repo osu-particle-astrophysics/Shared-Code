@@ -63,8 +63,8 @@ class GA:
             settings['reproduction_rate']) > 1.0:
             print('Operator rates exceed 1.0. Exiting.')
             valid_settings = False
-        if not(settings['tournament_rate'] + settings['roulette_rate'] + 
-               settings['rank_rate'] == 1.0):
+        if (settings['tournament_rate'] + settings['roulette_rate'] + 
+            settings['rank_rate']) != 1.0:
             print('Selection rates do not sum to 1.0. Exiting.')
             valid_settings = False
         if settings['steady_state'] and settings['reproduction_rate'] != 0:
