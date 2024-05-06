@@ -244,7 +244,7 @@ class GA:
     
     def mutation(self, individual):
         '''Mutate a randomly selected gene across a gaussian distribution.'''
-        chosen_gene_index = random.randint(0, len(individual.genes) - 1)
+        chosen_gene_index = random.randrange(len(individual.genes))
         chosen_gene = individual.genes[chosen_gene_index]
         new_indiv = copy.deepcopy(individual)
             
@@ -289,7 +289,7 @@ class GA:
         '''Write the fitness of the population to the run directory.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_fitnessScores.csv"
-        with open (filepath, "w") as file:
+        with open(filepath, "w") as file:
             for individual in self.population:
                 file.write(f"{individual.fitness}\n")
     
@@ -319,8 +319,8 @@ class GA:
     def load_fitness(self, filepath):
         '''Load the fitness of the population from a csv file.'''
         fitness_list = np.loadtxt(filepath)
-        for i in range(self.settings["npop"]):
-            self.population[i].fitness = fitness_list[i]
+        for individual, fitness in zip(self.population, fitness_list):
+            individual.fitness = fitness
             
             
     def save_to_tracker(self):
@@ -333,8 +333,8 @@ class GA:
     def save_files(self):
         '''Save current generation files.'''
         if self.settings["test_loop"]:
-                self.save_to_tracker()
-                self.evaluate_population()
+            self.save_to_tracker()
+            self.evaluate_population()
                 
         if self.settings["save_all_files"]:
             self.save_population()
@@ -429,7 +429,7 @@ class GA:
     def replace_individual(self, new_indiv):
         '''Choose an individual in the population to replace'''
         if self.settings["replacement_method"] == "random":
-            index = random.randint(0, len(self.population) - 1)
+            index = random.randrange(len(self.population))
             self.population[index] = new_indiv
         else:
             sys.exit('Invalid replacement method. Exiting.')
@@ -462,7 +462,7 @@ class GA:
             self.initialize_population()
             self.save_files()
             self.generation += 1
-            return 0
+            return
         
         if self.settings["steady_state"]:
             self.advance_generation_steady_state()
@@ -471,7 +471,7 @@ class GA:
         
         self.save_files()
         self.generation += 1
-        return 0
+        return
     
     
     def advance_generation_steady_state(self):
@@ -492,7 +492,7 @@ class GA:
                 new_indiv = self.create_individual(operator, parents)
                 
                 # Check if the antenna is unique if required
-                if self.settings["forced_diversity"] == True:
+                if self.settings["forced_diversity"]:
                     valid_individual = self.test_diverse(new_indiv)
                 else:
                     valid_individual = True
