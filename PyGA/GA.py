@@ -319,8 +319,8 @@ class GA:
     def load_fitness(self, filepath):
         '''Load the fitness of the population from a csv file.'''
         fitness_list = np.loadtxt(filepath)
-        for i in range(self.settings["npop"]):
-            self.population[i].fitness = fitness_list[i]
+        for individual, fitness in zip(self.population, fitness_list):
+            individual.fitness = fitness
             
             
     def save_to_tracker(self):
