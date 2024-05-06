@@ -423,9 +423,7 @@ class GA:
     
     def get_num_parents(self, operator):
         '''Get the number of parents for a SSGA operator.'''
-        if operator == "crossover":
-            return 2
-        return 1
+        return 2 if operator == "crossover" else 1
     
     
     def replace_individual(self, new_indiv):
