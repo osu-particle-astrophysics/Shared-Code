@@ -3,7 +3,7 @@ import argparse
 
 from pathlib import Path
 
-from GA import GA
+from genetic_algorithm import GA
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Run the genetic algorithm')
