@@ -492,7 +492,7 @@ class GA:
                 new_indiv = self.create_individual(operator, parents)
                 
                 # Check if the antenna is unique if required
-                if self.settings["forced_diversity"] == True:
+                if self.settings["forced_diversity"]:
                     valid_individual = self.test_diverse(new_indiv)
                 else:
                     valid_individual = True
