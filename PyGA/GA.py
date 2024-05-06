@@ -9,7 +9,7 @@ import yaml
 import numpy as np
 from pathlib import Path
 
-from horn_antenna import horn_antenna
+from horn_antenna import HornAntenna
 #import bicone_antenna
 #import hpol_antenna
 
@@ -40,7 +40,7 @@ class GA:
     ### Initialization ########################################################
     
     def initialize_settings(self, settingsfile):
-        '''Initializes the settings from the settings file'''
+        '''Initialize the settings from the settings file.'''
         settingspath = Path(settingsfile)
         if settingspath.exists():
             with open(settingspath, 'r') as file:
@@ -57,7 +57,7 @@ class GA:
     
     
     def check_settings(self, settings):
-        '''Checks if the settings are valid'''
+        '''Check if the settings are valid.'''
         valid_settings = True
         if (settings['crossover_rate'] + settings['mutation_rate'] +
             settings['reproduction_rate']) > 1.0:
@@ -75,7 +75,7 @@ class GA:
     
     
     def initialize_population(self):
-        '''Initializes the population of horn antennas'''
+        '''Initialize the population of horn antennas.'''
         antenna_type = self.settings['a_type']
         if self.custom_init is None:
             for i in range(self.settings["npop"]):
@@ -88,7 +88,7 @@ class GA:
     
     
     def load_compairson(self):
-        '''Loads the comparison genes from the comparison file'''
+        '''Load the comparison genes from the comparison file.'''
         comparison_path = Path(f"comparisons/{self.settings['comparison_file']}")
         if comparison_path.exists():
             self.comparison = np.loadtxt(comparison_path)
@@ -98,7 +98,7 @@ class GA:
     
     
     def make_run_directory(self):
-        '''Creates the run directory for the current run'''
+        '''Create the run directory for the current run.'''
         self.run_dir.mkdir(parents=True, exist_ok=True)
         if self.settings["save_all_files"]:
             fitness_files = self.run_dir / "fitness_files"
@@ -114,9 +114,9 @@ class GA:
     
     
     def make_antenna(self, type, genes=None):
-        '''Creates an antenna object'''
+        '''Create an antenna object.'''
         if type == 'horn':
-            return horn_antenna(genes)
+            return HornAntenna(genes)
         else:
             print('Invalid antenna type. Exiting.')
             exit(1)
@@ -125,7 +125,7 @@ class GA:
     ### Selection ############################################################
     
     def tournament_selection(self):
-        '''selects a parent using tournament selection'''
+        '''Select a parent using tournament selection.'''
         
         # Select tournamentsize percentage of the population
         tournament_count = int(self.settings["tournament_size"] * self.settings["npop"])
@@ -145,7 +145,7 @@ class GA:
     
     
     def roulette_selection(self):
-        '''Selects a parent using roulette selection'''
+        '''Select a parent using roulette selection.'''
         
         # Calculate the total fitness of the population
         total_fitness = sum([individual.fitness for individual in self.population])
@@ -163,7 +163,7 @@ class GA:
     
     
     def rank_selection(self):
-        '''Selects a parent using rank selection'''
+        '''Select a parent using rank selection.'''
         
         # Sort the population by fitness
         sorted_population = sorted(self.population, key=lambda x: x.fitness)
@@ -181,8 +181,8 @@ class GA:
     
     
     def selection(self, num_parents):
-        '''Selects parents from the population based on
-        percentages'''
+        '''Select parents from the population based on
+        percentages.'''
         parents = []
         
         for i in range(num_parents):
@@ -198,7 +198,7 @@ class GA:
         
     
     def absolute_selection(self, num_parents):
-        '''Selects exactly the rate from each selection method'''
+        '''Select exactly the rate from each selection method.'''
         
         no_tournament = int(num_parents * self.settings["tournament_rate"])
         no_roulette = int(num_parents * self.settings["roulette_rate"])
@@ -215,7 +215,7 @@ class GA:
     ### Operators ############################################################
     
     def crossover(self, parent1, parent2):
-        '''Crossover two parents to create two children'''
+        '''Crossover two parents to create two children.'''
         antenna_type = self.settings['a_type']
         
         valid_children = False
@@ -248,7 +248,7 @@ class GA:
                 
     
     def mutation(self, individual):
-        '''Mutate a randomly selected gene across a gaussian distribution'''
+        '''Mutate a randomly selected gene across a gaussian distribution.'''
         chosen_gene_index = random.randint(0, len(individual.genes) - 1)
         chosen_gene = individual.genes[chosen_gene_index]
         new_indiv = copy.deepcopy(individual)
@@ -264,12 +264,12 @@ class GA:
     
     
     def reproduction(individual):
-        '''Asexual Reproduction'''
+        '''Asexual Reproduction.'''
         return individual
     
     
     def injection(self):
-        '''Injects new individuals into the population'''
+        '''Inject a new individual into the population.'''
 
         individual = self.make_antenna(self.settings['a_type'])
         individual.initialize()
@@ -280,7 +280,7 @@ class GA:
     ### Write/ReadFunctions ##################################################
     
     def write_population_genes(self, filepath=None):
-        '''Write the gened of the population to the run directory'''
+        '''Write the genes of the population to the run directory.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_generationDNA.csv"
         with open (filepath, "w") as file:
@@ -291,7 +291,7 @@ class GA:
     
     
     def write_population_fitness(self, filepath=None):
-        '''Write the fitness of the population to the run directory'''
+        '''Write the fitness of the population to the run directory.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_fitnessScores.csv"
         with open (filepath, "w") as file:
@@ -300,7 +300,7 @@ class GA:
     
     
     def save_population(self, filepath=None):
-        '''save the antenna objects to a pickle file'''
+        '''Save the antenna objects to a pickle file.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_population.pkl"
         with open(filepath, 'wb') as file:
@@ -308,7 +308,7 @@ class GA:
     
     
     def save_ga(self, filepath=None):
-        '''Save the GA object to a pickle file'''
+        '''Save the GA object to a pickle file.'''
         if filepath is None:
             filepath = self.run_dir / "GA.pkl"
         with open(filepath, 'wb') as file:
@@ -316,27 +316,27 @@ class GA:
     
             
     def load_population(self, filepath):
-        '''Load the population from a pickle file'''
+        '''Load the population from a pickle file.'''
         with open(filepath, 'rb') as file:
             self.population = pickle.load(file)
     
     
     def load_fitness(self, filepath):
-        '''Load the fitness of the population from a csv file'''
+        '''Load the fitness of the population from a csv file.'''
         fitness_list = np.loadtxt(filepath)
         for i in range(self.settings["npop"]):
             self.population[i].fitness = fitness_list[i]
             
             
     def save_to_tracker(self):
-        '''append the current best to the tracker file'''
+        '''Append the current best to the tracker file.'''
         filepath = self.run_dir / "tracker.csv"
         with open(filepath, 'a') as file:
             file.write(f"{self.generation-1},{self.best_fitness},{self.best_individual.genes}\n")
     
     
     def save_files(self):
-        '''save current generation files'''
+        '''Save current generation files.'''
         if self.settings["test_loop"]:
                 self.save_to_tracker()
                 self.evaluate_population()
@@ -356,7 +356,7 @@ class GA:
     ### Generational Methods #################################################
     
     def evaluate_population(self):
-        ''' Evaluate the fitness of the entire population'''
+        '''Evaluate the fitness of the entire population.'''
         for individual in self.population:
             individual.evaluate_fitness(self.comparison)
             if individual.fitness > self.best_fitness:
@@ -365,6 +365,8 @@ class GA:
     
     
     def get_operator_numbers(self):
+        '''Get the integer number of each operator from percentage
+        size and population size.'''
         mutation_no = int(self.settings["mutation_rate"] * self.settings["npop"])
         crossover_no = int(self.settings["crossover_rate"] * self.settings["npop"])
         reproduction_no = int(self.settings["reproduction_rate"] * self.settings["npop"])
@@ -384,8 +386,8 @@ class GA:
     ### SSGA Methods #########################################################
     
     def choose_operator(self):
-        '''choose an operator from the operator set of 
-        REPRODUCTION, CROSSOVER, MUTATION, INJECTION'''
+        '''Choose an operator from the operator set of 
+        REPRODUCTION, CROSSOVER, MUTATION, INJECTION.'''
         # choose a random number from 0 to 1
         choice = random.uniform(0, 1)
         
@@ -405,7 +407,7 @@ class GA:
 
     
     def create_individual(self, operator, parents):
-        '''Create an individual from the operator and parents'''
+        '''Create an individual from the given operator and parents.'''
         
         if operator == "crossover":
             new_indiv = self.crossover(parents[0], parents[1])
@@ -425,13 +427,14 @@ class GA:
     
     
     def get_num_parents(self, operator):
-        '''get the number of parents for a SSGA operator'''
+        '''Get the number of parents for a SSGA operator.'''
         if operator == "crossover":
             return 2
         return 1
     
     
     def replace_individual(self, new_indiv):
+        '''Choose an individual in the population to replace'''
         if self.settings["replacement_method"] == "random":
             index = random.randint(0, len(self.population) - 1)
             self.population[index] = new_indiv
@@ -444,7 +447,7 @@ class GA:
     
     def test_diverse(self, new_indiv, new_population=None):
         '''Test if an individual is identical to any
-        individuals currently in the population'''
+        individuals currently in the population.'''
         
         unique = True
         for individual in self.population:
@@ -465,7 +468,7 @@ class GA:
     ### Main Loop Functions #########################################################
     
     def advance_generation(self):
-        '''Advances the generation of the population'''
+        '''Advance the generation of the population.'''
         
         # check if initial generation
         if self.generation == 0:
@@ -485,8 +488,8 @@ class GA:
     
     
     def advance_generation_steady_state(self):
-        '''Advances the state of the GA in a steady state manner,
-        creating new individuals one by one'''
+        '''Advance the state of the GA in a steady state manner,
+        creating new individuals one by one.'''
         
         for i in range(self.settings["npop"]):
             
@@ -517,6 +520,7 @@ class GA:
     
     
     def advance_generation_generational(self):
+        '''Advance to the next generation of the Generational GA.'''
         new_population = []
         operator_nos = self.get_operator_numbers()
         

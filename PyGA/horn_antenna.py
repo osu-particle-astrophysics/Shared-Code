@@ -2,7 +2,7 @@ import random
 import numpy as np
 from pathlib import Path
 
-class horn_antenna:
+class HornAntenna:
     
     def __init__(self, genes=None):
         self.genes = genes
@@ -14,7 +14,7 @@ class horn_antenna:
         
     
     def initialize(self):
-        '''Initializes the genes of the horn antenna. 
+        '''Initialize the genes of the horn antenna. 
         The genes are: [side_length, height, x_0, y_0, z_f, y_f, 
         beta, trpzd_length, trpzd_height]'''
         
@@ -41,7 +41,8 @@ class horn_antenna:
         
     
     def check_genes(self):
-        '''Checks if the genes are valid. Returns True if the genes are invalid'''
+        '''Check if the genes are valid. 
+        Return False if the genes are invalid.'''
         
         # Load genes
         (side_length, height, x_0, y_0, z_f, y_f, 
@@ -80,15 +81,15 @@ class horn_antenna:
         return valid_design
     
     
-    def evaluate_fitness(self, compairson):
+    def evaluate_fitness(self, comparison):
         '''Calculate the euclidean distance between the genes
-        of the horn antenna and the comparison genes'''
+        of the horn antenna and the comparison genes.'''
         
         euclidean_distance = 0.0
         gene_count = len(self.genes)
         for i in range(gene_count):
-            numerator = (self.genes[i] - compairson[i]) ** 2
-            denominator = (self.genes[i] + compairson[i]) ** 2
+            numerator = (self.genes[i] - comparison[i]) ** 2
+            denominator = (self.genes[i] + comparison[i]) ** 2
             euclidean_distance += numerator / denominator
             
         normalized_distance = euclidean_distance / (2 * gene_count)
@@ -99,12 +100,12 @@ class horn_antenna:
     
     
     def save_as_comparison(self, filename):
-        '''save the current genes as a comparison file'''
+        '''save the current genes as a comparison file.'''
         filepath = Path(f"comparisons/{filename}.txt")
         np.savetxt(filepath, self.genes)
     
     
     def __str__(self) -> str:
-        '''Returns a string representation of the antenna's genes'''
+        '''Return a string representation of the antenna's genes.'''
         return str(self.genes)
         
