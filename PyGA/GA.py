@@ -404,7 +404,7 @@ class GA:
         '''Create an individual from the given operator and parents.'''
         
         if operator == "crossover":
-            new_indiv = self.crossover(parents[0], parents[1])
+            new_indiv = self.crossover(parents[0], parents[1])[0]
         elif operator == "mutation":
             new_indiv = self.mutation(parents[0])
         elif operator == "injection":
@@ -412,19 +412,12 @@ class GA:
         else:
             new_indiv = parents[0]
         
-        if type(new_indiv) in [list, tuple]:
-            new_indiv = copy.deepcopy(new_indiv[0])
-        else:
-            new_indiv = copy.deepcopy(new_indiv)
-
-        return new_indiv
+        return copy.deepcopy(new_indiv)
     
     
     def get_num_parents(self, operator):
         '''Get the number of parents for a SSGA operator.'''
-        if operator == "crossover":
-            return 2
-        return 1
+        return 2 if operator == "crossover" else 1
     
     
     def replace_individual(self, new_indiv):
@@ -441,21 +434,17 @@ class GA:
     def test_diverse(self, new_indiv, new_population=None):
         '''Test if an individual is identical to any
         individuals currently in the population.'''
-        
-        unique = True
         for individual in self.population:
             if new_indiv.genes == individual.genes:
                 #print("Duplicate")
-                unique = False
-                break
+                return False
         
         if new_population is not None:
             for individual in new_population:
                 if new_indiv.genes == individual.genes:
-                    unique = False
-                    break
+                    return False
         
-        return unique
+        return True
     
     
     ### Main Loop Functions #########################################################
