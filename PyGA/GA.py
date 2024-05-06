@@ -333,8 +333,8 @@ class GA:
     def save_files(self):
         '''Save current generation files.'''
         if self.settings["test_loop"]:
-                self.save_to_tracker()
-                self.evaluate_population()
+            self.save_to_tracker()
+            self.evaluate_population()
                 
         if self.settings["save_all_files"]:
             self.save_population()
