@@ -56,16 +56,16 @@ class horn_antenna:
             x_0 * y_0) / (trpzd_height + trpzd_length - y_0)
         
         # Run checks
-        if (not(0 <= side_length <= self.MAX_S) or 
-            not(self.MIN_H <= height <= self.MAX_H)):
+        if (not (0 <= side_length <= self.MAX_S) or 
+            not (self.MIN_H <= height <= self.MAX_H)):
             valid_design = False
-        elif not(0 <= x_0 <= x_f):
+        elif not (0 <= x_0 <= x_f):
             valid_design = False
-        elif not(0 <= y_0 <= min(z_f, x_0)):
+        elif not (0 <= y_0 <= min(z_f, x_0)):
             valid_design = False
-        elif not(0 <= y_f <= z_f):
+        elif not (0 <= y_f <= z_f):
             valid_design = False
-        elif not(0 <= z_f <= height):
+        elif not (0 <= z_f <= height):
             valid_design = False
             
         # Check if trapezoids touch
