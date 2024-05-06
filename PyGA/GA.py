@@ -151,10 +151,10 @@ class GA:
         # Select an individual
         selection = random.uniform(0, 1)
         cumulative_probability = 0
-        for i in range(len(self.population)):
-            cumulative_probability += probabilities[i]
+        for probability, individual in zip(probabilities, self.population):
+            cumulative_probability += probability
             if cumulative_probability > selection:
-                return self.population[i]
+                return individual
     
     
     def rank_selection(self):
