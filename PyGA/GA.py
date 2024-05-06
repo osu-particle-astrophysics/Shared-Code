@@ -244,7 +244,7 @@ class GA:
     
     def mutation(self, individual):
         '''Mutate a randomly selected gene across a gaussian distribution.'''
-        chosen_gene_index = random.randint(0, len(individual.genes) - 1)
+        chosen_gene_index = random.randrange(len(individual.genes))
         chosen_gene = individual.genes[chosen_gene_index]
         new_indiv = copy.deepcopy(individual)
             
