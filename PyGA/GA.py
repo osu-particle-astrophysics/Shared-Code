@@ -58,14 +58,14 @@ class GA:
         '''Check if the settings are valid.'''
         if (settings['crossover_rate'] + settings['mutation_rate'] +
             settings['reproduction_rate']) > 1.0:
-            print('Operator rates exceed 1.0. Exiting.')
+            print('Operator rates exceed 1.0.')
             return False
         if (settings['tournament_rate'] + settings['roulette_rate'] + 
             settings['rank_rate']) != 1.0:
-            print('Selection rates do not sum to 1.0. Exiting.')
+            print('Selection rates do not sum to 1.0.')
             return False
         if settings['steady_state'] and settings['reproduction_rate'] != 0:
-            print('Steady state and reproduction not compatible. Exiting.')
+            print('Steady state and reproduction not compatible.')
             return False
         return True
     
@@ -236,7 +236,7 @@ class GA:
             
             cross_attempt += 1
             if cross_attempt > 100:
-                print("Crossover Failed") if self.settings["verbose"] else None
+                self.print("Crossover Failed")
                 return parent1, parent2
             
         return child1, child2
@@ -346,6 +346,11 @@ class GA:
         print(f"Generation: {self.generation}")
         print(f"Best Fitness: {self.best_fitness}")
         print(f"Best Individual: {self.best_individual.genes}")
+        
+        
+    def print(self, *args, **kwargs):
+        if self.settings["verbose"]:
+            print(*args, **kwargs)
     
     
     ### Generational Methods #################################################
@@ -437,7 +442,6 @@ class GA:
         individuals currently in the population.'''
         for individual in self.population:
             if new_indiv.genes == individual.genes:
-                #print("Duplicate")
                 return False
         
         if new_population is not None:
@@ -507,7 +511,7 @@ class GA:
         new_population = []
         operator_nos = self.get_operator_numbers()
         
-        print("Crossover") if self.settings["verbose"] else None
+        self.print("Crossover")
         parents = self.absolute_selection(operator_nos[0]*2)
         for i in range(int(operator_nos[0]/2)):  
             # Create children
@@ -536,7 +540,7 @@ class GA:
                 diverse_attempt += 1
                 
                 if diverse_attempt > 100:
-                    print("Crossover Failed, adding rest to mutation") if self.settings["verbose"] else None
+                    self.print("Crossover Failed, adding rest to mutation")
                     operator_nos[1] += (operator_nos[0] - i) * 2
                     break
             
@@ -554,10 +558,9 @@ class GA:
             
             break  
 
-        print("Mutation") if self.settings["verbose"] else None
+        self.print("Mutation")
         parents = self.absolute_selection(operator_nos[1])
         for i in range(operator_nos[1]):
-           # print(i)
             valid_individual = False
             while not valid_individual:
                 new_indiv = self.mutation(parents[i])
@@ -569,16 +572,16 @@ class GA:
             
             new_population.append(new_indiv)
         
-        print("Reproduction") if self.settings["verbose"] else None
+        self.print("Reproduction")
         parents = self.absolute_selection(operator_nos[2])
         for i in range(operator_nos[2]):
             new_population.append(copy.deepcopy(parents[i]))
         
-        print("Injection") if self.settings["verbose"] else None
+        self.print("Injection")
         for i in range(operator_nos[3]):
             new_population.append(self.injection())
             
-        print("Evaluation") if self.settings["verbose"] else None
+        self.print("Evaluation")
         self.population = new_population
         
         if self.settings["test_loop"]:
