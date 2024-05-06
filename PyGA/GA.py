@@ -143,7 +143,7 @@ class GA:
         '''Select a parent using roulette selection.'''
         
         # Calculate the total fitness of the population
-        total_fitness = sum([individual.fitness for individual in self.population])
+        total_fitness = sum(individual.fitness for individual in self.population)
         
         # Calculate the probability of selection for each individual
         probabilities = [individual.fitness / total_fitness for individual in self.population]
