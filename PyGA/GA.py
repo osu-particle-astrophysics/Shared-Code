@@ -519,8 +519,8 @@ class GA:
             diverse_attempt = 0
             
             while not valid_children:
-                parent1_index = random.randint(0, len(parents) - 1)
-                parent2_index = random.randint(0, len(parents) - 1)
+                parent1_index = random.randrange(len(parents))
+                parent2_index = random.randrange(len(parents))
                 parent_attempt = 0
                 while parents[parent1_index].genes == parents[parent2_index].genes:
                     parent2_index = random.randint(0, len(parents) - 1)
