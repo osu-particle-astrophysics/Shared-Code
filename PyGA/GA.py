@@ -523,7 +523,7 @@ class GA:
                 parent2_index = random.randrange(len(parents))
                 parent_attempt = 0
                 while parents[parent1_index].genes == parents[parent2_index].genes:
-                    parent2_index = random.randint(0, len(parents) - 1)
+                    parent2_index = random.randrange(len(parents))
                     parent_attempt += 1
                     if parent_attempt > 100:
                         diverse_attempt += 100
