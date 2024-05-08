@@ -1,0 +1,25 @@
+# EXAMPLE SETTINGS FILE (Automatically generated in the PUEO loop)
+
+# General
+a_type: "horn"
+npop: 250
+n_gen: 100
+steady_state: 0
+replacement_method: "random"
+forced_diversity: 1
+verbose: True
+save_all_files: True
+test_loop: False
+run_dir: "~/GENETIS_PUEO/Run_Outputs/test"
+
+# Operators (PERCENTAGE NOT NUMBER)
+crossover_rate: 0.80
+mutation_rate: 0.10
+reproduction_rate: 0.05
+sigma: 0.05
+
+# Selection (PERCENTAGE NOT NUMBER)
+tournament_rate: 0.9
+roulette_rate: 0.05
+rank_rate: 0.05
+tournament_size: 0.07
