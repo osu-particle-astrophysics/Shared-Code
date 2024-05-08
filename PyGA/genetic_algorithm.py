@@ -33,7 +33,7 @@ class GA:
         
         if self.settings["test_loop"]:
             self.comparison = np.array([])
-            self.load_compairson()
+            self.load_comparison()
             self.make_run_directory()
             self.initialize_tracker()
     
@@ -85,7 +85,7 @@ class GA:
             self.load_population(init_path)
     
     
-    def load_compairson(self):
+    def load_comparison(self):
         '''Load the comparison genes from the comparison file.'''
         comparison_path = Path(f"comparisons/{self.settings['comparison_file']}")
         if comparison_path.exists():
