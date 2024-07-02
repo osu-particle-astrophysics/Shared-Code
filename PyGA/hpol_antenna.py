@@ -11,14 +11,12 @@ class hpol_antenna:
         self.fitness = 0.0
         self.true_fitness = 0.0
         # NEW HPOL SPECIFIC VARIABLES THAT ARE SUBJECT TO CHANGE
-        self.num_plates_min = 3.0
+        self.num_plates_min = 4.0
         self.num_plates_max = 4.0
         self.radius_min = 0.5
         self.radius_max = 10.0
         self.arc_length_plate_min = 0.5
         self.arc_length_plate_max = 10.0
-        self.arc_length_angle_min = 0.5
-        self.arc_length_angle_max = 10.0
         self.height_min = 0.5
         self.height_max = 10.0
     
@@ -30,28 +28,9 @@ class hpol_antenna:
         num_plates = random.uniform(self.num_plates_min, self.num_plates_max)
         radius = random.uniform(self.radius_min, self.radius_max)
         arc_length_plate = random.uniform(self.arc_length_plate_min, self.arc_length_plate_max)
-        arc_length_angle = random.uniform(self.arc_length_angle_min, self.arc_length_angle_max)
         height = random.uniform(self.height_min, self.height_max)
         
-        self.genes = [num_plates, radius, arc_length_plate, arc_length_angle, height]
-        
-    def evaluate_fitness(self, comparison):
-        '''Calculate the euclidean distance between the genes
-        of the horn antenna and the comparison genes.'''
-        
-        euclidean_distance = 0.0
-        gene_count = len(self.genes)
-        for i in range(gene_count):
-            numerator = (self.genes[i] - comparison[i]) ** 2
-            denominator = (self.genes[i] + comparison[i]) ** 2
-            euclidean_distance += numerator / denominator
-            
-        normalized_distance = euclidean_distance / (2 * gene_count)
-        
-        normalized_distance = normalized_distance ** 0.5
-        
-        self.fitness = 1.0 - normalized_distance
-    
+        self.genes = [num_plates, radius, arc_length_plate, height]
     
     def save_as_comparison(self, filename):
         '''save the current genes as a comparison file.'''

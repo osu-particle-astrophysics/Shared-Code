@@ -72,7 +72,7 @@ class GA:
     
     
     def initialize_population(self):
-        '''Initialize the population of horn antennas.'''
+        '''Initialize the population of antennas.'''
         antenna_type = self.settings['a_type']
         if self.custom_init is None:
             for i in range(self.settings["npop"]):
