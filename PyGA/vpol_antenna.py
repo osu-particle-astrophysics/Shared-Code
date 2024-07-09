@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-class hpol_antenna:
+class VPOLAntenna:
     
     def __init__(self, genes=None):
         self.genes = genes

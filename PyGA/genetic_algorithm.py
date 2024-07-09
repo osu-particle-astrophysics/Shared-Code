@@ -11,8 +11,8 @@ import numpy as np
 from pathlib import Path
 
 from horn_antenna import HornAntenna
-from vpol_antenna import vpol_antenna
-from hpol_antenna import hpol_antenna
+from vpol_antenna import VPOLAntenna
+from hpol_antenna import HPOLAntenna
 
 class GA:
     def __init__(self, run_name, settingsfile='configs/settings.yaml', 
@@ -118,9 +118,9 @@ class GA:
         if type == 'horn':
             return HornAntenna(genes)
         elif type == 'VPOL':
-            return vpol_antenna(genes)
+            return VPOLAntenna(genes)
         elif type == 'HPOL':
-            return hpol_antenna(genes)
+            return HPOLAntenna(genes)
         else:
             sys.exit('Invalid antenna type. Exiting.')
     
