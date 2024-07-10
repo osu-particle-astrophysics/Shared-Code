@@ -113,12 +113,12 @@ class GA:
             writer.writerow(["Generation", "Best Fitness", "Best Individual Genes"])
     
     
-    def make_antenna(self, type, genes=None):
+    def make_antenna(self, type, genes=None, settingsfile = 'configs/settings.yaml'):
         '''Create an antenna object.'''
         if type == 'horn':
             return HornAntenna(genes)
         elif type == 'VPOL':
-            return VPOLAntenna(genes)
+            return VPOLAntenna(genes, settingsfile)
         elif type == 'HPOL':
             return HPOLAntenna(genes)
         else:
