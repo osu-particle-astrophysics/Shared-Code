@@ -138,7 +138,9 @@ int main(int argc, char const *argv[])
   ofstream generator_file;
 	generator_file.open("generators.csv");
 	generator_file << "First generator: " << endl << generator << endl;	
-
+	
+	const auto DELETE_ME_IM_JUST_A_TEST = 0.123456789;
+	printf("delete me too: %d", DELETE_ME_IM_JUST_A_TEST);
 
 	// First, define NPOP using the user's input. The atoi function converts from string to int
 	NPOP = atoi(argv[2]);
