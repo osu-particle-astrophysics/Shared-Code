@@ -10,10 +10,10 @@ class IceParameters:
         self.genes = genes
         self.fitness = 0.0
         self.true_fitness = 0.0
-        self.MAX_PHI = 2*np.pi ## Rotation about z-axis
-        self.MAX_THETA = np.pi ## Rotation about y-axis
-        self.MAX_PSI = 2*np.pi ## Rotation about z-axis
-				self.MAX_CROSS_POL = np.pi ## Initial cross-polarization angle
+        self.MAX_PHI = 360 ## Rotation about z-axis
+        self.MAX_THETA = 180 ## Rotation about y-axis
+        self.MAX_PSI = 360 ## Rotation about z-axis
+				self.MAX_CROSS_POL = 180 ## Initial cross-polarization angle
         
     
     def initialize(self):
@@ -24,20 +24,12 @@ class IceParameters:
         valid_design = False
         while valid_design == False:
             # Generate random values
-            side_length = random.uniform(0.0, self.MAX_S)
-            height = random.uniform(self.MIN_H, self.MAX_H)
-            x_0 = random.uniform(0.0, side_length)
-            y_0 = random.uniform(0.0, x_0)
-            z_f = random.uniform(0.0, height)
-            y_f = random.uniform(0.0, z_f)
-            beta = random.uniform((4.0/30.0) * z_f, 7.0 * z_f) / 100.0
-            trpzd_length = random.uniform(0.0, y_0)
-            trpzd_height = random.uniform(0.0, x_0)
-            
-            self.genes = [side_length, height, 
-                          x_0, y_0, z_f, y_f, 
-                          beta, trpzd_length, 
-                          trpzd_height]
+            phi = random.uniform(0.0, self.MAX_PHI)
+            theta = random.uniform(0.0, self.MAX_THETA)
+            psi = random.uniform(0.0, self.MAX_PSI)
+            delta = random.uniform(0.0, self.MAX_DELTA)
+
+            self.genes = [phi, theta, psi, delta]
             
             valid_design = self.check_genes()
         
@@ -48,35 +40,16 @@ class IceParameters:
         Return False if the genes are invalid.'''
         
         # Load genes
-        (side_length, height, x_0, y_0, z_f, y_f, 
-         beta, trpzd_length, trpzd_height) = self.genes
+        (phi, theta, psi, delta) = self.genes
 
         # Variables
         valid_design = False
-        x_f = side_length
         
-        # Calculate trapezoid intersection value
-        trpzd_intersect = (trpzd_length * x_0 + trpzd_height * y_0 -
-            x_0 * y_0) / (trpzd_height + trpzd_length - y_0)
+        # Check if phi, theta, psi give repeated orientation
+				# phi, theta, psi <=> psi + pi, pi - theta, psi + pi
         
         # Run checks
-        if (not (0 <= side_length <= self.MAX_S) or 
-            not (self.MIN_H <= height <= self.MAX_H)):
-            valid_design = False
-        elif not (0 <= x_0 <= x_f):
-            valid_design = False
-        elif not (0 <= y_0 <= min(z_f, x_0)):
-            valid_design = False
-        elif not (0 <= y_f <= z_f):
-            valid_design = False
-        elif not (0 <= z_f <= height):
-            valid_design = False
-            
-        # Check if trapezoids touch
-        elif x_0 - trpzd_height < trpzd_intersect < x_0:
-            valid_design = False
-        elif ((4.0 / 30.0) * z_f > (beta * 100) or 
-              (7 * z_f) < (beta * 100) or beta > 2):
+				if (phi > 180 and theta > 90 and psi > 180):
             valid_design = False
         else:
             valid_design = True
@@ -84,6 +57,8 @@ class IceParameters:
         return valid_design
     
     
+    ## Evaluate fitness by reading a file
+#    def evaluate_fitness():
     def evaluate_fitness(self, comparison):
         '''Calculate the euclidean distance between the genes
         of the horn antenna and the comparison genes.'''
