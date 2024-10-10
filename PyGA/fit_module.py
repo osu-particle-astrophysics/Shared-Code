@@ -3,6 +3,7 @@
 import subprocess
 import os
 import sys
+import pandas as pd
 
 def run_fit_executable(script_args):
     """
@@ -80,6 +81,26 @@ def run_fit_executable(script_args):
                     print(f"No line found after 'Elements of psi_median_model:' at line {idx}")
                     # Continue to the next occurrence
                     continue
+        rcs = float(last_word.split(' ')[-1])
+        return rcs, psi_median_models
 
-        return last_word, psi_median_models
+def read_genes(directory, gen, ind):
+        '''
+          This will read in the genes and return them as a list that can be passed
+					 to run_fit_executable. 
+        '''
+        ## Read in with pandas
+        df = pd.read_csv(directory + "Generation_Data/{}_generationDNA.csv".format(gen), header = None)
+        genes = [str(df.iloc[ind][i]) for i in range(len(df.iloc[ind]))]
+        return genes
+
+def write_results(directory, gen, ind, fitness, psis):
+				with open(directory + "/Fit_Outputs/Generation_{}/".format(gen) + "{}_output.csv".format(ind), 'w') as file:
+								file.write(f"{fitness}")
+
+								for psi in psis:
+												sublist_str = "[" + " ".join(map(str, psi)) + "]"
+												file.write(f",{sublist_str}")
+
+								file.write("\n")
 
