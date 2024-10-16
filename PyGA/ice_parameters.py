@@ -30,10 +30,10 @@ class IceParameters:
         valid_design = False
         while valid_design == False:
             # Generate random values
-            phi = round(random.uniform(0.0, self.MAX_PHI),4)
-            theta = round(random.uniform(0.0, self.MAX_THETA),4)
-            psi = round(random.uniform(0.0, self.MAX_PSI),4)
-            delta = round(random.uniform(0.0, self.MAX_DELTA),4)
+            phi = round(random.uniform(0.0, self.MAX_PHI),1)
+            theta = round(random.uniform(0.0, self.MAX_THETA),1)
+            psi = round(random.uniform(0.0, self.MAX_PSI),1)
+            delta = round(random.uniform(0.0, self.MAX_DELTA),1)
 
             self.genes = [phi, theta, psi, delta]
             
@@ -91,7 +91,9 @@ class IceParameters:
 
         fit_args = [str(self.genes[i]) for i in range(len(self.genes))]
         rcs, self.psis = run_fit_executable(fit_args)
-				self.fitness = 1/rcs ## Makes lower RCS better!
+        self.fitness = 1/rcs ## Makes lower RCS better!
+        print("RCS: ", rcs)
+        print("Fitness score: ", self.fitness)
 
     
     ## MACHTAY
