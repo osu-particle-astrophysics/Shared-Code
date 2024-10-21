@@ -43,6 +43,7 @@ def run_fit_executable(script_args):
         lines = output.strip().split('\n')
 
         # Extract the last word from the second-to-last line
+				# This gets the total reduced chi-squared
         last_word = None
         if len(lines) >= 2:
             second_to_last_line = lines[-2]
@@ -57,8 +58,10 @@ def run_fit_executable(script_args):
 
         # Initialize a list to hold all psi_median_model elements
         psi_median_models = []
+        chi_squareds = []
 
         # Search for all occurrences of "Elements of psi_median_model:"
+        # This gets the psis from the simulation
         for idx, line in enumerate(lines):
             if "Elements of psi_median_model:" in line:
                 # Check if there is a line after this line
@@ -81,8 +84,12 @@ def run_fit_executable(script_args):
                     print(f"No line found after 'Elements of psi_median_model:' at line {idx}")
                     # Continue to the next occurrence
                     continue
+            elif "chi-squared: " in line and "Total" not in line:
+#                chi_squareds.append(line.split(':')[1].strip())
+                chi_squareds.append(line.split(' ')[-1])
+
         rcs = float(last_word.split(' ')[-1])
-        return rcs, psi_median_models
+        return rcs, psi_median_models, chi_squareds
 
 def read_genes(directory, gen, ind):
         '''
@@ -94,13 +101,16 @@ def read_genes(directory, gen, ind):
         genes = [str(df.iloc[ind][i]) for i in range(len(df.iloc[ind]))]
         return genes
 
-def write_results(directory, gen, ind, fitness, psis):
+def write_results(directory, gen, ind, fitness, psis, chis):
 				with open(directory + "/Fit_Outputs/Generation_{}/".format(gen) + "{}_output.csv".format(ind), 'w') as file:
 								file.write(f"{fitness}")
 
 								for psi in psis:
 												sublist_str = "[" + " ".join(map(str, psi)) + "]"
 												file.write(f",{sublist_str}")
+								for chi in chis:
+												sublist_str = "[" + " ".join(map(str, chi)) + "]"
+												file.write(f",{chi}")
 
 								file.write("\n")
 

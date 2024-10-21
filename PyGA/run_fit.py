@@ -21,12 +21,12 @@ def main(args):
     fit_args = fit_module.read_genes(args.run_dir, args.gen, args.ind)
     fit_args.append('1')
     fit_args.append('0')
-    fit_args.append('1')
+    fit_args.append('4')
 
     ## Run the birefringence script to get RCS and psis
-    fitness, psi_models = fit_module.run_fit_executable(fit_args)
+    fitness, psi_models, chi_squareds = fit_module.run_fit_executable(fit_args)
     print("fitness score: ", fitness)
-    fit_module.write_results(args.run_dir, args.gen, args.ind, fitness, psi_models)
+    fit_module.write_results(args.run_dir, args.gen, args.ind, fitness, psi_models, chi_squareds)
 
 
 if __name__ == '__main__':

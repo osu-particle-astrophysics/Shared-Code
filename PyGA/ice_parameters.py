@@ -55,10 +55,13 @@ class IceParameters:
         # phi, theta, psi <=> psi + pi, pi - theta, psi + pi
         
         # Run checks
-        if (phi > 180 and theta > 90 and psi > 180):
-            valid_design = False
+        if (0 <= phi < 360 and 0 <= theta <= 180 and 0 <= psi < 360):
+            if (phi > 180 and theta > 90 and psi > 180):
+                valid_design = False
+            else:
+                valid_design = True
         else:
-            valid_design = True
+            valid_design = False 
 
         return valid_design
     
@@ -90,10 +93,11 @@ class IceParameters:
         """
 
         fit_args = [str(self.genes[i]) for i in range(len(self.genes))]
-        rcs, self.psis = run_fit_executable(fit_args)
+        rcs, self.psis, chi_squareds = run_fit_executable(fit_args)
         self.fitness = 1/rcs ## Makes lower RCS better!
         print("RCS: ", rcs)
         print("Fitness score: ", self.fitness)
+        print("chi-squareds: ", chi_squareds)
 
     
     ## MACHTAY
