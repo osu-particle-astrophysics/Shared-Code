@@ -55,7 +55,7 @@ class IceParameters:
         # phi, theta, psi <=> psi + pi, pi - theta, psi + pi
         
         # Run checks
-        if (0 <= phi < 360 and 0 <= theta <= 180 and 0 <= psi < 360):
+        if (0 <= phi < 360 and 0 <= theta <= 180 and 0 <= psi < 360 and 0 <= delta <= 180):
             if (phi > 180 and theta > 90 and psi > 180):
                 valid_design = False
             else:
