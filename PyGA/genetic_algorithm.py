@@ -11,6 +11,7 @@ import numpy as np
 from pathlib import Path
 
 from horn_antenna import HornAntenna
+from ice_parameters import IceParameters
 #import bicone_antenna
 #import hpol_antenna
 
@@ -72,13 +73,13 @@ class GA:
     
     
     def initialize_population(self):
-        '''Initialize the population of horn antennas.'''
-        antenna_type = self.settings['a_type']
+        '''Initialize the population of individuals.'''
+        individual_type = self.settings['a_type']
         if self.custom_init is None:
             for i in range(self.settings["npop"]):
-                antenna = self.make_antenna(antenna_type)
-                antenna.initialize()
-                self.population.append(antenna)
+                individual = self.make_individual(individual_type)
+                individual.initialize()
+                self.population.append(individual)
         else:
             # load in the population from a file
             init_path = Path(f"initializations/{self.custom_init}.pkl")
@@ -113,12 +114,14 @@ class GA:
             writer.writerow(["Generation", "Best Fitness", "Best Individual Genes"])
     
     
-    def make_antenna(self, type, genes=None):
-        '''Create an antenna object.'''
+    def make_individual(self, type, genes=None):
+        '''Create an individual object.'''
         if type == 'horn':
             return HornAntenna(genes)
+        elif type == 'ice':
+            return IceParameters(genes)
         else:
-            sys.exit('Invalid antenna type. Exiting.')
+            sys.exit('Invalid individual type. Exiting.')
     
     
     ### Selection ############################################################
@@ -212,7 +215,7 @@ class GA:
     
     def crossover(self, parent1, parent2):
         '''Crossover two parents to create two children.'''
-        antenna_type = self.settings['a_type']
+        individual_type = self.settings['a_type']
         
         valid_children = False
         cross_attempt = 0
@@ -226,8 +229,8 @@ class GA:
                 child1_genes.append(gene_1 if coinflip == 0 else gene_2)
                 child2_genes.append(gene_2 if coinflip == 0 else gene_1)
                 
-            child1 = self.make_antenna(antenna_type, child1_genes)
-            child2 = self.make_antenna(antenna_type, child2_genes)
+            child1 = self.make_individual(individual_type, child1_genes)
+            child2 = self.make_individual(individual_type, child2_genes)
             
             # Check if children are valid
             valid_children = child1.check_genes() and child2.check_genes()
@@ -247,11 +250,11 @@ class GA:
         new_indiv = copy.deepcopy(individual)
             
         
-        valid_antenna = False
-        while not valid_antenna:
+        valid_individual = False
+        while not valid_individual:
             new_gene = random.gauss(chosen_gene, chosen_gene * self.settings["sigma"])
             new_indiv.genes[chosen_gene_index] = new_gene
-            valid_antenna = new_indiv.check_genes()
+            valid_individual = new_indiv.check_genes()
             
         return new_indiv
     
@@ -264,7 +267,7 @@ class GA:
     def injection(self):
         '''Inject a new individual into the population.'''
 
-        individual = self.make_antenna(self.settings['a_type'])
+        individual = self.make_individual(self.settings['a_type'])
         individual.initialize()
         
         return individual
@@ -291,7 +294,7 @@ class GA:
     
     
     def save_population(self, filepath=None):
-        '''Save the antenna objects to a pickle file.'''
+        '''Save the individual objects to a pickle file.'''
         if filepath is None:
             filepath = self.run_dir / "Generation_Data" / f"{self.generation}_population.pkl"
         with open(filepath, 'wb') as file:
@@ -477,7 +480,7 @@ class GA:
         
         for i in range(self.settings["npop"]):
             
-            # Create a new antenna
+            # Create a new individual 
             valid_individual = False
             while not valid_individual:
                 # Create a new individual
@@ -488,7 +491,7 @@ class GA:
                 
                 new_indiv = self.create_individual(operator, parents)
                 
-                # Check if the antenna is unique if required
+                # Check if the individual is unique if required
                 if self.settings["forced_diversity"]:
                     valid_individual = self.test_diverse(new_indiv)
                 else:
