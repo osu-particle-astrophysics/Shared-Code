@@ -3,10 +3,7 @@
 import subprocess
 import os
 import sys
-<<<<<<< HEAD
-=======
 import pandas as pd
->>>>>>> 4a080f35249526611a0f55aa827ecaf70eff0623
 
 def run_fit_executable(script_args):
     """
@@ -46,10 +43,7 @@ def run_fit_executable(script_args):
         lines = output.strip().split('\n')
 
         # Extract the last word from the second-to-last line
-<<<<<<< HEAD
-=======
 				# This gets the total reduced chi-squared
->>>>>>> 4a080f35249526611a0f55aa827ecaf70eff0623
         last_word = None
         if len(lines) >= 2:
             second_to_last_line = lines[-2]
@@ -64,15 +58,12 @@ def run_fit_executable(script_args):
 
         # Initialize a list to hold all psi_median_model elements
         psi_median_models = []
-<<<<<<< HEAD
 
         # Search for all occurrences of "Elements of psi_median_model:"
-=======
         chi_squareds = []
 
         # Search for all occurrences of "Elements of psi_median_model:"
         # This gets the psis from the simulation
->>>>>>> 4a080f35249526611a0f55aa827ecaf70eff0623
         for idx, line in enumerate(lines):
             if "Elements of psi_median_model:" in line:
                 # Check if there is a line after this line
@@ -95,10 +86,8 @@ def run_fit_executable(script_args):
                     print(f"No line found after 'Elements of psi_median_model:' at line {idx}")
                     # Continue to the next occurrence
                     continue
-<<<<<<< HEAD
 
         return last_word, psi_median_models
-=======
             elif "chi-squared: " in line and "Total" not in line:
 #                chi_squareds.append(line.split(':')[1].strip())
                 chi_squareds.append(line.split(' ')[-1])
@@ -128,5 +117,4 @@ def write_results(directory, gen, ind, fitness, psis, chis):
 												file.write(f",{chi}")
 
 								file.write("\n")
->>>>>>> 4a080f35249526611a0f55aa827ecaf70eff0623
 
