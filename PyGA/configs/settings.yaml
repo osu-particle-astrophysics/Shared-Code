@@ -1,7 +1,7 @@
 # EXAMPLE SETTINGS FILE (Automatically generated in the PUEO loop)
 
 # General
-a_type: "horn"
+a_type: "ice"
 npop: 250
 n_gen: 100
 steady_state: 0

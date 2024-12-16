@@ -30,10 +30,10 @@ class IceParameters:
         valid_design = False
         while valid_design == False:
             # Generate random values
-            phi = random.uniform(0.0, self.MAX_PHI)
-            theta = random.uniform(0.0, self.MAX_THETA)
-            psi = random.uniform(0.0, self.MAX_PSI)
-            delta = random.uniform(0.0, self.MAX_DELTA)
+            phi = round(random.uniform(0.0, self.MAX_PHI),1)
+            theta = round(random.uniform(0.0, self.MAX_THETA),1)
+            psi = round(random.uniform(0.0, self.MAX_PSI),1)
+            delta = round(random.uniform(0.0, self.MAX_DELTA),1)
 
             self.genes = [phi, theta, psi, delta]
             
@@ -55,10 +55,18 @@ class IceParameters:
         # phi, theta, psi <=> psi + pi, pi - theta, psi + pi
         
         # Run checks
+<<<<<<< HEAD
         if (phi > 180 and theta > 90 and psi > 180):
             valid_design = False
+=======
+        if (0 <= phi < 360 and 0 <= theta <= 180 and 0 <= psi < 360 and 0 <= delta <= 180):
+            if (phi > 180 and theta > 90 and psi > 180):
+                valid_design = False
+            else:
+                valid_design = True
+>>>>>>> 4a080f35249526611a0f55aa827ecaf70eff0623
         else:
-            valid_design = True
+            valid_design = False 
 
         return valid_design
     
@@ -90,7 +98,15 @@ class IceParameters:
         """
 
         fit_args = [str(self.genes[i]) for i in range(len(self.genes))]
+<<<<<<< HEAD
         self.fitness, self.psis = run_fit_executable(fit_args)
+=======
+        rcs, self.psis, chi_squareds = run_fit_executable(fit_args)
+        self.fitness = 1/rcs ## Makes lower RCS better!
+        print("RCS: ", rcs)
+        print("Fitness score: ", self.fitness)
+        print("chi-squareds: ", chi_squareds)
+>>>>>>> 4a080f35249526611a0f55aa827ecaf70eff0623
 
     
     ## MACHTAY

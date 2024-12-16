@@ -33,3 +33,7 @@
 
 # Folders and Repositories
 *.vs
+
+# Extras
+PyGA/__pycache__
+PyGA/configs/settings_original.yaml
