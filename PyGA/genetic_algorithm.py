@@ -54,7 +54,6 @@ class GA:
         else:
             sys.exit('Invalid settings. Exiting.')
     
-    
     def check_settings(self, settings):
         '''Check if the settings are valid.'''
         if (settings['crossover_rate'] + settings['mutation_rate'] +
@@ -113,12 +112,12 @@ class GA:
             writer.writerow(["Generation", "Best Fitness", "Best Individual Genes"])
     
     
-    def make_antenna(self, type, genes=None, settingsfile = 'configs/settings.yaml'):
+    def make_antenna(self, type, genes=None):
         '''Create an antenna object.'''
         if type == 'horn':
             return HornAntenna(genes)
         elif type == 'VPOL':
-            return VPOLAntenna(genes, settingsfile)
+            return VPOLAntenna(self.settings['run_dir'], genes)
         elif type == 'HPOL':
             return HPOLAntenna(genes)
         else:
