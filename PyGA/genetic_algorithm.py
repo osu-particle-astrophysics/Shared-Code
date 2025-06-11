@@ -1,7 +1,6 @@
 import sys
 import copy
 import pickle
-import random
 import csv
 
 from pathlib import Path
@@ -20,8 +19,13 @@ class GA:
         self.run_name = run_name
         self.custom_init = initialization
         self.initialize_settings(settingsfile)
-        self.run_dir = Path(self.settings["run_dir"])
-        
+        self.ga_cfg = self.settings["ga"]
+        self.run_cfg = self.settings["run"]
+        self.a_cfg = self.settings["antennas"]
+        self.run_dir = Path(self.run_cfg["rundir"])
+        self.rng_seed = int(self.run_cfg["rng_seed"])
+        self.rng = np.random.default_rng(self.rng_seed)
+
         if gen is not None:
             self.generation = gen
         else:
@@ -56,15 +60,15 @@ class GA:
     
     def check_settings(self, settings):
         '''Check if the settings are valid.'''
-        if (settings['crossover_rate'] + settings['mutation_rate'] +
-            settings['reproduction_rate']) > 1.0:
+        if (self.ga_cfg['crossover'] + self.ga_cfg['mutation'] +
+            self.ga_cfg['reproduction']) > 1.0:
             print('Operator rates exceed 1.0.')
             return False
-        if (settings['tournament_rate'] + settings['roulette_rate'] + 
-            settings['rank_rate']) != 1.0:
+        if (self.ga_cfg['tournament'] + self.ga_cfg['roulette'] + 
+            self.ga_cfg['rank']) != 1.0:
             print('Selection rates do not sum to 1.0.')
             return False
-        if settings['steady_state'] and settings['reproduction_rate'] != 0:
+        if settings['steady_state'] and self.ga_cfg['reproduction'] != 0:
             print('Steady state and reproduction not compatible.')
             return False
         return True
@@ -72,9 +76,9 @@ class GA:
     
     def initialize_population(self):
         '''Initialize the population of antennas.'''
-        antenna_type = self.settings['a_type']
+        antenna_type = self.a_cfg['antenna']
         if self.custom_init is None:
-            for i in range(self.settings["npop"]):
+            for i in range(self.run_cfg["npop"]):
                 antenna = self.make_antenna(antenna_type)
                 antenna.initialize()
                 self.population.append(antenna)
@@ -117,9 +121,9 @@ class GA:
         if type == 'horn':
             return HornAntenna(genes)
         elif type == 'VPOL':
-            return VPOLAntenna(self.settings['run_dir'], genes)
+            return VPOLAntenna(self.settings, genes)
         elif type == 'HPOL':
-            return HPOLAntenna(genes)
+            return HPOLAntenna(self.settings, genes)
         else:
             sys.exit('Invalid antenna type. Exiting.')
     
@@ -130,12 +134,12 @@ class GA:
         '''Select a parent using tournament selection.'''
         
         # Select tournamentsize percentage of the population
-        tournament_count = int(self.settings["tournament_size"] * self.settings["npop"])
+        tournament_count = int(self.ga_cfg["tournament"] * self.run_cfg["npop"])
         
         if tournament_count == 0:
             tournament_count = 1
         
-        tournament = random.sample(self.population, tournament_count)
+        tournament = self.rng.choice(self.population, size=tournament_count, replace=False)
         
         # Find the best individual in the tournament 
         best_individual = max(tournament, key=lambda ind: ind.fitness)
@@ -171,7 +175,7 @@ class GA:
     
     def get_indiv_from_prob(self, probabilities, population):
         '''Get an individual from a probability distribution.'''
-        selection = random.uniform(0, 1)
+        selection = self.rng.uniform(0, 1)
         cumulative_probability = 0
         for probability, individual in zip(probabilities, population):
             cumulative_probability += probability
@@ -185,10 +189,10 @@ class GA:
         parents = []
         
         for i in range(num_parents):
-            selection = random.uniform(0, 1)
-            if selection < self.settings["tournament_rate"]:
+            selection = self.rng.uniform(0, 1)
+            if selection < self.ga_cfg["tournament"]:
                 parents.append(self.tournament_selection())
-            elif selection < self.settings["tournament_rate"] + self.settings["roulette_rate"]:
+            elif selection < self.ga_cfg["tournament"] + self.ga_cfg["roulette"]:
                 parents.append(self.roulette_selection())
             else:
                 parents.append(self.rank_selection())
@@ -199,8 +203,8 @@ class GA:
     def absolute_selection(self, num_parents):
         '''Select exactly the rate from each selection method.'''
         
-        no_tournament = int(num_parents * self.settings["tournament_rate"])
-        no_roulette = int(num_parents * self.settings["roulette_rate"])
+        no_tournament = int(num_parents * self.ga_cfg["tournament"])
+        no_roulette = int(num_parents * self.ga_cfg["roulette"])
         no_rank = int(num_parents - no_tournament - no_roulette)
         
         parents = []
@@ -215,7 +219,7 @@ class GA:
     
     def crossover(self, parent1, parent2):
         '''Crossover two parents to create two children.'''
-        antenna_type = self.settings['a_type']
+        antenna_type = self.a_cfg['antenna']
         
         valid_children = False
         cross_attempt = 0
@@ -225,7 +229,7 @@ class GA:
             
             # Crossover genes
             for gene_1, gene_2 in zip(parent1.genes, parent2.genes):
-                coinflip = random.randint(0, 1)
+                coinflip = self.rng.integers(0, 2)
                 child1_genes.append(gene_1 if coinflip == 0 else gene_2)
                 child2_genes.append(gene_2 if coinflip == 0 else gene_1)
                 
@@ -245,14 +249,14 @@ class GA:
     
     def mutation(self, individual):
         '''Mutate a randomly selected gene across a gaussian distribution.'''
-        chosen_gene_index = random.randrange(len(individual.genes))
+        chosen_gene_index = self.rng.integers(0, len(individual.genes))
         chosen_gene = individual.genes[chosen_gene_index]
         new_indiv = copy.deepcopy(individual)
             
         
         valid_antenna = False
         while not valid_antenna:
-            new_gene = random.gauss(chosen_gene, chosen_gene * self.settings["sigma"])
+            new_gene = self.rng.normal(loc=chosen_gene, scale=chosen_gene * self.ga_cfg["sigma"])
             new_indiv.genes[chosen_gene_index] = new_gene
             valid_antenna = new_indiv.check_genes()
             
@@ -267,7 +271,7 @@ class GA:
     def injection(self):
         '''Inject a new individual into the population.'''
 
-        individual = self.make_antenna(self.settings['a_type'])
+        individual = self.make_antenna(self.a_cfg['antenna'])
         individual.initialize()
         
         return individual
@@ -367,18 +371,18 @@ class GA:
     def get_operator_numbers(self):
         '''Get the integer number of each operator from percentage
         size and population size.'''
-        mutation_no = int(self.settings["mutation_rate"] * self.settings["npop"])
-        crossover_no = int(self.settings["crossover_rate"] * self.settings["npop"])
-        reproduction_no = int(self.settings["reproduction_rate"] * self.settings["npop"])
+        mutation_no = int(self.ga_cfg["mutation"] * self.run_cfg["npop"])
+        crossover_no = int(self.ga_cfg["crossover"] * self.run_cfg["npop"])
+        reproduction_no = int(self.ga_cfg["reproduction"] * self.run_cfg["npop"])
         
         if crossover_no % 2 != 0:
             crossover_no += 1
         
-        if mutation_no + crossover_no + reproduction_no < self.settings["npop"]:
-            injection_no = self.settings["npop"] - mutation_no - crossover_no - reproduction_no
+        if mutation_no + crossover_no + reproduction_no < self.run_cfg["npop"]:
+            injection_no = self.run_cfg["npop"] - mutation_no - crossover_no - reproduction_no
         else:
             injection_no = 0
-            reproduction_no = self.settings["npop"] - mutation_no - crossover_no
+            reproduction_no = self.run_cfg["npop"] - mutation_no - crossover_no
             
         return [crossover_no, mutation_no, reproduction_no, injection_no]
     
@@ -389,17 +393,17 @@ class GA:
         '''Choose an operator from the operator set of 
         REPRODUCTION, CROSSOVER, MUTATION, INJECTION.'''
         # choose a random number from 0 to 1
-        choice = random.uniform(0, 1)
+        choice = self.rng.uniform(0, 1)
         
-        limit = self.settings["crossover_rate"]
+        limit = self.ga_cfg["crossover"]
         if choice <= limit:
             return "crossover"
         
-        limit += self.settings["mutation_rate"]
+        limit += self.ga_cfg["mutation"]
         if choice <= limit:
             return "mutation"
         
-        limit += self.settings["reproduction_rate"]
+        limit += self.ga_cfg["reproduction"]
         if choice <= limit:
             return "reproduction"
         
@@ -429,7 +433,7 @@ class GA:
     def replace_individual(self, new_indiv):
         '''Choose an individual in the population to replace'''
         if self.settings["replacement_method"] == "random":
-            index = random.randrange(len(self.population))
+            index = self.rng.integers(0, len(self.population))
             self.population[index] = new_indiv
         else:
             sys.exit('Invalid replacement method. Exiting.')
@@ -478,7 +482,7 @@ class GA:
         '''Advance the state of the GA in a steady state manner,
         creating new individuals one by one.'''
         
-        for i in range(self.settings["npop"]):
+        for i in range(self.ga_cfg["npop"]):
             
             # Create a new antenna
             valid_individual = False
@@ -519,11 +523,11 @@ class GA:
             diverse_attempt = 0
             
             while not valid_children:
-                parent1_index = random.randrange(len(parents))
-                parent2_index = random.randrange(len(parents))
+                parent1_index = self.rng.integers(0, len(parents))
+                parent2_index = self.rng.integers(0, len(parents))
                 parent_attempt = 0
                 while parents[parent1_index].genes == parents[parent2_index].genes:
-                    parent2_index = random.randrange(len(parents))
+                    parent2_index = self.rng.integers(0, len(parents))
                     parent_attempt += 1
                     if parent_attempt > 100:
                         diverse_attempt += 100
@@ -591,9 +595,9 @@ class GA:
     def run(self):
         '''Run the genetic algorithm test loop'''
         print("Running Genetic Algorithm...")
-        for i in range(self.settings["ngens"]):
+        for i in range(self.run_cfg["total_gens"]):
             self.advance_generation()
-            if self.settings["verbose"]:
+            if self.run_cfg["log_level"] == "DEBUG":
                 self.print_stats()
         print("Genetic Algorithm Complete")
     
