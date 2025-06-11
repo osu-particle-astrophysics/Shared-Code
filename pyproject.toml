@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 packages = ["PyGA"]
 
 [project]
-name = "shared-code"
+name = "shared_code"
 version = "0.1.0"
 description = "Shared code utilities for GENETIS and related projects"
 authors = [{ name = "OSU Particle Astrophysics"}]

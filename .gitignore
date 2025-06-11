@@ -33,3 +33,7 @@
 
 # Folders and Repositories
 *.vs
+
+# Project Folders
+*.egg-info
+build/ 
