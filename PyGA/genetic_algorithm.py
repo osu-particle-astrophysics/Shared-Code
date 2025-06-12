@@ -9,10 +9,8 @@ import yaml
 import numpy as np
 from pathlib import Path
 
-from horn_antenna import HornAntenna
-from ara_antennas import AraAntennas
-from vpol_antenna import VPOLAntenna
-from hpol_antenna import HPOLAntenna
+from .horn_antenna import HornAntenna
+from .ara_antennas import AraAntennas
 
 
 class GA:
