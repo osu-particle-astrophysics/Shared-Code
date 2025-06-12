@@ -24,7 +24,7 @@ class GA:
         self.run_name = run_name
         self.custom_init = initialization
         self.initialize_settings(settingsfile)
-        self.run_dir = Path(self.settings["rundir"])
+        self.run_dir = Path(self.settings["run_dir"])
         self.rng_seed = int(self.settings["rng_seed"])
         self.rng = np.random.default_rng(self.rng_seed)
 
@@ -62,18 +62,18 @@ class GA:
     def check_settings(self, settings):
         """Check if the settings are valid."""
         if (
-            self.settings["crossover_rate"]
-            + self.settings["mutation_rate"]
-            + self.settings["reproduction_rate"]
+            settings["crossover_rate"]
+            + settings["mutation_rate"]
+            + settings["reproduction_rate"]
         ) > 1.0:
             print("Operator rates exceed 1.0.")
             return False
         if (
-            self.settings["tournament_rate"] + self.settings["roulette_rate"] + self.settings["rank_rate"]
+            settings["tournament_rate"] + settings["roulette_rate"] + settings["rank_rate"]
         ) != 1.0:
             print("Selection rates do not sum to 1.0.")
             return False
-        if settings["steady_state"] and self.settings["reproduction_rate"] != 0:
+        if settings["steady_state"] and settings["reproduction_rate"] != 0:
             print("Steady state and reproduction not compatible.")
             return False
         return True
