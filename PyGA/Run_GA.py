@@ -8,7 +8,7 @@ from genetic_algorithm import GA
 def parse_args():
     parser = argparse.ArgumentParser(description='Run the genetic algorithm')
     parser.add_argument("run_name", type=str, help='Name of the run')
-    parser.add_argument("rundir", type=Path, help='Home Working Directory')
+    parser.add_argument("workingdir", type=Path, help='Home Working Directory')
     parser.add_argument("gen", type=int, help="Generation number to start from")
     return parser.parse_args()
 
@@ -17,12 +17,13 @@ def main(args):
     '''Create antennas for the new generation'''
     # Create path variables
     last_gen = args.gen - 1
-    rundir = args.rundir
-    poppath = rundir / "generation_data" / f"{last_gen}_population.pkl"
-    fitpath = rundir / "generation_data" / f"{last_gen}_fitnessScores.csv"
+    rundir = args.workingdir / "Run_Outputs" / args.run_name
+    poppath = rundir / "Generation_Data" / f"{last_gen}_population.pkl"
+    fitpath = rundir / "Generation_Data" / f"{last_gen}_fitnessScores.csv"
+    
     # Create the GA object
     ga = GA(args.run_name, 
-            settingsfile=rundir / "config.yml",
+            settingsfile=rundir / "settings.yaml",
             gen=args.gen)
     
     # Load the population and fitness scores
