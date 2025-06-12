@@ -4,14 +4,13 @@ import numpy as np
 class AraAntennas:
     def __init__(self, settings, genes=None):
         self.settings = settings
-        self.antenna_type = settings["antenna_type"].lower()  # "vpol" or "hpol"
-        self.rng_seed = int(settings["run"]["rng_seed"])
+        self.antenna_type = settings["a_type"].lower()  # "vpol" or "hpol"
+        self.rng_seed = int(settings["rng_seed"])
         self.rng = np.random.default_rng(self.rng_seed)
         self.genes = genes
         self.fitness = 0.0
 
         if self.antenna_type == "vpol":
-            self.a_cfg = self.settings["antennas"]["vpol"]
             self._set_vpol_limits()
         elif self.antenna_type == "hpol":
             self._set_hpol_limits()
@@ -23,7 +22,7 @@ class AraAntennas:
     def _set_vpol_limits(self):
         self.min_rad, self.max_rad = 0.0, 7.5
         self.min_length, self.max_length = 37.5, 140.0
-        if self.a_cfg["curved"] == 0:
+        if self.settings["curved"] == 0:
             self.min_theta = 0.0
             self.max_theta = np.arctan(self.max_rad / self.min_length)
             self.min_separation = self.max_separation = 2.5
@@ -56,7 +55,7 @@ class AraAntennas:
             self._initialize_hpol()
 
     def _initialize_vpol(self):
-        if self.a_cfg["curved"] == 0:
+        if self.settings["curved"] == 0:
             self._initialize_vpol_straight()
         else:
             self._initialize_vpol_curved()
@@ -66,13 +65,13 @@ class AraAntennas:
         length = self._rand(self.min_length, self.max_length)
         theta = self._rand(self.min_theta, self.max_theta)
 
-        if self.a_cfg["nsections"] == 1:
+        if self.settings["nsections"] == 1:
             self.genes = np.array([radius, length, theta])
         else:
             sep = self._rand(self.min_separation, self.max_separation)
-            radius1 = self._enforce_symmetry(radius, self._rand(self.min_rad, self.max_rad), self.a_cfg["radius"])
-            length1 = self._enforce_symmetry(length, self._rand(self.min_length, self.max_length), self.a_cfg["length"])
-            theta1 = self._enforce_symmetry(theta, self._rand(self.min_theta, self.max_theta), self.a_cfg["angle"])
+            radius1 = self._enforce_symmetry(radius, self._rand(self.min_rad, self.max_rad), self.settings["radius"])
+            length1 = self._enforce_symmetry(length, self._rand(self.min_length, self.max_length), self.settings["length"])
+            theta1 = self._enforce_symmetry(theta, self._rand(self.min_theta, self.max_theta), self.settings["angle"])
             self.genes = np.array([radius, length, theta, sep, radius1, length1, theta1])
 
     def _initialize_vpol_curved(self):
@@ -81,10 +80,10 @@ class AraAntennas:
         a = self._rand(self.min_a, self.max_a)
         b = self._rand(self.min_b, self.max_b)
 
-        radius1 = self._enforce_symmetry(radius, self._rand(self.min_rad, self.max_rad), self.a_cfg["radius"])
-        length1 = self._enforce_symmetry(length, self._rand(self.min_length, self.max_length), self.a_cfg["length"])
-        a1 = self._enforce_symmetry(a, self._rand(self.min_a, self.max_a), self.a_cfg["a"])
-        b1 = self._enforce_symmetry(b, self._rand(self.min_b, self.max_b), self.a_cfg["b"])
+        radius1 = self._enforce_symmetry(radius, self._rand(self.min_rad, self.max_rad), self.settings["radius"])
+        length1 = self._enforce_symmetry(length, self._rand(self.min_length, self.max_length), self.settings["length"])
+        a1 = self._enforce_symmetry(a, self._rand(self.min_a, self.max_a), self.settings["a"])
+        b1 = self._enforce_symmetry(b, self._rand(self.min_b, self.max_b), self.settings["b"])
 
         self.genes = np.array([radius, length, a, b, radius1, length1, a1, b1])
 
