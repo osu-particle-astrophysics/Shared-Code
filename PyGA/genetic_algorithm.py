@@ -220,7 +220,7 @@ class GA:
 
     def crossover(self, parent1, parent2):
         """Crossover two parents to create two children."""
-        antenna_type = self.settings["antenna"]
+        antenna_type = self.settings["a_type"]
 
         valid_children = False
         cross_attempt = 0
