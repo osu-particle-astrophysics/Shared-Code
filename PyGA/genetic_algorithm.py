@@ -123,8 +123,7 @@ class GA:
         
         elif type in {"VPOL", "HPOL"}:
             settings = self.settings.copy()
-            settings["a_type"] = type.lower() 
-            return AraAntennas(settings, genes)
+            return AraAntennas(settings, genes, rng=self.rng)
 
         else:
             sys.exit("Invalid antenna type. Exiting.")

@@ -2,11 +2,10 @@ from pathlib import Path
 import numpy as np
 
 class AraAntennas:
-    def __init__(self, settings, genes=None):
+    def __init__(self, settings, genes=None, rng=None):
         self.settings = settings
         self.antenna_type = settings["a_type"].lower()  # "vpol" or "hpol"
-        self.rng_seed = int(settings["rng_seed"])
-        self.rng = np.random.default_rng(self.rng_seed)
+        self.rng = rng if rng else np.random.default_rng()
         self.genes = genes
         self.fitness = 0.0
 
