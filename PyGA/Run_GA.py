@@ -18,8 +18,8 @@ def main(args):
     # Create path variables
     last_gen = args.gen - 1
     rundir = args.workingdir / "Run_Outputs" / args.run_name
-    poppath = rundir / "Generation_Data" / f"{last_gen}_population.pkl"
-    fitpath = rundir / "Generation_Data" / f"{last_gen}_fitnessScores.csv"
+    poppath = rundir / "Generation_Data" / f"{last_gen}" / f"{last_gen}_population.pkl"
+    fitpath = rundir / "Generation_Data" / f"{last_gen}" / f"{last_gen}_fitnessScores.csv"
     
     # Create the GA object
     ga = GA(args.run_name, 
