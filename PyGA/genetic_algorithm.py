@@ -282,7 +282,7 @@ class GA:
             filepath = (
                 self.run_dir
                 / "Generation_Data"
-                / self.generation
+                / str(self.generation)
                 / f"{self.generation}_generationDNA.csv"
             )
 
@@ -297,7 +297,7 @@ class GA:
             filepath = (
                 self.run_dir
                 / "Generation_Data"
-                / self.generation
+                / str(self.generation)
                 / f"{self.generation}_fitnessScores.csv"
             )
         np.savetxt(filepath, [individual.fitness for individual in self.population])
@@ -306,7 +306,7 @@ class GA:
         """Save the antenna objects to a pickle file."""
         if filepath is None:
             filepath = (
-                self.run_dir / "Generation_Data" /  self.generation / f"{self.generation}_population.pkl"
+                self.run_dir / "Generation_Data" /  str(self.generation) / f"{self.generation}_population.pkl"
             )
         with open(filepath, "wb") as file:
             pickle.dump(self.population, file)
