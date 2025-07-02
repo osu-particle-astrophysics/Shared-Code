@@ -99,13 +99,53 @@ class AraAntennas:
     # ----- Other Methods -----
 
     def check_genes(self):
-        if self.antenna_type != "hpol":
-            raise NotImplementedError("check_genes is only implemented for HPOL")
-        keys = list(self.hpol_limits.keys())
-        return all(
-            self.hpol_limits[k][0] <= val <= self.hpol_limits[k][1]
-            for k, val in zip(keys, self.genes)
-        )
+        if self.antenna_type == "hpol":
+            keys = list(self.hpol_limits.keys())
+            return all(
+                self.hpol_limits[k][0] <= val <= self.hpol_limits[k][1]
+                for k, val in zip(keys, self.genes)
+            )
+
+        elif self.antenna_type == "vpol":
+            if self.settings["curved"] == 0:
+                if self.settings["nsections"] == 1:
+                    # genes: [radius, length, theta]
+                    radius, length, theta = self.genes
+                    checks = [
+                        self.min_rad <= radius <= self.max_rad,
+                        self.min_length <= length <= self.max_length,
+                        self.min_theta <= theta <= self.max_theta,
+                    ]
+                else:
+                    # genes: [radius, length, theta, sep, radius1, length1, theta1]
+                    radius, length, theta, sep, radius1, length1, theta1 = self.genes
+                    checks = [
+                        self.min_rad <= radius <= self.max_rad,
+                        self.min_length <= length <= self.max_length,
+                        self.min_theta <= theta <= self.max_theta,
+                        self.min_separation <= sep <= self.max_separation,
+                        self.min_rad <= radius1 <= self.max_rad,
+                        self.min_length <= length1 <= self.max_length,
+                        self.min_theta <= theta1 <= self.max_theta,
+                    ]
+            else:
+                # curved
+                # genes: [radius, length, a, b, radius1, length1, a1, b1]
+                radius, length, a, b, radius1, length1, a1, b1 = self.genes
+                checks = [
+                    self.min_rad <= radius <= self.max_rad,
+                    self.min_length <= length <= self.max_length,
+                    self.min_a <= a <= self.max_a,
+                    self.min_b <= b <= self.max_b,
+                    self.min_rad <= radius1 <= self.max_rad,
+                    self.min_length <= length1 <= self.max_length,
+                    self.min_a <= a1 <= self.max_a,
+                    self.min_b <= b1 <= self.max_b,
+                ]
+            return all(checks)
+
+        else:
+            raise NotImplementedError(f"check_genes is not supported for antenna type {self.antenna_type}")
 
     def save_as_comparison(self, filename):
         filepath = Path(f"comparisons/{filename}.txt")
