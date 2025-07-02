@@ -521,7 +521,7 @@ class GA:
                 parent1_index = self.rng.integers(0, len(parents))
                 parent2_index = self.rng.integers(0, len(parents))
                 parent_attempt = 0
-                while parents[parent1_index].genes == parents[parent2_index].genes:
+                while np.array_equal(parents[parent1_index].genes, parents[parent2_index].genes):
                     parent2_index = self.rng.integers(0, len(parents))
                     parent_attempt += 1
                     if parent_attempt > 100:
