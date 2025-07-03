@@ -443,12 +443,12 @@ class GA:
         """Test if an individual is identical to any
         individuals currently in the population."""
         for individual in self.population:
-            if new_indiv.genes == individual.genes:
+            if np.array_equal(new_indiv.genes, individual.genes):
                 return False
 
         if new_population is not None:
             for individual in new_population:
-                if new_indiv.genes == individual.genes:
+                if np.array_equal(new_indiv.genes, individual.genes):
                     return False
 
         return True
